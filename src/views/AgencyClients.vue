@@ -6,8 +6,8 @@
           <AgencyDescription></AgencyDescription>
         </v-col>
         <v-col cols="12" class="col-md-9">
-          <v-card>
-            <!-- TODO: HERE WILL BE THE TABLE OF CLIENTS -->
+          <v-card class="pt-md-4">
+            <hired-services></hired-services>
           </v-card>
         </v-col>
       </v-row>
@@ -17,9 +17,10 @@
 
 <script>
 import AgencyDescription from "./AgencyDescription";
+import HiredServices from "../agency/pages/hired-services";
 export default {
   name: "AgencyClients",
-  components: {AgencyDescription}
+  components: {HiredServices, AgencyDescription}
 }
 </script>
 

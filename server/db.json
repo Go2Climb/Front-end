@@ -1,0 +1,115 @@
+{
+  "customers": [
+    {
+      "id": "c1",
+      "name": "Elías",
+      "lastname":"Bernat Priego",
+      "email": "elias@gmail.com",
+      "password": "123456789",
+      "phoneNumber": "945621300"
+    },
+    {
+      "id": "c2",
+      "name": "Candelaria",
+      "lastname":"Gálvez Gascón",
+      "email": "candelaria@gmail.com",
+      "password": "987654321",
+      "phoneNumber": "945621301"
+    },
+    {
+      "id": "c3",
+      "name": "Amaya Emperatriz",
+      "lastname":"Miralles Berenguer",
+      "email": "amaya@gmail.com",
+      "password": "12345678",
+      "phoneNumber": "987521400"
+    }
+  ],
+
+  "agencies": [
+    {
+      "id": 1,
+      "name": "NewTravel",
+      "email": "newtravel@gmail.com",
+      "description": "The best agency from Peru",
+      "score": "5",
+      "location": "San Isidro, Lima - Peru",
+      "RUC": "641478521",
+      "phoneNumber": "985389026"
+    },
+    {
+      "id": 2,
+      "name": "PeruT",
+      "email": "peruT@gmail.com",
+      "description": "low prices for poor families",
+      "score": "4",
+      "location": "San Miguel, Lima - Peru",
+      "RUC": "798456123",
+      "phoneNumber": "974563210"
+    },
+    {
+      "id": 3,
+      "name": "PeruM",
+      "email": "peruM@gmail.com",
+      "description": "from Peru to the world",
+      "score": "3",
+      "location": "Santa Anita, Lima - Peru",
+      "RUC": "852147963",
+      "phoneNumber": "963258741"
+    }
+  ],
+
+  "services": [
+    {
+      "id": "s1",
+      "agencyId": 1,
+      "name": "Disfruta de una aventura en la montaña",
+      "score": 4,
+      "price": 480,
+      "location": "Pomabamba, Ancash",
+      "creationDate": "25-05-2020",
+      "photos": {},
+      "description": "Esta es la descripcion de este servicio",
+      "activities": [
+        { "name": "activity1", "description": "description1" },
+        { "name": "activity2", "description": "description2" }
+      ]
+    },
+    {
+      "id": "s2",
+      "agencyId": 1,
+      "name": "Escala, suerte si sobrevives",
+      "score": 5,
+      "price": 520,
+      "location": "LugarX, Ancash",
+      "creationDate": "10-02-2020",
+      "photos": {},
+      "description": "Esta es la descripcion del servicio 2",
+      "activities": [
+        { "name": "activity1", "description": "description1" },
+        { "name": "activity2", "description": "description2" }
+      ]
+    },
+    {
+      "id": "s3",
+      "agencyId": 3,
+      "name": "A ver ven",
+      "score": 4,
+      "price": 250,
+      "location": "No, Lima",
+      "creationDate": "20-06-2021",
+      "photos": {},
+      "description": "Lleve casera, lleve casera",
+      "activities": [
+        { "name": "activity1", "description": "description1" },
+        { "name": "activity2", "description": "description2" }
+      ]
+    }
+  ],
+
+  "hiredServices": [
+    { "id": "hs1", "customerId": "c1", "serviceId":  "s1", "amount": 1, "price": 480, "scheduledDate": "20-11-2021", "status": "pending"},
+    { "id": "hs2", "customerId": "c2", "serviceId":  "s1", "amount": 2, "price": 320, "scheduledDate": "20-09-2021", "status": "active"},
+    { "id": "hs3", "customerId": "c3", "serviceId":  "s1", "amount": 1, "price": 320,  "scheduledDate": "20-11-2020","status": "finished"}
+  ]
+}
