@@ -3,13 +3,26 @@
     <v-col cols="12">
       <v-card class="mx-auto">
         <v-data-table :headers="headers" :items="clients" sort-by="name" class="elevation-1" show-group-by>
-          <template v-slot:top>
-            <v-toolbar flat>
-              <!-- Change status -->
-              <v-dialog>
 
-              </v-dialog>
-            </v-toolbar>
+          <template v-slot:item.status="props">
+            <v-edit-dialog
+                large
+                persistent
+            >
+              <div>{{ props.item.status }}</div>
+
+              <template v-slot:input>
+                <div class="mt-4 text-h6">
+                  Update status
+                </div>
+                <v-select
+                    :items = "serviceStatus"
+                    v-model="props.item.status"
+                    label="Edit"
+                ></v-select>
+              </template>
+
+            </v-edit-dialog>
           </template>
         </v-data-table>
       </v-card>
@@ -25,20 +38,29 @@ export default {
   name: "hired-services",
   data: () => ({
     headers: [
-      { text: 'Nombre y apellidos', align: 'start', value: 'name', groupable: false  },
-      { text: 'Correo', align: 'left', value: 'email', sortable: false, groupable: false },
-      { text: 'Teléfono', align: 'left', value: 'phoneNumber', sortable: false, groupable: false },
-      { text: 'Cantidad (personas)', align: 'left', value: 'amount', groupable: false },
-      { text: 'Servicio', align: 'left', value: 'service'},
-      { text: 'Fecha de salida', align: 'left', value: 'scheduledDate', groupable: false },
-      { text: 'Monto', align: 'left', value: 'price', groupable: false  },
-      { text: 'Estado', align: 'left', value: 'status', groupable: false },
+      {text: 'Nombre y apellidos', align: 'start', value: 'name', groupable: false},
+      {text: 'Correo', align: 'left', value: 'email', sortable: false, groupable: false},
+      {text: 'Teléfono', align: 'left', value: 'phoneNumber', sortable: false, groupable: false},
+      {text: 'Cantidad (personas)', align: 'left', value: 'amount', groupable: false},
+      {text: 'Servicio', align: 'left', value: 'service'},
+      {text: 'Fecha de salida', align: 'left', value: 'scheduledDate', groupable: false},
+      {text: 'Monto', align: 'left', value: 'price', groupable: false},
+      {text: 'Estado', align: 'left', value: 'status', groupable: false},
     ],
     clients: [],
     dialogChangeStatus: false,
     dialogDelete: false,
     editIndex: -1,
-    editedItem: {name: '', email: '', phoneNumber: '', amount: '', service: '', scheduledDate: '', price: 0, status: ''},
+    editedItem: {
+      name: '',
+      email: '',
+      phoneNumber: '',
+      amount: '',
+      service: '',
+      scheduledDate: '',
+      price: 0,
+      status: ''
+    },
     serviceStatus: ['pending', 'active', 'finished'],
   }),
 
@@ -78,7 +100,7 @@ export default {
 
           HiredService.getExtendInformation("service")
               .then((response) => {
-                for(let position = 0; position < response.data.length; position++) {
+                for (let position = 0; position < response.data.length; position++) {
                   this.clients[position].service = response.data[position].service.name;
                 }
                 console.log(response.data);
@@ -99,10 +121,10 @@ export default {
 
     deleteHiredService(id) {
       HiredService.delete(id)
-          .then( () => {
+          .then(() => {
             this.refreshList();
           })
-          .catch( e => {
+          .catch(e => {
             console.log(e);
           });
     },
@@ -110,7 +132,7 @@ export default {
     changeStatusItem(item) {
       this.editedIndex = this.clients.indexOf(item);
       this.editedItem = Object.assign({}, item);
-      this.dialogDelete = true;
+      this.dialogChangeStatus = true;
     },
 
     deleteItem(item) {
