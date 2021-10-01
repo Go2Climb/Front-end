@@ -19,7 +19,13 @@ const routes = [
     path: '/AgencyClients',
     name: 'AgencyClients',
     component: () => import('../views/AgencyClients')
+  },
+  {
+    path: '/ServiceDetails',
+    name: 'ServiceDetails',
+    component: () => import('../views/ServiceDetail')
   }
+
 ]
 
 const router = new VueRouter({

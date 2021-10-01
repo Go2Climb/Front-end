@@ -73,6 +73,13 @@
       "activities": [
         { "name": "activity1", "description": "description1" },
         { "name": "activity2", "description": "description2" }
+      ],
+      "reviews": [
+        { "name": "rev1", "description": "Esta es una reseña", "date": "20/05/2020",
+          "Customer": "Elias Candelaria"
+        },
+        { "name": "rev2", "description": "Esta es otra reseña", "date": "20/06/2020",
+          "Customer": "Candelaria Galvez" }
       ]
     },
     {
