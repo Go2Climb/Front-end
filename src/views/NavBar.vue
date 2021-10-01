@@ -8,11 +8,12 @@
       </v-col>
       <v-col cols="4" class="col-sm-3 col-md-3 d-flex flex-row align-center pa-0">
         <div class="d-flex justify-center align-center my-auto ml-3 rounded-pill white">
-          <v-btn class="rounded-l-pill" icon><v-icon>mdi-account</v-icon></v-btn>
+          <v-btn to ="/AgencyProfile" class="rounded-l-pill" icon>
+            <v-icon>mdi-account</v-icon>
+          </v-btn>
           <v-app-bar-nav-icon class="rounded-r-pill"></v-app-bar-nav-icon>
         </div>
-        <router-link class="ml-3 d-none d-md-flex" to="/"><v-btn dark text>Inicio</v-btn></router-link>
-
+        <router-link class="ml-3 d-none d-md-flex" to="/AgencyClients"><v-btn dark text>Clientes</v-btn></router-link>
       </v-col>
       <v-col cols="8" class="col-sm-6 col-md-6 py-0 pr-3 d-flex align-center justify-end">
         <div class="my-auto">
