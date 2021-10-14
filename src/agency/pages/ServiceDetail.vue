@@ -8,11 +8,11 @@
             <v-list>
               <v-subheader class="font-weight-bold title"> ${{ services.price }}</v-subheader>
               <v-list-item-group>
-                <v-subheader class="font-weight-medium subtitle-1">Salida</v-subheader>
-                <v-text-field type="date" full-width solo hide-details single-line flat class="rounded-pill" placeholder="Ingrese la fecha"  outlined color="blue"></v-text-field>
-                <v-subheader class="font-weight-medium subtitle-1">Personas</v-subheader>
-                <v-text-field type="text" full-width solo hide-details single-line flat class="rounded-pill ajustar" placeholder="Ingrese el numero de personas" outlined color="blue"></v-text-field>
-                <v-btn class="rounded-pill my-5 ml-15" color="primary">  Solicitar</v-btn>
+                <v-subheader class="font-weight-medium subtitle-1">Output</v-subheader>
+                <v-text-field type="date" full-width solo hide-details single-line flat class="rounded-pill" placeholder="Enter the date"  outlined color="blue"></v-text-field>
+                <v-subheader class="font-weight-medium subtitle-1">Persons</v-subheader>
+                <v-text-field type="text" full-width solo hide-details single-line flat class="rounded-pill adjust" placeholder="Enter the number of people" outlined color="blue"></v-text-field>
+                <v-btn class="rounded-pill my-5 ml-15" color="primary">Solicit</v-btn>
               </v-list-item-group>
             </v-list>
           </v-card>
@@ -28,7 +28,7 @@
           <!-- SECTION: Activities -->
               <v-card class="py-4 px-8 mb-4 rounded-lg">
                 <v-list>
-                  <header class="title font-weight-bold pl-0">las actividades que realizaras</header>
+                  <header class="title font-weight-bold pl-0">The activities you will do</header>
                   <v-subheader v-for="activities in services.activities" :key ="activities.name"> <v-icon class="pa-1">mdi-playlist-check</v-icon>{{activities.description}}</v-subheader>
 
                   <v-list-item-group >
@@ -42,9 +42,9 @@
             <v-col>
               <v-card class="py-4 px-8 mb-4 rounded-lg">
                 <v-list>
-                  <header class="title font-weight-bold pl-0">Es bueno saberlo</header>
-                  <v-subheader class="justify-end"> Este servicio atiende a los visitantes de lunes a viernes</v-subheader>
-                  <v-subheader class="font-weight-light justify-lg-end">desde 10:00 am hasta 20:00 pm</v-subheader>
+                  <header class="title font-weight-bold pl-0">Good to Know</header>
+                  <v-subheader class="justify-end">This service serves visitors from Monday to Friday</v-subheader>
+                  <v-subheader class="font-weight-light justify-lg-end">from 10:00 am to 20:00 pm</v-subheader>
                   <v-list-item-group >
 
 
@@ -65,10 +65,10 @@
 </template>
 
 <script>
-import ServicesService from "../agency/services/services.service";
+import ServicesService from "../services/services.service";
 
-import AgencyInfo from "../agency/pages/AgencyInfo";
-import Reviews from "../agency/pages/Reviews";
+import AgencyInfo from "./AgencyInfo";
+import Reviews from "./Reviews";
 
 
 export default {

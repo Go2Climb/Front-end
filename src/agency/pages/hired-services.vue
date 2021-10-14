@@ -1,9 +1,12 @@
 <template>
-  <v-row align="center" class="mx-auto">
+  <v-row align="center" class="pa-4">
     <v-col cols="12">
+      <h2 class="mb-3 title font-weight-bold">Hired services</h2>
+      <div class="d-flex justify-end">
+        <v-btn color="primary" class="mb-3">Download</v-btn>
+      </div>
       <v-card class="mx-auto">
         <v-data-table :headers="headers" :items="clients" sort-by="name" class="elevation-1" show-group-by>
-
           <template v-slot:item.status="props">
             <v-edit-dialog
                 large

@@ -80,8 +80,8 @@
           </v-col>
 
           <v-col>
-            <v-subheader>Ofrecido por {{agency.name}}</v-subheader>
-            <v-subheader class="align-lg-start"> Agencia registrada desde Octubre 2020</v-subheader>
+            <v-subheader>Offered by {{agency.name}}</v-subheader>
+            <v-subheader class="align-lg-start">Registered agency since October 2020</v-subheader>
           </v-col>
           <v-col>
             <v-subheader class="font-weight-bold title justify-end">${{services.price}}</v-subheader>
@@ -95,7 +95,7 @@
 
 <script>
 import ServicesService from "../../agency/services/services.service";
-import AgenciesData from "../../agency/services/agenciesdata";
+import AgenciesService from "../services/agencies.service";
 export default {
   name: "AgencyInfo",
 
@@ -119,7 +119,7 @@ export default {
           })
     },
     retrieveAgency(){
-      AgenciesData.getById(1).then((response) =>{
+      AgenciesService.getById(1).then((response) =>{
         this.agency = response.data;
         console.log(response.data);
       }).catch(e => {

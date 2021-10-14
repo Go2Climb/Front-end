@@ -7,9 +7,9 @@
         </v-col>
         <v-col cols="12" class="col-md-9">
           <v-card class="mb-6">
-            <v-card-title>Servicios</v-card-title>
+            <v-card-title>Services</v-card-title>
             <div class="px-4 d-flex justify-space-between">
-              <v-btn depressed dark class="grey">Ofertas</v-btn>
+              <v-btn depressed dark class="grey">Offers</v-btn>
               <v-btn dark fab small color="primary"><v-icon dark>mdi-plus</v-icon></v-btn>
             </div>
             <v-row class="px-4 py-2 wrap">
@@ -440,22 +440,22 @@
             </v-row>
           </v-card>
           <v-card class="mb-4">
-            <v-card-title>Reseñas</v-card-title>
+            <v-card-title>Reviews</v-card-title>
             <v-row class="px-4">
               <v-col cols="12" class="d-flex flex-row align-center col-md-6">
-                <div class="pr-4 col-5">Profesionalismo</div>
+                <div class="pr-4 col-5">Professionalism</div>
                 <v-progress-linear class="col-7" value="100" light background-color="grey" color="black"></v-progress-linear>
               </v-col>
               <v-col cols="12" class="d-flex flex-row align-center col-md-6">
-                <div class="pr-4 col-5">Calidad/Precio</div>
+                <div class="pr-4 col-5">Price/Quality</div>
                 <v-progress-linear class="col-7" value="100" light background-color="grey" color="black"></v-progress-linear>
               </v-col>
               <v-col cols="12" class="d-flex flex-row align-center col-md-6">
-                <div class="pr-4 col-5">Seguridad</div>
+                <div class="pr-4 col-5">Security</div>
                 <v-progress-linear class="col-7" value="100" light background-color="grey" color="black"></v-progress-linear>
               </v-col>
               <v-col cols="12" class="d-flex flex-row align-center col-md-6">
-                <div class="pr-4 col-5">Costos</div>
+                <div class="pr-4 col-5">Costs</div>
                 <v-progress-linear class="col-7" value="100" light background-color="grey" color="black"></v-progress-linear>
               </v-col>
             </v-row>
@@ -466,14 +466,14 @@
                   <v-avatar><img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John"></v-avatar>
                   <div>
                     <v-card-title>Julieta Rodrigues Gala</v-card-title>
-                    <v-card-subtitle>septiembre de 2021</v-card-subtitle>
+                    <v-card-subtitle>September 2021</v-card-subtitle>
                   </div>
                 </div>
                 <v-card-text>
-                  <p>Tuve una buena experiencia con este servicio. Nunca me había atrevido a realizar alpinismo, pero
-                    con esta empresa he cambiado mi forma de ver las cosas. Los guías son muy serviciales y me ayudaron
-                    en muchos tramos, me enseñaron los mejores lugares del trayecto y siempre estuve segura.
-                    Lo recomiendo, 10/10</p>
+                  <p>I had a good experience with this service. I had never dared to do mountaineering, but
+                    With this company I have changed my way of seeing things. The guides are very helpful and they helped me
+                    In many sections, they showed me the best places along the way and I was always safe.
+                    I recommend it , 10/10</p>
                 </v-card-text>
               </v-card>
               <v-card class="pa-4">
@@ -481,13 +481,13 @@
                   <v-avatar><img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John"></v-avatar>
                   <div>
                     <v-card-title>Sebastian Mazca Ilz</v-card-title>
-                    <v-card-subtitle>diciembre de 2020</v-card-subtitle>
+                    <v-card-subtitle>December 2020</v-card-subtitle>
                   </div>
                 </div>
                 <v-card-text>
-                  <p>No es mi primera vez con TravelNew, nunca me decepcionan, es cierto que para algunos tramos los
-                    costos son bastante altos en comparación a los demás, pero no lo cambiaría por nada,
-                    gracias!!!!!!!!!</p>
+                  <p>It is not my first time with TravelNew, they never disappoint me, it is true that for some sections the
+                    costs are quite high compared to the others, but I would not change it for anything,
+                    Thank you!!!!!!!!!</p>
                 </v-card-text>
               </v-card>
             </div>

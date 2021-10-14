@@ -6,16 +6,16 @@
           <!--Filters-->
           <v-card class="rounded-lg pa-1">
             <v-list>
-              <v-subheader class="font-weight-bold title">Categorias</v-subheader>
+              <v-subheader class="font-weight-bold title">Categories</v-subheader>
               <v-list-item-group>
                 <v-list-item>
-                  <v-list-item-title>Ofertas del dia</v-list-item-title>
+                  <v-list-item-title>Offers of the day</v-list-item-title>
                 </v-list-item>
                 <v-list-item>
-                  <v-list-item-title>Los más populares</v-list-item-title>
+                  <v-list-item-title>The most popular</v-list-item-title>
                 </v-list-item>
                 <v-list-item>
-                  <v-list-item-title>Para ti</v-list-item-title>
+                  <v-list-item-title>For you</v-list-item-title>
                 </v-list-item>
               </v-list-item-group>
             </v-list>
@@ -26,7 +26,7 @@
           <!-- SECTION: OFFERS -->
           <v-card class="py-4 px-8 mb-4 rounded-lg">
             <v-list>
-              <v-subheader class="title font-weight-bold pl-0">Ofertas del día</v-subheader>
+              <v-subheader class="title font-weight-bold pl-0">Offers of the day</v-subheader>
               <v-list-item-group>
                 <v-row>
                     <v-col cols="12" class="col-md-3" v-for="service in services" :key="service.id">
@@ -92,7 +92,7 @@
           <!-- SECTION: MORE POPULAR -->
           <v-card class="py-4 px-8 mb-4 rounded-lg">
             <v-list>
-              <v-subheader class="title font-weight-bold pl-0">Los más populares</v-subheader>
+              <v-subheader class="title font-weight-bold pl-0">The most popular</v-subheader>
               <v-list-item-group >
                 <v-row>
                   <v-col cols="12" class="col-md-3">
@@ -304,7 +304,7 @@
           <!-- SECTION: FOR YOU -->
           <v-card class="py-4 px-8 rounded-lg">
             <v-list>
-              <v-subheader class="title font-weight-bold pl-0">Para ti</v-subheader>
+              <v-subheader class="title font-weight-bold pl-0">For you</v-subheader>
               <v-list-item-group >
                 <v-row>
                   <v-col cols="12" class="col-md-3">

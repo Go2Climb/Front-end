@@ -17,7 +17,7 @@
 
 <script>
 import AgencyDescription from "./AgencyDescription";
-import HiredServices from "../agency/pages/hired-services";
+import HiredServices from "./hired-services";
 export default {
   name: "AgencyClients",
   components: {HiredServices, AgencyDescription}

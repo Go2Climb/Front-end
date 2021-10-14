@@ -63,35 +63,35 @@
     {
       "id": "s1",
       "agencyId": 1,
-      "name": "Disfruta de una aventura en la montaña",
+      "name": "Enjoy an adventure in the mountains",
       "score": 4,
       "price": 480,
       "location": "Pomabamba, Ancash",
       "creationDate": "25-05-2020",
       "photos": "https://cdn.aarp.net/content/dam/aarp/tourism/national/2017/10/1140-maroon-bells-mountains-north-america-esp.imgcache.rev3ae52edfa9863c5cf8680f82006b8b2d.web.900.513.jpg",
-      "description": "Esta es la descripcion de este servicio",
+      "description": "This is the description of this service",
       "activities": [
         { "name": "activity1", "description": "description1" },
         { "name": "activity2", "description": "description2" }
       ],
       "reviews": [
-        { "name": "rev1", "description": "Esta es una reseña", "date": "20/05/2020",
+        { "name": "rev1", "description": "This is a review", "date": "20/05/2020",
           "Customer": "Elias Candelaria"
         },
-        { "name": "rev2", "description": "Esta es otra reseña", "date": "20/06/2020",
+        { "name": "rev2", "description": "This is a review", "date": "20/06/2020",
           "Customer": "Candelaria Galvez" }
       ]
     },
     {
       "id": "s2",
       "agencyId": 1,
-      "name": "Escala, suerte si sobrevives",
+      "name": "Climb, luck if you survive",
       "score": 5,
       "price": 520,
       "location": "LugarX, Ancash",
       "creationDate": "10-02-2020",
       "photos": "https://www.caracteristicas.co/wp-content/uploads/2018/11/montan%CC%83as-e1543190126108.jpg",
-      "description": "Esta es la descripcion del servicio 2",
+      "description": "This is the description of service 2",
       "activities": [
         { "name": "activity1", "description": "description1" },
         { "name": "activity2", "description": "description2" }
@@ -100,13 +100,13 @@
     {
       "id": "s3",
       "agencyId": 3,
-      "name": "A ver ven y disfruta de este lugar",
+      "name": "Let's see come and enjoy this place",
       "score": 4,
       "price": 250,
       "location": "No, Lima",
       "creationDate": "20-06-2021",
       "photos": "https://estaticos.muyinteresante.es/media/cache/1140x_thumb/uploads/images/gallery/5f96c5745bafe85c04aac28e/1-monte-everest_1.jpg",
-      "description": "Lleve casera, lleve casera",
+      "description": "Take home, take home",
       "activities": [
         { "name": "activity1", "description": "description1" },
         { "name": "activity2", "description": "description2" }
@@ -115,13 +115,13 @@
     {
       "id": "s4",
       "agencyId": 3,
-      "name": "Ultima oportunidad para viajar",
+      "name": "Last chance to travel",
       "score": 2,
       "price": 780,
       "location": "No, Lima",
       "creationDate": "20-06-2021",
       "photos": "https://cdn.aarp.net/content/dam/aarp/travel/Domestic/2013-04/1140-wildflowers-mount-rainier-washington-frommers-beautiful-mountains-esp.imgcache.rev0e36c9680e5843406394b38ea8826513.jpg",
-      "description": "Un nuevo lugar cada día, ven y averigualo tú mismo",
+      "description": "A new place every day, come and find out for yourself",
       "activities": [
         { "name": "activity1", "description": "description1" },
         { "name": "activity2", "description": "description2" }

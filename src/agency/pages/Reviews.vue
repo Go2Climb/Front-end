@@ -1,6 +1,6 @@
 <template>
  <v-card class="py-4 px-8 mb-4 rounded-lg">
-   <header class="title font-weight-bold pl-0">Reseñas</header>
+   <header class="title font-weight-bold pl-0">Reviews</header>
 
    <v-li v-for="rev in services.reviews" :key ="rev.name">
      <v-row>
@@ -23,7 +23,7 @@
 
 <script>
 import ServicesService from "../../agency/services/services.service";
-import AgenciesData from "../../agency/services/agenciesdata";
+import AgenciesService from "../services/agencies.service";
 
 export default {
   name: "Reviews",
@@ -47,7 +47,7 @@ export default {
           })
     },
     retrieveAgency(){
-      AgenciesData.getById(1).then((response) =>{
+      AgenciesService.getById(1).then((response) =>{
         this.agency = response.data;
         console.log(response.data);
       }).catch(e => {

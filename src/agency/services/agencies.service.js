@@ -1,6 +1,6 @@
 import http from '../../core/http-common'
 
-class AgenciesData {
+class AgenciesService {
     endPoint = '/agencies';
 
     getAll() {
@@ -24,4 +24,4 @@ class AgenciesData {
 
 }
 
-export default new AgenciesData();
+export default new AgenciesService();
