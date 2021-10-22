@@ -42,7 +42,7 @@
                 v-for="n in 4"
                 :key="n"
                 class="d-flex child-flex"
-                cols="5"
+                cols="6"
             >
               <v-img
                   :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
@@ -68,24 +68,22 @@
           </v-row>
         </v-col>
       </v-row>
-      <v-list-item-group>
-        <v-row>
-
-          <v-col cols = "1">
+      <v-list-item-group class="ml-3">
+        <v-row class="my-8">
+          <div>
             <v-img :src="`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxU5N0gjC5KeKFAVkh-sN7ogtf4lSQ_WsMJQ&usqp=CAU`"
-                   max-height="75px"
-                   max-width="75px"
-                   class="logo"
+                   min-height="80px"
+                   max-width="80px"
+                   class="logo ma-0"
             ></v-img>
-          </v-col>
-
-          <v-col>
-            <v-subheader>Ofrecido por {{agency.name}}</v-subheader>
-            <v-subheader class="align-lg-start"> Agencia registrada desde Octubre 2020</v-subheader>
-          </v-col>
-          <v-col>
-            <v-subheader class="font-weight-bold title justify-end">${{services.price}}</v-subheader>
-          </v-col>
+          </div>
+          <div class="d-flex flex-column justify-center">
+            <v-subheader>Offered by {{agency.name}}</v-subheader>
+            <v-subheader class="align-lg-start">Registered agency since October 2020</v-subheader>
+          </div>
+          <div class="d-flex align-center align-end ml-auto">
+            <v-subheader class="font-weight-bold title">${{services.price}}</v-subheader>
+          </div>
         </v-row>
         <v-subheader class="font-weight-bold align-lg-start">{{services.description}}</v-subheader>
       </v-list-item-group>
@@ -95,7 +93,7 @@
 
 <script>
 import ServicesService from "../../agency/services/services.service";
-import AgenciesData from "../../agency/services/agenciesdata";
+import AgenciesService from "../services/agencies.service";
 export default {
   name: "AgencyInfo",
 
@@ -108,7 +106,6 @@ export default {
 
   methods: {
     retrieveServices(){
-      console.log(this.id)
       ServicesService.getById(this.id)
           .then((response) => {
             this.services = response.data;
@@ -119,7 +116,7 @@ export default {
           })
     },
     retrieveAgency(){
-      AgenciesData.getById(1).then((response) =>{
+      AgenciesService.getById(1).then((response) =>{
         this.agency = response.data;
         console.log(response.data);
       }).catch(e => {
@@ -132,7 +129,6 @@ export default {
   mounted() {
     this.retrieveServices();
     this.retrieveAgency();
-
   }
 }
 </script>
@@ -142,5 +138,8 @@ export default {
 .logo{
   margin-top: 25px;
   border-radius: 50%;
+}
+.full-witch {
+  min-width: 100%;
 }
 </style>
