@@ -13,17 +13,20 @@ const routes = [
   {
     path: '/agency/profile',
     name: 'AgencyProfile',
-    component: () => import('../agency/pages/AgencyProfile')
+    component: () => import('../agency/pages/AgencyProfile'),
+    props: true
   },
   {
     path: '/agency/clients',
     name: 'AgencyClients',
-    component: () => import('../agency/pages/AgencyClients')
+    component: () => import('../agency/pages/AgencyClients'),
+    props: true
   },
   {
-    path: '/agency/service',
+    path: '/agency/service/:id',
     name: 'ServiceDetails',
-    component: () => import('../agency/pages/ServiceDetail')
+    component: () => import('../agency/pages/ServiceDetail'),
+    props: true
   }
 
 ]

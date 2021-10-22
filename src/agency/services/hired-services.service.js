@@ -1,7 +1,7 @@
 import http from '../../core/http-common'
 
-class AgenciesService {
-    endPoint = '/agencies';
+class HiredService {
+    endPoint = '/hiredServices';
 
     getAll() {
         return http.get(this.endPoint);
@@ -12,11 +12,11 @@ class AgenciesService {
     getById(id) {
         return http.get(`${this.endPoint}/${id}`);
     }
-    create(createAgency) {
-        return http.post(this.endPoint, createAgency);
+    create(createHiredServiceDto) {
+        return http.post(this.endPoint, createHiredServiceDto);
     }
-    update(id, updateAgency) {
-        return http.put(`${this.endPoint}/${id}`, updateAgency);
+    update(id, updateHiredServiceDto) {
+        return http.put(`${this.endPoint}/${id}`, updateHiredServiceDto);
     }
     delete(id) {
         return http.delete( `${this.endPoint}/${id}`);
@@ -24,4 +24,4 @@ class AgenciesService {
 
 }
 
-export default new AgenciesService();
+export default new HiredService();

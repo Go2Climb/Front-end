@@ -5,11 +5,11 @@
         src="https://cdn.vuetifyjs.com/images/cards/cooking.png">
     </v-img>
     <v-card-text>
-      <v-card-title>TravelNew</v-card-title>
-      <v-card-subtitle>travelnew@gmail.com</v-card-subtitle>
+      <v-card-title>{{agency.name}}</v-card-title>
+      <v-card-subtitle>{{ agency.email }}</v-card-subtitle>
       <v-row align="center" class="mx-3">
         <v-rating
-            :value="4"
+            :value="agency.score"
             color="amber"
             dense
             half-increments
@@ -18,21 +18,20 @@
         ></v-rating>
       </v-row>
       <v-card-text class="">
-        <p>We are an agency dedicated to mountaineering for beginners and experienced people. We have
-          more than 20 years of experience in the field of mountaineering. We appreciate your visit.</p>
+        <p>{{agency.description}}</p>
       </v-card-text>
       <v-card-text>
         <div class="d-flex flex-column">
           <p class="font-weight-bold">Location</p>
-          <p>Maicena, Lima - Peru</p>
+          <p>{{agency.location}}</p>
         </div>
         <div class="d-flex flex-column">
           <p class="font-weight-bold">RUC</p>
-          <p>641478521</p>
+          <p>{{ agency.RUC }}</p>
         </div>
         <div class="d-flex flex-column">
           <p class="font-weight-bold">Telephone</p>
-          <p>+51 952364789</p>
+          <p>{{agency.phoneNumber}}</p>
         </div>
       </v-card-text>
     </v-card-text>
@@ -47,8 +46,34 @@
 </template>
 
 <script>
+import AgenciesService from '../services/agencies.service'
+
 export default {
-  name: "AgencyDescription"
+  name: "AgencyDescription",
+  data: () => ({
+    agency:[],
+    id: 1
+  }),
+
+  methods:
+      {
+        retrieveAgency(){
+          AgenciesService.getById(this.id).then((response) =>{
+            this.agency = response.data;
+            console.log(response.data);
+          }).catch(e => {
+            console.log(e);
+          })
+
+        },
+
+
+      },
+
+  mounted() {
+    this.retrieveAgency()
+  }
+
 }
 </script>
 

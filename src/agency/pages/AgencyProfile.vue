@@ -9,19 +9,15 @@
           <v-card class="mb-6">
             <v-card-title>Services</v-card-title>
             <div class="px-4 d-flex justify-space-between">
-              <v-btn
-                  depressed dark
-                  v-on:click="setOnlyOffer()"
-                  v-bind:class="[onlyOffer? active: noActive]">Offers
-              </v-btn>
+              <v-btn depressed dark class="grey">Offers</v-btn>
               <v-btn dark fab small color="primary"><v-icon dark>mdi-plus</v-icon></v-btn>
             </div>
             <v-row class="px-4 py-2 wrap">
-              <v-col cols="12" class="col-md-3" v-for="(service, index) in services" :key="index">
+              <v-col cols="12" class="col-md-3">
                 <v-card
+                    :loading="loading"
                     class="my-2"
                     max-width="374"
-                    min-height="310"
                 >
                   <template slot="progress">
                     <v-progress-linear
@@ -34,12 +30,12 @@
                   <a href="">
                     <v-img
                         height=120
-                        :src=service.photos
+                        src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
                     ></v-img>
                   </a>
 
                   <a href="" class="text-decoration-none">
-                    <v-card-title class="d-flex flex-column align-center pb-0 black--text">{{service.name}}</v-card-title>
+                    <v-card-title class="d-flex flex-column align-center pb-0 black--text">Cafe Badilico</v-card-title>
                   </a>
 
                   <v-card-text class="d-flex flex-column align-center">
@@ -60,10 +56,382 @@
                     </v-row>
 
                     <div class="pt-3 text-subtitle-1 d-flex flex-row">
-                      <a href="" class="text-decoration-none d-flex">
-                        <div v-if="service.isOffer" class="text-decoration-line-through pr-2 black--text">${{service.price}}</div>
-                        <div v-if="service.isOffer" class="black--text">${{service.newPrice}}</div>
-                        <div v-else class="black--text">${{service.price}}</div>
+                      <a href="" class="text-decoration-none ">
+                        <div class="text-decoration-line-through pr-2 black--text">$500</div>
+                      </a>
+                      <a href="" class="text-decoration-none">
+                        <div class="black--text">$480</div>
+                      </a>
+                    </div>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-col cols="12" class="col-md-3">
+                <v-card
+                    :loading="loading"
+                    class="my-2"
+                    max-width="374"
+                >
+                  <template slot="progress">
+                    <v-progress-linear
+                        color="deep-purple"
+                        height="10"
+                        indeterminate
+                    ></v-progress-linear>
+                  </template>
+
+                  <a href="">
+                    <v-img
+                        height=120
+                        src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+                    ></v-img>
+                  </a>
+
+                  <a href="" class="text-decoration-none">
+                    <v-card-title class="d-flex flex-column align-center pb-0 black--text">Cafe Badilico</v-card-title>
+                  </a>
+
+                  <v-card-text class="d-flex flex-column align-center">
+                    <v-row
+                        align="center"
+                        class="mx-0"
+                    >
+                      <a href="" class="text-decoration-none">
+                        <v-rating
+                            :value="4"
+                            color="amber"
+                            dense
+                            half-increments
+                            readonly
+                            size="20"
+                        ></v-rating>
+                      </a>
+                    </v-row>
+
+                    <div class="pt-3 text-subtitle-1 d-flex flex-row">
+                      <a href="" class="text-decoration-none ">
+                        <div class="text-decoration-line-through pr-2 black--text">$500</div>
+                      </a>
+                      <a href="" class="text-decoration-none">
+                        <div class="black--text">$480</div>
+                      </a>
+                    </div>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-col cols="12" class="col-md-3">
+                <v-card
+                    :loading="loading"
+                    class="my-2"
+                    max-width="374"
+                >
+                  <template slot="progress">
+                    <v-progress-linear
+                        color="deep-purple"
+                        height="10"
+                        indeterminate
+                    ></v-progress-linear>
+                  </template>
+
+                  <a href="">
+                    <v-img
+                        height=120
+                        src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+                    ></v-img>
+                  </a>
+
+                  <a href="" class="text-decoration-none">
+                    <v-card-title class="d-flex flex-column align-center pb-0 black--text">Cafe Badilico</v-card-title>
+                  </a>
+
+                  <v-card-text class="d-flex flex-column align-center">
+                    <v-row
+                        align="center"
+                        class="mx-0"
+                    >
+                      <a href="" class="text-decoration-none">
+                        <v-rating
+                            :value="4"
+                            color="amber"
+                            dense
+                            half-increments
+                            readonly
+                            size="20"
+                        ></v-rating>
+                      </a>
+                    </v-row>
+
+                    <div class="pt-3 text-subtitle-1 d-flex flex-row">
+                      <a href="" class="text-decoration-none ">
+                        <div class="text-decoration-line-through pr-2 black--text">$500</div>
+                      </a>
+                      <a href="" class="text-decoration-none">
+                        <div class="black--text">$480</div>
+                      </a>
+                    </div>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-col cols="12" class="col-md-3">
+                <v-card
+                    :loading="loading"
+                    class="my-2"
+                    max-width="374"
+                >
+                  <template slot="progress">
+                    <v-progress-linear
+                        color="deep-purple"
+                        height="10"
+                        indeterminate
+                    ></v-progress-linear>
+                  </template>
+
+                  <a href="">
+                    <v-img
+                        height=120
+                        src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+                    ></v-img>
+                  </a>
+
+                  <a href="" class="text-decoration-none">
+                    <v-card-title class="d-flex flex-column align-center pb-0 black--text">Cafe Badilico</v-card-title>
+                  </a>
+
+                  <v-card-text class="d-flex flex-column align-center">
+                    <v-row
+                        align="center"
+                        class="mx-0"
+                    >
+                      <a href="" class="text-decoration-none">
+                        <v-rating
+                            :value="4"
+                            color="amber"
+                            dense
+                            half-increments
+                            readonly
+                            size="20"
+                        ></v-rating>
+                      </a>
+                    </v-row>
+
+                    <div class="pt-3 text-subtitle-1 d-flex flex-row">
+                      <a href="" class="text-decoration-none ">
+                        <div class="text-decoration-line-through pr-2 black--text">$500</div>
+                      </a>
+                      <a href="" class="text-decoration-none">
+                        <div class="black--text">$480</div>
+                      </a>
+                    </div>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-col cols="12" class="col-md-3">
+                <v-card
+                    :loading="loading"
+                    class="my-2"
+                    max-width="374"
+                >
+                  <template slot="progress">
+                    <v-progress-linear
+                        color="deep-purple"
+                        height="10"
+                        indeterminate
+                    ></v-progress-linear>
+                  </template>
+
+                  <a href="">
+                    <v-img
+                        height=120
+                        src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+                    ></v-img>
+                  </a>
+
+                  <a href="" class="text-decoration-none">
+                    <v-card-title class="d-flex flex-column align-center pb-0 black--text">Cafe Badilico</v-card-title>
+                  </a>
+
+                  <v-card-text class="d-flex flex-column align-center">
+                    <v-row
+                        align="center"
+                        class="mx-0"
+                    >
+                      <a href="" class="text-decoration-none">
+                        <v-rating
+                            :value="4"
+                            color="amber"
+                            dense
+                            half-increments
+                            readonly
+                            size="20"
+                        ></v-rating>
+                      </a>
+                    </v-row>
+
+                    <div class="pt-3 text-subtitle-1 d-flex flex-row">
+                      <a href="" class="text-decoration-none ">
+                        <div class="text-decoration-line-through pr-2 black--text">$500</div>
+                      </a>
+                      <a href="" class="text-decoration-none">
+                        <div class="black--text">$480</div>
+                      </a>
+                    </div>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-col cols="12" class="col-md-3">
+                <v-card
+                    :loading="loading"
+                    class="my-2"
+                    max-width="374"
+                >
+                  <template slot="progress">
+                    <v-progress-linear
+                        color="deep-purple"
+                        height="10"
+                        indeterminate
+                    ></v-progress-linear>
+                  </template>
+
+                  <a href="">
+                    <v-img
+                        height=120
+                        src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+                    ></v-img>
+                  </a>
+
+                  <a href="" class="text-decoration-none">
+                    <v-card-title class="d-flex flex-column align-center pb-0 black--text">Cafe Badilico</v-card-title>
+                  </a>
+
+                  <v-card-text class="d-flex flex-column align-center">
+                    <v-row
+                        align="center"
+                        class="mx-0"
+                    >
+                      <a href="" class="text-decoration-none">
+                        <v-rating
+                            :value="4"
+                            color="amber"
+                            dense
+                            half-increments
+                            readonly
+                            size="20"
+                        ></v-rating>
+                      </a>
+                    </v-row>
+
+                    <div class="pt-3 text-subtitle-1 d-flex flex-row">
+                      <a href="" class="text-decoration-none ">
+                        <div class="text-decoration-line-through pr-2 black--text">$500</div>
+                      </a>
+                      <a href="" class="text-decoration-none">
+                        <div class="black--text">$480</div>
+                      </a>
+                    </div>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-col cols="12" class="col-md-3">
+                <v-card
+                    :loading="loading"
+                    class="my-2"
+                    max-width="374"
+                >
+                  <template slot="progress">
+                    <v-progress-linear
+                        color="deep-purple"
+                        height="10"
+                        indeterminate
+                    ></v-progress-linear>
+                  </template>
+
+                  <a href="">
+                    <v-img
+                        height=120
+                        src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+                    ></v-img>
+                  </a>
+
+                  <a href="" class="text-decoration-none">
+                    <v-card-title class="d-flex flex-column align-center pb-0 black--text">Cafe Badilico</v-card-title>
+                  </a>
+
+                  <v-card-text class="d-flex flex-column align-center">
+                    <v-row
+                        align="center"
+                        class="mx-0"
+                    >
+                      <a href="" class="text-decoration-none">
+                        <v-rating
+                            :value="4"
+                            color="amber"
+                            dense
+                            half-increments
+                            readonly
+                            size="20"
+                        ></v-rating>
+                      </a>
+                    </v-row>
+
+                    <div class="pt-3 text-subtitle-1 d-flex flex-row">
+                      <a href="" class="text-decoration-none ">
+                        <div class="text-decoration-line-through pr-2 black--text">$500</div>
+                      </a>
+                      <a href="" class="text-decoration-none">
+                        <div class="black--text">$480</div>
+                      </a>
+                    </div>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-col cols="12" class="col-md-3">
+                <v-card
+                    :loading="loading"
+                    class="my-2"
+                    max-width="374"
+                >
+                  <template slot="progress">
+                    <v-progress-linear
+                        color="deep-purple"
+                        height="10"
+                        indeterminate
+                    ></v-progress-linear>
+                  </template>
+
+                  <a href="">
+                    <v-img
+                        height=120
+                        src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+                    ></v-img>
+                  </a>
+
+                  <a href="" class="text-decoration-none">
+                    <v-card-title class="d-flex flex-column align-center pb-0 black--text">Cafe Badilico</v-card-title>
+                  </a>
+
+                  <v-card-text class="d-flex flex-column align-center">
+                    <v-row
+                        align="center"
+                        class="mx-0"
+                    >
+                      <a href="" class="text-decoration-none">
+                        <v-rating
+                            :value="4"
+                            color="amber"
+                            dense
+                            half-increments
+                            readonly
+                            size="20"
+                        ></v-rating>
+                      </a>
+                    </v-row>
+
+                    <div class="pt-3 text-subtitle-1 d-flex flex-row">
+                      <a href="" class="text-decoration-none ">
+                        <div class="text-decoration-line-through pr-2 black--text">$500</div>
+                      </a>
+                      <a href="" class="text-decoration-none">
+                        <div class="black--text">$480</div>
                       </a>
                     </div>
                   </v-card-text>
@@ -92,29 +460,34 @@
               </v-col>
             </v-row>
             <div class="pa-8">
-              <div v-if="Object.keys(reviews).length === 0">
-                <div class="d-flex justify-center align-center">
-                  <v-img
-                      min-height="100px"
-                      max-width="100px"
-                      src="https://cdn-icons-png.flaticon.com/512/65/65842.png">
-                  </v-img>
-                </div>
-                <div class="d-flex justify-center">
-                  <p>You still do not have user reviews, get
-                    customers by promoting your services</p>
-                </div>
-              </div>
-              <v-card v-for="(review, index) in reviews" v-bind:key="index" class="pa-4 mb-4">
+
+              <v-card class="pa-4 mb-4">
                 <div class="d-flex align-center">
                   <v-avatar><img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John"></v-avatar>
                   <div>
-                    <v-card-title>{{review.author}}</v-card-title>
-                    <v-card-subtitle>{{review.date}}</v-card-subtitle>
+                    <v-card-title>Julieta Rodrigues Gala</v-card-title>
+                    <v-card-subtitle>September 2021</v-card-subtitle>
                   </div>
                 </div>
                 <v-card-text>
-                  <p>{{review.comment}}</p>
+                  <p>I had a good experience with this service. I had never dared to do mountaineering, but
+                    With this company I have changed my way of seeing things. The guides are very helpful and they helped me
+                    In many sections, they showed me the best places along the way and I was always safe.
+                    I recommend it , 10/10</p>
+                </v-card-text>
+              </v-card>
+              <v-card class="pa-4">
+                <div class="d-flex align-center">
+                  <v-avatar><img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John"></v-avatar>
+                  <div>
+                    <v-card-title>Sebastian Mazca Ilz</v-card-title>
+                    <v-card-subtitle>December 2020</v-card-subtitle>
+                  </div>
+                </div>
+                <v-card-text>
+                  <p>It is not my first time with TravelNew, they never disappoint me, it is true that for some sections the
+                    costs are quite high compared to the others, but I would not change it for anything,
+                    Thank you!!!!!!!!!</p>
                 </v-card-text>
               </v-card>
             </div>
@@ -127,61 +500,9 @@
 
 <script>
 import AgencyDescription from "./AgencyDescription";
-import AgencyService from '../services/agencies.service'
 export default {
   name: "CustomerProfile",
-  components: {AgencyDescription},
-  data: () => ({
-    idAgency: 1,
-    onlyOffer: 0,
-    active: "primary",
-    noActive: "secondary",
-    services: [],
-    reviews: []
-  }),
-  methods: {
-    getServiceOfAgency(id) {
-      AgencyService.getServices(id)
-          .then((response) => {
-            this.services = response.data;
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          })
-    },
-    getReviewsOfAgency(id) {
-      AgencyService.getReviews(id)
-          .then((response) => {
-            this.reviews = response.data;
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          })
-    },
-    getServiceOfferOfAgency(id) {
-      AgencyService.getServiceOffer(id)
-          .then((response) => {
-            this.services = response.data;
-            console.log(response.data);
-            console.log("hello");
-          })
-          .catch(e => {
-            console.log(e);
-          })
-    },
-    setOnlyOffer(){
-      this.onlyOffer = !this.onlyOffer;
-      if (this.onlyOffer) this.getServiceOfferOfAgency(this.idAgency);
-      else this.getServiceOfAgency(this.idAgency);
-    }
-  },
-  mounted() {
-    this.getServiceOfAgency(this.idAgency);
-    this.getReviewsOfAgency(this.idAgency);
-  }
-
+  components: {AgencyDescription}
 }
 </script>
 
