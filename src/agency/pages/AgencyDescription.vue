@@ -18,20 +18,20 @@
         ></v-rating>
       </v-row>
       <v-card-text class="">
-        <p>Somos una agencia destinada al alpinismo para principiantes y personas experimentadas. Contamos con
-          más de 20 años de experiencia en el rubro de alpinismo. Agradecemos tu visita.</p>
+        <p>We are an agency dedicated to mountaineering for beginners and experienced people. We have
+          more than 20 years of experience in the field of mountaineering. We appreciate your visit.</p>
       </v-card-text>
       <v-card-text>
         <div class="d-flex flex-column">
-          <p class="font-weight-bold">Ubicacion</p>
-          <p>Maicena, Lima - Perú</p>
+          <p class="font-weight-bold">Location</p>
+          <p>Maicena, Lima - Peru</p>
         </div>
         <div class="d-flex flex-column">
           <p class="font-weight-bold">RUC</p>
           <p>641478521</p>
         </div>
         <div class="d-flex flex-column">
-          <p class="font-weight-bold">Telefono</p>
+          <p class="font-weight-bold">Telephone</p>
           <p>+51 952364789</p>
         </div>
       </v-card-text>
@@ -39,7 +39,7 @@
     <v-card-actions>
       <template>
         <v-btn block color="primary">
-          Editar información
+          Edit information
         </v-btn>
       </template>
     </v-card-actions>

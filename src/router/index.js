@@ -11,19 +11,19 @@ const routes = [
     component: Home
   },
   {
-    path: '/AgencyProfile',
+    path: '/agency/profile',
     name: 'AgencyProfile',
-    component: () => import('../views/AgencyProfile')
+    component: () => import('../agency/pages/AgencyProfile')
   },
   {
-    path: '/AgencyClients',
+    path: '/agency/clients',
     name: 'AgencyClients',
-    component: () => import('../views/AgencyClients')
+    component: () => import('../agency/pages/AgencyClients')
   },
   {
-    path: '/ServiceDetails',
+    path: '/agency/service',
     name: 'ServiceDetails',
-    component: () => import('../views/ServiceDetail')
+    component: () => import('../agency/pages/ServiceDetail')
   }
 
 ]

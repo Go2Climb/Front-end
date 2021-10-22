@@ -1,16 +1,22 @@
 import http from '../../core/http-common'
 
-class AgenciesData {
+class AgenciesService {
     endPoint = '/agencies';
 
     getAll() {
         return http.get(this.endPoint);
     }
-    getExtendInformation(category) {
-        return http.get(`${this.endPoint}?_expand=${category}`);
-    }
     getById(id) {
         return http.get(`${this.endPoint}/${id}`);
+    }
+    getServices(idAgency) {
+        return http.get(`${this.endPoint}/${idAgency}/services`);
+    }
+    getServiceOffer(idAgency) {
+        return http.get(`${this.endPoint}/${idAgency}/services?isOffer=1`);
+    }
+    getReviews(idAgency) {
+        return http.get(`${this.endPoint}/${idAgency}/reviews`);
     }
     create(createAgency) {
         return http.post(this.endPoint, createAgency);
@@ -24,4 +30,4 @@ class AgenciesData {
 
 }
 
-export default new AgenciesData();
+export default new AgenciesService();
