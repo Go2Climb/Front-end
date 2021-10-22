@@ -6,11 +6,14 @@ class ServicesService {
     getAll() {
         return http.get(this.endPoint);
     }
-    getExtendInformation(category) {
-        return http.get(`${this.endPoint}?_expand=${category}`);
-    }
     getById(id) {
         return http.get(`${this.endPoint}/${id}`);
+    }
+    getActivities(idService) {
+        return http.get(`${this.endPoint}/${idService}/activities`);
+    }
+    getReviews(idService) {
+        return http.get(`${this.endPoint}/${idService}/reviews`);
     }
     create(createServiceDto) {
         return http.post(this.endPoint, createServiceDto);

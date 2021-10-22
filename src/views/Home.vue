@@ -5,16 +5,16 @@
         <v-col cols="12" class="col-md-3">
           <!--Filters-->
           <v-card class="rounded-lg pa-1">
-            <v-list>
+            <v-list flat>
               <v-subheader class="font-weight-bold title">Categories</v-subheader>
               <v-list-item-group>
-                <v-list-item>
+                <v-list-item href="#secOffers">
                   <v-list-item-title>Offers of the day</v-list-item-title>
                 </v-list-item>
-                <v-list-item>
+                <v-list-item href="#secPopular">
                   <v-list-item-title>The most popular</v-list-item-title>
                 </v-list-item>
-                <v-list-item>
+                <v-list-item href="#secForYou">
                   <v-list-item-title>For you</v-list-item-title>
                 </v-list-item>
               </v-list-item-group>
@@ -24,16 +24,16 @@
 
         <v-col cols="12" class="col-md-9">
           <!-- SECTION: OFFERS -->
-          <v-card class="py-4 px-8 mb-4 rounded-lg">
+          <v-card id="secOffers" class="py-4 px-8 mb-4 rounded-lg">
             <v-list>
               <v-subheader class="title font-weight-bold pl-0">Offers of the day</v-subheader>
               <v-list-item-group>
                 <v-row>
-                    <v-col cols="12" class="col-md-3" v-for="service in services" :key="service.id">
+                    <v-col cols="12" class="col-md-3 wrap" v-for="service in services" :key="service.id">
                       <v-card
-                          :loading="loading"
                           class="my-2"
                           max-width="374"
+                          min-height="250"
                       >
                         <template slot="progress">
                           <v-progress-linear
@@ -84,13 +84,12 @@
                     </v-col>
 
                 </v-row>
-
               </v-list-item-group>
             </v-list>
           </v-card>
 
           <!-- SECTION: MORE POPULAR -->
-          <v-card class="py-4 px-8 mb-4 rounded-lg">
+          <v-card id="secPopular" class="py-4 px-8 mb-4 rounded-lg">
             <v-list>
               <v-subheader class="title font-weight-bold pl-0">The most popular</v-subheader>
               <v-list-item-group >
@@ -302,7 +301,7 @@
           </v-card>
 
           <!-- SECTION: FOR YOU -->
-          <v-card class="py-4 px-8 rounded-lg">
+          <v-card id="secForYou" class="py-4 px-8 rounded-lg">
             <v-list>
               <v-subheader class="title font-weight-bold pl-0">For you</v-subheader>
               <v-list-item-group >

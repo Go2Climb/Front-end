@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import HiredService from '../services/hired-services.service'
+import HiredService from '../services/hiredServices.service'
 
 export default {
   name: "hired-services",

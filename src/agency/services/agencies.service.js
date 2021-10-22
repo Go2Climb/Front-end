@@ -6,11 +6,17 @@ class AgenciesService {
     getAll() {
         return http.get(this.endPoint);
     }
-    getExtendInformation(category) {
-        return http.get(`${this.endPoint}?_expand=${category}`);
-    }
     getById(id) {
         return http.get(`${this.endPoint}/${id}`);
+    }
+    getServices(idAgency) {
+        return http.get(`${this.endPoint}/${idAgency}/services`);
+    }
+    getServiceOffer(idAgency) {
+        return http.get(`${this.endPoint}/${idAgency}/services?isOffer=1`);
+    }
+    getReviews(idAgency) {
+        return http.get(`${this.endPoint}/${idAgency}/reviews`);
     }
     create(createAgency) {
         return http.post(this.endPoint, createAgency);
