@@ -14,7 +14,9 @@
                   v-on:click="setOnlyOffer()"
                   v-bind:class="[onlyOffer? active: noActive]">Offers
               </v-btn>
-              <v-btn dark fab small color="primary"><v-icon dark>mdi-plus</v-icon></v-btn>
+              <v-btn to="add-service" dark fab small color="primary">
+                <v-icon dark>mdi-plus</v-icon>
+              </v-btn>
             </div>
             <v-row class="px-4 py-2 wrap">
               <v-col cols="12" class="col-md-3" v-for="(service, index) in services" :key="index">

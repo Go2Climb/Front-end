@@ -24,8 +24,12 @@ const routes = [
     path: '/agency/service',
     name: 'ServiceDetails',
     component: () => import('../agency/pages/ServiceDetail')
+  },
+  {
+    path: '/agency/add-service',
+    name: 'AddService',
+    component: () => import('../agency/pages/AddServices')
   }
-
 ]
 
 const router = new VueRouter({
