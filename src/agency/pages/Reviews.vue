@@ -36,15 +36,16 @@ import ServicesService from "../../agency/services/services.service";
 
 export default {
   name: "Reviews",
+  props:['AId'],
   data: () => ({
     reviews: [],
-    idService: 's1'
+    //idService: 's1'
 
   }),
 
   methods: {
     retrieveServices(){
-      ServicesService.getReviews(this.idService)
+      ServicesService.getReviews(this.AId)
           .then((response) => {
             this.reviews = response.data;
             console.log(response.data);
