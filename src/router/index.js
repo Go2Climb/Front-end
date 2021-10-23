@@ -29,7 +29,13 @@ const routes = [
     path: '/agency/add-service',
     name: 'AddService',
     component: () => import('../agency/pages/AddServices')
+  },
+  {
+    path: '/agency/add-service/promotion',
+    name: 'PromoteService',
+    component: () => import('../agency/pages/PromoteService')
   }
+
 ]
 
 const router = new VueRouter({

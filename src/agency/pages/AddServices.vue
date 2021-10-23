@@ -7,7 +7,7 @@
         </v-col>
         <v-col cols="12" class="col-md-9">
           <v-card class="mb-6">
-            <v-card-title class="mb-2">Add new service</v-card-title>
+            <v-card-title class="mb-2 font-weight-bold">Add new service</v-card-title>
             <v-card-subtitle class="font-weight-black mb-4">Service Details</v-card-subtitle>
             <v-divider></v-divider>
             <v-form>
@@ -36,9 +36,40 @@
                 </v-col>
               </v-row>
               <v-divider></v-divider>
-              <v-row class="py-6">
-                <v-col cols="12">
-                  <v-btn class="mx-4 black--text" color="primary" rounded>Add Offer</v-btn>
+              <v-row>
+                <v-col cols="3">
+                  <template>
+                    <v-container fluid>
+                      <v-combobox color="primary" :items="items" label="Currency" :search-input.sync="search" class="rounded-xl pt-3" outlined dense hide-selected></v-combobox>
+                    </v-container>
+                  </template>
+                </v-col>
+                <v-col cols="3" >
+                  <v-text-field color="primary" label="Price" outlined dense class="rounded-xl pt-6"></v-text-field>
+                </v-col>
+                <v-col cols="3">
+                  <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :return-value.sync="start_date" transition="scale-transition" offset-y min-width="auto">
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-text-field v-model="start_date" label="Start Date" outlined dense prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" class="rounded-xl mx-4 pt-6"></v-text-field>
+                    </template>
+                    <v-date-picker v-model="start_date" no-title scrollable>
+                      <v-spacer></v-spacer>
+                      <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
+                      <v-btn text color="primary" @click="$refs.menu.save(start_date)">OK</v-btn>
+                    </v-date-picker>
+                  </v-menu>
+                </v-col>
+                <v-col cols="3">
+                  <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" :return-value.sync="end_date" transition="scale-transition" offset-y min-width="auto">
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-text-field v-model="end_date" label="End Date" outlined dense prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" class="rounded-xl mx-4 pt-6"></v-text-field>
+                    </template>
+                    <v-date-picker v-model="end_date" no-title scrollable>
+                      <v-spacer></v-spacer>
+                      <v-btn text color="primary" @click="menu1 = false">Cancel</v-btn>
+                      <v-btn text color="primary" @click="$refs.menu1.save(end_date)">OK</v-btn>
+                    </v-date-picker>
+                  </v-menu>
                 </v-col>
               </v-row>
               <v-divider></v-divider>
@@ -46,37 +77,38 @@
                 <v-col cols="3">
                   <template>
                     <v-container fluid>
-                      <v-combobox color="primary" :items="items" label="Currency" :search-input.sync="search" class="rounded-xl mx-4 pt-3" outlined dense hide-selected></v-combobox>
+                      <v-combobox color="primary" :items="items" label="Currency" :search-input.sync="search" class="rounded-xl pt-3" outlined dense hide-selected></v-combobox>
                     </v-container>
                   </template>
                 </v-col>
-                <v-col cols="2">
-                  <v-text-field color="primary" label="Price" outlined dense class="rounded-xl mx-4 pt-6"></v-text-field>
+                <v-col cols="3" >
+                  <v-text-field color="primary" label="Price" outlined dense class="rounded-xl pt-6"></v-text-field>
                 </v-col>
-                <v-col cols="4">
-                  <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :return-value.sync="date" transition="scale-transition" offset-y min-width="auto">
+                <v-col cols="3">
+                  <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :return-value.sync="start_date" transition="scale-transition" offset-y min-width="auto">
                     <template v-slot:activator="{ on, attrs }">
-                      <v-text-field v-model="date" label="Start Date" outlined dense prepend-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" class="rounded-xl mx-16 pt-6"></v-text-field>
+                      <v-text-field v-model="start_date" label="Start Date" outlined dense prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" class="rounded-xl mx-4 pt-6"></v-text-field>
                     </template>
-                    <v-date-picker v-model="date" no-title scrollable>
+                    <v-date-picker v-model="start_date" no-title scrollable>
                       <v-spacer></v-spacer>
                       <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-                      <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+                      <v-btn text color="primary" @click="$refs.menu.save(start_date)">OK</v-btn>
                     </v-date-picker>
                   </v-menu>
                 </v-col>
-                <v-col cols="4">
-                  <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" :return-value.sync="date1" transition="scale-transition" offset-y min-width="auto">
+                <v-col cols="3">
+                  <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" :return-value.sync="end_date" transition="scale-transition" offset-y min-width="auto">
                     <template v-slot:activator="{ on, attrs }">
-                      <v-text-field v-model="date1" label="End Date" outlined dense prepend-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" class="rounded-xl mx-16 pt-6"></v-text-field>
+                      <v-text-field v-model="end_date" label="End Date" outlined dense prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" class="rounded-xl mx-4 pt-6"></v-text-field>
                     </template>
-                    <v-date-picker v-model="date1" no-title scrollable>
+                    <v-date-picker v-model="end_date" no-title scrollable>
                       <v-spacer></v-spacer>
                       <v-btn text color="primary" @click="menu1 = false">Cancel</v-btn>
-                      <v-btn text color="primary" @click="$refs.menu1.save(date1)">OK</v-btn>
+                      <v-btn text color="primary" @click="$refs.menu1.save(end_date)">OK</v-btn>
                     </v-date-picker>
                   </v-menu>
                 </v-col>
+                <v-btn class="mx-6 mb-8 black--text" color="primary" rounded>Add Offer</v-btn>
               </v-row>
               <v-divider></v-divider>
               <v-row>
@@ -104,6 +136,7 @@
                   </template>
                 </v-col>
               </v-row>
+              <v-btn to="add-service/promotion" class="ma-6 black--text float-right" color="primary" rounded>Continue</v-btn>
             </v-form>
           </v-card>
         </v-col>
@@ -118,8 +151,8 @@ export default {
   name: "AddServices",
   components: {AgencyDescription},
   data: () => ({
-    date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-    date1: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+    start_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+    end_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
     menu: false,
     menu1: false,
     rules: [
@@ -133,5 +166,7 @@ export default {
 </script>
 
 <style scoped>
-
+.continue {
+  float: right;
+}
 </style>
