@@ -12,7 +12,11 @@
                 <v-text-field type="date" full-width solo hide-details single-line flat class="rounded-pill" placeholder="Enter the date"  outlined color="blue"></v-text-field>
                 <v-subheader class="font-weight-medium subtitle-1">Persons</v-subheader>
                 <v-text-field type="text" full-width solo hide-details single-line flat class="rounded-pill adjust" placeholder="Enter the number of people" outlined color="blue"></v-text-field>
-                <v-btn class="rounded-pill my-5 ml-15" color="primary">Solicit</v-btn>
+                <v-btn @click="overlay = !overlay" class="rounded-pill my-5 ml-15" color="primary">Solicit</v-btn>
+                <v-overlay :value="overlay">
+                  <solicit-service></solicit-service>
+                  <v-btn @click="overlay=false"> close </v-btn>
+                </v-overlay>
               </v-list-item-group>
             </v-list>
           </v-card>
@@ -68,12 +72,13 @@ import ServicesService from "../services/services.service";
 
 import AgencyInfo from "./AgencyInfo";
 import Reviews from "./Reviews";
+import SolicitService from "./SolicitService";
 
 
 
 export default {
   name: "ServiceDetail",
-  components: {Reviews, AgencyInfo},
+  components: {SolicitService, Reviews, AgencyInfo},
   props: ['serviceId'],
 
 
@@ -81,6 +86,7 @@ export default {
     services: [],
     activities:[],
     id : ' ',
+    overlay: false
 
   }),
 
@@ -120,8 +126,9 @@ export default {
     //console.log("XD")
     this.id = this.$route.params.id
     //console.log(this.serviceId)
-  }
+  },
 
+ 
 
 }
 </script>
