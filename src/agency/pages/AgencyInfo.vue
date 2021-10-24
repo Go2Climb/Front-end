@@ -1,7 +1,10 @@
 <template>
   <v-card class="py-4 px-8 mb-4 rounded-lg">
     <v-list>
-      <v-subheader class="title font-weight-bold pl-0">{{services.name}}</v-subheader>
+      <!--
+      <p>{{this.AgId}}</p>
+      <p>{{this.aId}}</p> -->
+      <v-subheader class="title font-weight-bold pl-0">{{services.name}} </v-subheader>
       <v-row>
         <v-col>
           <v-subheader> <v-icon color ="blue"> mdi-map-marker-circle </v-icon> {{services.location}}</v-subheader>
@@ -42,7 +45,7 @@
                 v-for="n in 4"
                 :key="n"
                 class="d-flex child-flex"
-                cols="6"
+                cols="5"
             >
               <v-img
                   :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
@@ -68,22 +71,24 @@
           </v-row>
         </v-col>
       </v-row>
-      <v-list-item-group class="ml-3">
-        <v-row class="my-8">
-          <div>
+      <v-list-item-group>
+        <v-row>
+
+          <v-col cols = "1">
             <v-img :src="`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxU5N0gjC5KeKFAVkh-sN7ogtf4lSQ_WsMJQ&usqp=CAU`"
-                   min-height="80px"
-                   max-width="80px"
-                   class="logo ma-0"
+                   max-height="75px"
+                   max-width="75px"
+                   class="logo"
             ></v-img>
-          </div>
-          <div class="d-flex flex-column justify-center">
+          </v-col>
+
+          <v-col>
             <v-subheader>Offered by {{agency.name}}</v-subheader>
             <v-subheader class="align-lg-start">Registered agency since October 2020</v-subheader>
-          </div>
-          <div class="d-flex align-center align-end ml-auto">
-            <v-subheader class="font-weight-bold title">${{services.price}}</v-subheader>
-          </div>
+          </v-col>
+          <v-col>
+            <v-subheader class="font-weight-bold title justify-end">${{services.price}}</v-subheader>
+          </v-col>
         </v-row>
         <v-subheader class="font-weight-bold align-lg-start">{{services.description}}</v-subheader>
       </v-list-item-group>
@@ -96,27 +101,34 @@ import ServicesService from "../../agency/services/services.service";
 import AgenciesService from "../services/agencies.service";
 export default {
   name: "AgencyInfo",
+  props: ['Sid','AgId'],
+
 
   data: () => ({
     services: [],
     agency: [],
-    id: 's1'
+    id: " ",
+    aId: " "
 
   }),
 
   methods: {
     retrieveServices(){
-      ServicesService.getById(this.id)
+      //console.log(this.id)
+      ServicesService.getById(this.Sid)
           .then((response) => {
             this.services = response.data;
-            console.log(response.data);
+            //console.log(response.data);
           })
           .catch(e => {
             console.log(e);
+
           })
+
     },
     retrieveAgency(){
-      AgenciesService.getById(1).then((response) =>{
+
+      AgenciesService.getById(this.AgId).then((response) =>{
         this.agency = response.data;
         console.log(response.data);
       }).catch(e => {
@@ -127,9 +139,18 @@ export default {
   },
 
   mounted() {
+
     this.retrieveServices();
     this.retrieveAgency();
-  }
+    //console.log(this.Sid)
+  },
+  beforeMount() {
+    //console.log(this.Sid)
+    //this.id = this.Sid
+    this.aId =  this.AgId
+
+  },
+
 }
 </script>
 
@@ -138,8 +159,5 @@ export default {
 .logo{
   margin-top: 25px;
   border-radius: 50%;
-}
-.full-witch {
-  min-width: 100%;
 }
 </style>

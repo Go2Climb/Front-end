@@ -14,7 +14,9 @@
                   v-on:click="setOnlyOffer()"
                   v-bind:class="[onlyOffer? active: noActive]">Offers
               </v-btn>
-              <v-btn dark fab small color="primary"><v-icon dark>mdi-plus</v-icon></v-btn>
+              <v-btn v-on:click="getAgencyId(idAgency)" dark fab small color="primary">
+                <v-icon dark>mdi-plus</v-icon>
+              </v-btn>
             </div>
             <v-row class="px-4 py-2 wrap">
               <v-col cols="12" class="col-md-3" v-for="(service, index) in services" :key="index">
@@ -22,6 +24,7 @@
                     class="my-2"
                     max-width="374"
                     min-height="310"
+                    v-on:click="setId(service.id)"
                 >
                   <template slot="progress">
                     <v-progress-linear
@@ -31,7 +34,7 @@
                     ></v-progress-linear>
                   </template>
 
-                  <a href="">
+                  <a >
                     <v-img
                         height=120
                         :src=service.photos
@@ -47,7 +50,7 @@
                         align="center"
                         class="mx-0"
                     >
-                      <a href="" class="text-decoration-none">
+                      <a class="text-decoration-none">
                         <v-rating
                             :value="4"
                             color="amber"
@@ -60,7 +63,7 @@
                     </v-row>
 
                     <div class="pt-3 text-subtitle-1 d-flex flex-row">
-                      <a href="" class="text-decoration-none d-flex">
+                      <a  class="text-decoration-none d-flex">
                         <div v-if="service.isOffer" class="text-decoration-line-through pr-2 black--text">${{service.price}}</div>
                         <div v-if="service.isOffer" class="black--text">${{service.newPrice}}</div>
                         <div v-else class="black--text">${{service.price}}</div>
@@ -128,6 +131,7 @@
 <script>
 import AgencyDescription from "./AgencyDescription";
 import AgencyService from '../services/agencies.service'
+
 export default {
   name: "CustomerProfile",
   components: {AgencyDescription},
@@ -175,6 +179,13 @@ export default {
       this.onlyOffer = !this.onlyOffer;
       if (this.onlyOffer) this.getServiceOfferOfAgency(this.idAgency);
       else this.getServiceOfAgency(this.idAgency);
+    },
+    getAgencyId(id){
+      this.$router.push({ path: `/agency/add-service/${id}`})
+    },
+    setId(i){
+      this.id = i
+      this.$router.push({ path: `/agency/service/${this.id}`})
     }
   },
   mounted() {

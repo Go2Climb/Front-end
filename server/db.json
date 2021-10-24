@@ -3,7 +3,7 @@
     {
       "id": "c1",
       "name": "Elías",
-      "lastname":"Bernat Priego",
+      "lastname": "Bernat Priego",
       "email": "elias@gmail.com",
       "password": "123456789",
       "phoneNumber": "945621300"
@@ -11,7 +11,7 @@
     {
       "id": "c2",
       "name": "Candelaria",
-      "lastname":"Gálvez Gascón",
+      "lastname": "Gálvez Gascón",
       "email": "candelaria@gmail.com",
       "password": "987654321",
       "phoneNumber": "945621301"
@@ -19,7 +19,7 @@
     {
       "id": "c3",
       "name": "Amaya Emperatriz",
-      "lastname":"Miralles Berenguer",
+      "lastname": "Miralles Berenguer",
       "email": "amaya@gmail.com",
       "password": "12345678",
       "phoneNumber": "987521400"
@@ -33,9 +33,10 @@
       "password": "123456",
       "description": "The best agency from Peru",
       "score": "5",
-      "location": "San Isidro, Lima - Peru",
-      "RUC": "641478521",
-      "phoneNumber": "985389026"
+      "location": "Italia, Two - Peru",
+      "RUC": "745123685",
+      "phoneNumber": "985479265",
+      "photo": "https://www.paquetesdeviajesperu.com/wp-content/uploads/2021/10/logo-peru-grand-travel-1.png"
     },
     {
       "id": 2,
@@ -46,7 +47,8 @@
       "score": "4",
       "location": "San Miguel, Lima - Peru",
       "RUC": "798456123",
-      "phoneNumber": "974563210"
+      "phoneNumber": "974563210",
+      "photo": "https://www.paquetesdeviajesperu.com/wp-content/uploads/2021/10/logo-peru-grand-travel-1.png"
     },
     {
       "id": 3,
@@ -57,7 +59,8 @@
       "score": "3",
       "location": "Santa Anita, Lima - Peru",
       "RUC": "852147963",
-      "phoneNumber": "963258741"
+      "phoneNumber": "963258741",
+      "photo": "https://www.paquetesdeviajesperu.com/wp-content/uploads/2021/10/logo-peru-grand-travel-1.png"
     }
   ],
   "services": [
@@ -110,6 +113,16 @@
       "photos": "https://cdn.aarp.net/content/dam/aarp/travel/Domestic/2013-04/1140-wildflowers-mount-rainier-washington-frommers-beautiful-mountains-esp.imgcache.rev0e36c9680e5843406394b38ea8826513.jpg",
       "description": "A new place every day, come and find out for yourself",
       "isOffer": 1
+    },
+    {
+      "name": "asdfasdfqasdfdasf",
+      "price": "450",
+      "location": "asdfasdfdfas",
+      "agencyId": "1",
+      "id": "s5",
+      "isOffer": 0,
+      "photos": "https://www.boletomachupicchu.com/gutblt/wp-content/uploads/2018/06/montana-siete-colores-informacion.jpg",
+      "description": "asdfasdfasdf"
     }
   ],
   "activities": [
@@ -166,26 +179,30 @@
     {
       "id": "hs1",
       "customerId": "c1",
-      "serviceId":  "s1",
+      "serviceId": "s1",
       "amount": 1,
       "price": 480,
       "scheduledDate": "20-11-2021",
       "status": "pending"
     },
-    { "id": "hs2",
+    {
+      "id": "hs2",
       "customerId": "c2",
-      "serviceId":  "s1",
-      "amount": 2, "price": 320,
+      "serviceId": "s1",
+      "amount": 2,
+      "price": 320,
       "scheduledDate": "20-09-2021",
       "status": "active"
     },
     {
       "id": "hs3",
       "customerId": "c3",
-      "serviceId":  "s1",
-      "amount": 1, "price": 320,
+      "serviceId": "s1",
+      "amount": 1,
+      "price": 320,
       "scheduledDate": "20-11-2020",
-      "status": "finished"}
+      "status": "finished"
+    }
   ],
   "reviews": [
     {
