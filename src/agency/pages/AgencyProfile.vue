@@ -14,7 +14,7 @@
                   v-on:click="setOnlyOffer()"
                   v-bind:class="[onlyOffer? active: noActive]">Offers
               </v-btn>
-              <v-btn to="add-service" dark fab small color="primary">
+              <v-btn v-on:click="getAgencyId(idAgency)" dark fab small color="primary">
                 <v-icon dark>mdi-plus</v-icon>
               </v-btn>
             </div>
@@ -130,6 +130,7 @@
 <script>
 import AgencyDescription from "./AgencyDescription";
 import AgencyService from '../services/agencies.service'
+
 export default {
   name: "CustomerProfile",
   components: {AgencyDescription},
@@ -177,6 +178,9 @@ export default {
       this.onlyOffer = !this.onlyOffer;
       if (this.onlyOffer) this.getServiceOfferOfAgency(this.idAgency);
       else this.getServiceOfAgency(this.idAgency);
+    },
+    getAgencyId(id){
+      this.$router.push({ path: `/agency/add-service/${id}`})
     }
   },
   mounted() {

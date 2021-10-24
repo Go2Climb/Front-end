@@ -13,19 +13,19 @@
             <v-form>
               <v-row>
                 <v-col cols="12">
-                  <v-text-field color="primary" label="Service Name" outlined dense class="rounded-xl mx-4 pt-6"></v-text-field>
+                  <v-text-field v-model="item.name" color="primary" label="Service Name" outlined dense class="rounded-xl mx-4 pt-6"></v-text-field>
                 </v-col>
               </v-row>
               <v-divider></v-divider>
               <v-row>
                 <v-col cols="12">
-                  <v-text-field label="Description" counter="300" outlined auto-grow class="rounded-xl mx-4 pt-6"></v-text-field>
+                  <v-text-field v-model="item.description" label="Description" counter="300" outlined auto-grow class="rounded-xl mx-4 pt-6"></v-text-field>
                 </v-col>
               </v-row>
               <v-divider></v-divider>
               <v-row>
                 <v-col cols="12">
-                  <v-text-field label="Location" outlined dense class="rounded-xl mx-4 pt-6"></v-text-field>
+                  <v-text-field v-model="item.location" label="Location" outlined dense class="rounded-xl mx-4 pt-6"></v-text-field>
                 </v-col>
               </v-row>
               <v-divider></v-divider>
@@ -45,7 +45,7 @@
                   </template>
                 </v-col>
                 <v-col cols="3" >
-                  <v-text-field color="primary" label="Price" outlined dense class="rounded-xl pt-6"></v-text-field>
+                  <v-text-field v-model="item.price" color="primary" type="number" label="Price" min="0" outlined dense class="rounded-xl pt-6"></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :return-value.sync="start_date" transition="scale-transition" offset-y min-width="auto">
@@ -82,7 +82,7 @@
                   </template>
                 </v-col>
                 <v-col cols="3" >
-                  <v-text-field color="primary" label="Price" outlined dense class="rounded-xl pt-6"></v-text-field>
+                  <v-text-field color="primary" label="Price" type="number" min="0" outlined dense class="rounded-xl pt-6"></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :return-value.sync="start_date" transition="scale-transition" offset-y min-width="auto">
@@ -136,7 +136,9 @@
                   </template>
                 </v-col>
               </v-row>
-              <v-btn to="add-service/promotion" class="ma-6 black--text float-right" color="primary" rounded>Continue</v-btn>
+              <v-card-actions>
+                <v-btn to="promotions" class="ma-6 black--text float-right" color="primary" rounded @click="save">Continue</v-btn>
+              </v-card-actions>
             </v-form>
           </v-card>
         </v-col>
@@ -147,6 +149,8 @@
 
 <script>
 import AgencyDescription from "./AgencyDescription";
+import ServiceService from '../services/services.service';
+
 export default {
   name: "AddServices",
   components: {AgencyDescription},
@@ -161,12 +165,41 @@ export default {
     items: ['USD', 'PEN'],
     files: [],
     search: null,
+    item: {
+      name: '',
+      price: '',
+      location: '',
+      agencyId: '',
+      id: 's5',
+      isOffer: 0,
+      photos: "https://www.boletomachupicchu.com/gutblt/wp-content/uploads/2018/06/montana-siete-colores-informacion.jpg"
+    }
   }),
+
+  methods: {
+    save() {
+      ServiceService.create(this.item)
+        .then(() => {
+          this.navigateToServices();
+        })
+        .catch(e => {
+          console.log(e);
+        })
+    },
+    close() {
+      this.navigateToServices()
+    },
+
+    navigateToServices() {
+      this.$router.push({name: 'promotion'});
+    }
+  },
+
+  beforeMount() {
+    this.item.agencyId = this.$route.params.id;
+  }
 }
 </script>
 
 <style scoped>
-.continue {
-  float: right;
-}
 </style>
