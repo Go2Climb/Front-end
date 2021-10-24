@@ -32,7 +32,7 @@ const routes = [
     component: () => import('../agency/pages/AddServices')
   },
   {
-    path: '/agency/add-service/promotion',
+    path: '/agency/add-service/promotion/:id',
     name: 'PromoteService',
     component: () => import('../agency/pages/PromoteService')
   }

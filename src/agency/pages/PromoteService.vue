@@ -44,7 +44,7 @@
             <v-divider></v-divider>
             <v-row>
               <v-text class="ml-7 pt-10">Total Price</v-text>
-              <v-text-field class="mx-6 pt-8 py-4" value="0.00 USD" hint="Daily Price for promotion 0.00 USD" persistent-hint rounded dense outlined readonly></v-text-field>
+              <v-text-field class="mx-6 pt-8 py-4" placeholder="0.00"  suffix="USD" hint="Daily Price for promotion 0.00 USD" persistent-hint rounded dense outlined></v-text-field>
             </v-row>
             <v-divider></v-divider>
             <v-row>
@@ -77,7 +77,13 @@ export default {
     end_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
     menu: false,
     items: ['Tarjeta01 xxxx - xxxx - xxxx - xx45', 'Tarjeta02 xxxx - xxxx - xxxx - xx54'],
-  })
+    item: {
+      id: '',
+    }
+  }),
+  beforeMount() {
+    this.item.id = this.$route.params.id;
+  },
 }
 </script>
 

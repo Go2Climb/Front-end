@@ -28,13 +28,13 @@
   "agencies": [
     {
       "id": 1,
-      "name": " B",
-      "email": "A",
-      "description": "XD",
+      "name": " ",
+      "email": " ",
+      "description": " ",
       "score": "5",
-      "location": "huacho",
-      "RUC": "666",
-      "phoneNumber": "999",
+      "location": " ",
+      "RUC": " ",
+      "phoneNumber": " ",
       "photo": "https://www.paquetesdeviajesperu.com/wp-content/uploads/2021/10/logo-peru-grand-travel-1.png"
     },
     {
@@ -110,16 +110,6 @@
       "photos": "https://cdn.aarp.net/content/dam/aarp/travel/Domestic/2013-04/1140-wildflowers-mount-rainier-washington-frommers-beautiful-mountains-esp.imgcache.rev0e36c9680e5843406394b38ea8826513.jpg",
       "description": "A new place every day, come and find out for yourself",
       "isOffer": 1
-    },
-    {
-      "name": "asdfasdfqasdfdasf",
-      "price": "450",
-      "location": "asdfasdfdfas",
-      "agencyId": "1",
-      "id": "s5",
-      "isOffer": 0,
-      "photos": "https://www.boletomachupicchu.com/gutblt/wp-content/uploads/2018/06/montana-siete-colores-informacion.jpg",
-      "description": "asdfasdfasdf"
     }
   ],
   "activities": [
