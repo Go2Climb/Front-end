@@ -4,26 +4,28 @@
       <v-card class="rounded-xl">
         <v-card-text class="pa-2">
           <div cols="12">
-            <v-btn icon color="black" @click="setDialog()">
+            <v-btn icon color="black" @click="closeForm">
               <v-icon>mdi-close</v-icon>
             </v-btn>
           </div>
           <hr>
-          <v-form class="mx-8" @submit.prevent="handleSubmit()">
+          <v-form ref="form" class="mx-8" lazy-validation>
             <h3 class="mt-4">Welcome to Go2Climb</h3>
             <v-text-field
                 label = "Email"
                 v-model="email"
                 :rules="emailRules"
+                required
             ></v-text-field>
             <v-text-field
                 label = "Password"
                 v-model="password"
                 type="password"
                 :rules="passwordRules"
+                required
             ></v-text-field>
             <h4 class="mt-3">Do you forgot your password?</h4>
-            <v-btn color="primary" class="mt-6" block rounded type="submit">Sign in</v-btn>
+            <v-btn color="primary" class="mt-6" block rounded  @click="handleSubmit()">Sign in</v-btn>
           </v-form>
           <div class="mx-8">
             <hr class="mt-8 mb-8">
@@ -66,12 +68,19 @@ export default {
 //]
   }),
   methods: {
-    setDialog(){
+    closeForm(){
+      this.$refs.form.reset();
       this.dialog = false;
       this.$emit('dialog-false');
     },
     handleSubmit(){
-      console.log('submit');
+      this.$refs.form.validate();
+      const data = {
+        email: this.email,
+        password: this.password
+      }
+
+      console.log(data);
     }
   }
 }
