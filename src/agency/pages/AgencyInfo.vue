@@ -1,9 +1,9 @@
 <template>
   <v-card class="py-4 px-8 mb-4 rounded-lg">
     <v-list>
-
+      <!--
       <p>{{this.AgId}}</p>
-      <p>{{this.aId}}</p>
+      <p>{{this.aId}}</p> -->
       <v-subheader class="title font-weight-bold pl-0">{{services.name}} </v-subheader>
       <v-row>
         <v-col>

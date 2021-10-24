@@ -4,7 +4,7 @@
       <v-row class="d-flex flex-md-row flex-xl-column">
         <v-col cols="12" class="col-md-3">
           <!--Filters-->
-          <v-card class="rounded-lg pa-1">
+          <v-card  v-if="acctype == 1"   class="rounded-lg pa-1">
             <v-list>
               <v-subheader class="font-weight-bold title"> ${{ services.price }}</v-subheader>
               <v-list-item-group>
@@ -13,12 +13,17 @@
                 <v-subheader class="font-weight-medium subtitle-1">Persons</v-subheader>
                 <v-text-field type="text" full-width solo hide-details single-line flat class="rounded-pill adjust" placeholder="Enter the number of people" outlined color="blue"></v-text-field>
                 <v-btn @click="overlay = !overlay" class="rounded-pill my-5 ml-15" color="primary">Solicit</v-btn>
-                <v-overlay :value="overlay">
+                <v-overlay :value="overlay" >
                   <solicit-service></solicit-service>
                   <v-btn @click="overlay=false"> close </v-btn>
                 </v-overlay>
+
               </v-list-item-group>
             </v-list>
+          </v-card>
+
+          <v-card v-if="acctype==2" class="rounded-lg pa-4">
+            <v-btn block class="rounded-pill mb-5 text-uppercase" color="primary">Edit service</v-btn>
           </v-card>
         </v-col>
 
@@ -86,7 +91,8 @@ export default {
     services: [],
     activities:[],
     id : ' ',
-    overlay: false
+    overlay: false,
+    acctype: 2
 
   }),
 
@@ -128,7 +134,7 @@ export default {
     //console.log(this.serviceId)
   },
 
- 
+
 
 }
 </script>

@@ -1,7 +1,10 @@
-<template>
-  <v-card>
+<template xmlns:v-text-field="http://www.w3.org/1999/html">
+
+  <v-container>
+  <v-card v-if="editinfo == false">
     <v-img
-        height=150
+
+        class="logo"
         :src= "agency.photo">
     </v-img>
     <v-card-text>
@@ -35,14 +38,83 @@
         </div>
       </v-card-text>
     </v-card-text>
-    <v-card-actions>
+    <v-card-actions class="justify-center">
       <template>
-        <v-btn block color="primary">
+        <v-btn  v-on:click="edit" color="primary" >
           Edit information
         </v-btn>
       </template>
     </v-card-actions>
   </v-card>
+
+  <v-card v-if="editinfo == true">
+    <v-img
+        height=150
+        :src= "agency.photo">
+    </v-img>
+    <v-card-text>
+      <v-text-field
+          :label="agency.name"
+          class="subtitle-2 ma-0 "
+          dense
+          v-model="newinfo.name"
+      ></v-text-field>
+
+      <v-text-field
+          :label="agency.email"
+          class="subtitle-1 ma-0"
+          dense
+          v-model="newinfo.email"
+      ></v-text-field>
+
+
+      <v-text-field
+          :label="agency.description"
+          class="ma-0 text-sm-subtitle-1"
+          v-model="newinfo.description"
+
+      >
+      </v-text-field>
+
+      <div class="d-flex flex-column">
+        <p class="font-weight-bold ma-0">Location</p>
+        <v-text-field
+            :label="agency.location"
+            class="ma-0"
+            v-model="newinfo.location"
+        ></v-text-field>
+        </div>
+
+      <div class="d-flex flex-column">
+        <p class="font-weight-bold">RUC</p>
+        <v-text-field
+            :label="agency.RUC"
+            class="ma-0"
+            v-model="newinfo.RUC"
+        ></v-text-field>
+
+        <div class="d-flex flex-column">
+          <p class="font-weight-bold ma-0">Telephone</p>
+          <v-text-field
+              :label="agency.phoneNumber"
+              class="ma-0"
+              v-model="newinfo.phoneNumber"
+          >
+
+          </v-text-field>
+         </div>
+      </div>
+
+    </v-card-text>
+      <v-card-actions class="justify-center">
+      <v-btn  v-on:click="save" color="primary" >
+        save
+      </v-btn>
+      </v-card-actions>
+  </v-card>
+
+  </v-container>
+
 </template>
 
 <script>
@@ -52,7 +124,19 @@ export default {
   name: "AgencyDescription",
   data: () => ({
     agency:[],
-    id: 1
+    id: 1,
+    editinfo: false,
+    newinfo: {
+      id: 1,
+      name: " ",
+      email: " ",
+      description: " ",
+      score: "5",
+      location: " ",
+      RUC: " ",
+      phoneNumber: " ",
+      photo: "https://www.paquetesdeviajesperu.com/wp-content/uploads/2021/10/logo-peru-grand-travel-1.png"
+    }
   }),
 
   methods:
@@ -67,6 +151,17 @@ export default {
 
         },
 
+        edit(){
+          this.editinfo = true
+        },
+
+        save(){
+          console.log(this.newinfo)
+          AgenciesService.update(this.id, this.newinfo)
+
+          this.editinfo = false
+
+        }
 
       },
 
@@ -78,5 +173,10 @@ export default {
 </script>
 
 <style scoped>
+  .logo{
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
 
+  }
 </style>
