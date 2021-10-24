@@ -9,25 +9,27 @@ class AgenciesService {
     getById(id) {
         return http.get(`${this.endPoint}/${id}`);
     }
-    getServices(idAgency) {
-        return http.get(`${this.endPoint}/${idAgency}/services`);
+    getServices(id) {
+        return http.get(`${this.endPoint}/${id}/services`);
     }
-    getServiceOffer(idAgency) {
-        return http.get(`${this.endPoint}/${idAgency}/services?isOffer=1`);
+    getServiceOffer(id) {
+        return http.get(`${this.endPoint}/${id}/services?isOffer=1`);
     }
-    getReviews(idAgency) {
-        return http.get(`${this.endPoint}/${idAgency}/reviews`);
+    getReviews(id) {
+        return http.get(`${this.endPoint}/${id}/reviews`);
     }
-    create(createAgency) {
-        return http.post(this.endPoint, createAgency);
+    create(createAgencyDto) {
+        return http.post(this.endPoint, createAgencyDto);
     }
-    update(id, updateAgency) {
-        return http.put(`${this.endPoint}/${id}`, updateAgency);
+    update(id, updateAgencyDto) {
+        return http.put(`${this.endPoint}/${id}`, updateAgencyDto);
     }
     delete(id) {
         return http.delete( `${this.endPoint}/${id}`);
     }
-
+    findByEmail(email) {
+        return http.get(`${this.endPoint}?email=${email}`);
+    }
 }
 
 export default new AgenciesService();

@@ -2,7 +2,7 @@
   <v-app>
     <NavBar v-on:sign-in="setDialog"></NavBar>
     <router-view></router-view>
-    <LogIn :dialog="dialog" v-on:dialog-false="setDialog"></LogIn>
+    <LogIn :dialog="dialog" v-on:dialog-false="setDialog" v-on:set-id-sign-in="setIdSignIn"></LogIn>
     <Footer></Footer>
   </v-app>
 </template>
@@ -15,9 +15,13 @@ export default {
   name: 'App',
   components: {LogIn, Footer, NavBar},
   data: () => ({
+    idSignIn: '',
     dialog: false
   }),
   methods: {
+    setIdSignIn(id){
+      this.idSignIn = id;
+    },
     setDialog(){
       this.dialog = !this.dialog;
     }

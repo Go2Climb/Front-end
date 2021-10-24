@@ -41,6 +41,8 @@
 </template>
 
 <script>
+import AgenciesService from '../../agency/services/agencies.service'
+
 export default {
   name: "LogIn",
   props: {
@@ -55,17 +57,6 @@ export default {
     passwordRules: [
       v => !!v || 'Password is required',
     ]
-    //emailRules: [
- //   v => !!v || 'Email is required',
-  //  v => /.+@.+/.test(v) || 'E-mail must be valid'
-//],
-//passwordRules: [
- // v => !!v || 'Password is required',
-  //v => (v && v.length >= 6) || 'Password must have at least 6 characters',
-  //v => /(?=.*[A-Z])/.test(v) || 'Must have one uppercase character',
-  //v => /(?=.*\d)/.test(v) || 'Must have one number',
-  //v => /([!@$%])/.test(v) || 'Must have one special character [!@$%]'
-//]
   }),
   methods: {
     closeForm(){
@@ -75,12 +66,16 @@ export default {
     },
     handleSubmit(){
       this.$refs.form.validate();
-      const data = {
-        email: this.email,
-        password: this.password
-      }
-
-      console.log(data);
+      AgenciesService.findByEmail(this.email)
+      .then( (response) => {
+        if (this.password === response.data[0].password){
+            this.$emit('set-id-sign-in', response.data[0].id);
+            this.closeForm();
+        }
+      })
+      .catch(e => {
+        console.log(e);
+      });
     }
   }
 }
@@ -89,3 +84,15 @@ export default {
 <style scoped>
 
 </style>
+
+//emailRules: [
+//   v => !!v || 'Email is required',
+//  v => /.+@.+/.test(v) || 'E-mail must be valid'
+//],
+//passwordRules: [
+// v => !!v || 'Password is required',
+//v => (v && v.length >= 6) || 'Password must have at least 6 characters',
+//v => /(?=.*[A-Z])/.test(v) || 'Must have one uppercase character',
+//v => /(?=.*\d)/.test(v) || 'Must have one number',
+//v => /([!@$%])/.test(v) || 'Must have one special character [!@$%]'
+//]
