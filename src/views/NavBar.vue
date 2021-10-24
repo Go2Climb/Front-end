@@ -2,8 +2,8 @@
   <v-toolbar max-height="64px" color="primary">
     <v-toolbar-items class="container pa-0">
       <v-col cols="3" class="pa-0 d-none d-sm-flex d-md-flex d-lg-flex">
-        <router-link to="/">
-          <img class="mx-3" width="150px" v-bind:src="require('../assets/logo.png') " alt="Image of a snowy mountain, Go2Climb logo">
+        <router-link to="/" v-on:click="reloadPage">
+          <img class="mx-3"  width="150px" v-bind:src="require('../assets/logo.png') " alt="Image of a snowy mountain, Go2Climb logo">
         </router-link>
       </v-col>
       <v-col cols="4" class="col-sm-3 col-md-3 d-flex flex-row align-center pa-0">
@@ -34,7 +34,21 @@
       </v-col>
       <v-col cols="8" class="col-sm-6 col-md-6 py-0 pr-3 d-flex align-center justify-end">
         <div class="my-auto">
-          <v-text-field clearable dense type="text" full-width solo hide-details single-line flat class="rounded-pill adjust" placeholder="What are you looking for?" prepend-inner-icon="mdi-magnify"></v-text-field>
+          <v-text-field
+              clearable
+              dense
+              type="text"
+              full-width
+              solo
+              hide-details
+              single-line
+              flat
+              class="rounded-pill adjust"
+              placeholder="What are you looking for?"
+              prepend-inner-icon="mdi-magnify"
+              v-model="search"
+              v-on:keyup.enter="searchCommand()"
+          ></v-text-field>
         </div>
       </v-col>
     </v-toolbar-items>
@@ -48,8 +62,19 @@ export default {
     items: [
       { title: 'Sign up as a user' },
       { title: 'Sign up as agency' },
-    ]
+    ],
+    search: ''
   }),
+  methods: {
+    searchCommand() {
+      if (!this.search == '') {
+        this.$router.push({ path: `/search-service/${this.search}`})
+      }
+    },
+    reloadPage(){
+      location.reload();
+    }
+  }
 }
 </script>
 
