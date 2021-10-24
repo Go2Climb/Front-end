@@ -7,7 +7,7 @@
       <v-subheader class="title font-weight-bold pl-0">{{services.name}} </v-subheader>
       <v-row>
         <v-col>
-          <v-subheader > <v-icon color ="blue"> mdi-map-marker-circle </v-icon> {{services.location}}</v-subheader>
+          <v-subheader> <v-icon color ="blue"> mdi-map-marker-circle </v-icon> {{services.location}}</v-subheader>
         </v-col>
         <v-col>
           <v-subheader class="title font-weight-bold justify-end"> <v-icon color ="amber"> mdi-star </v-icon>  {{services.score}}</v-subheader>
