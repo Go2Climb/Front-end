@@ -19,11 +19,11 @@
                   v-on="on"
               ></v-app-bar-nav-icon>
             </template>
-            <v-list>
+            <v-list class="rounded-xl">
               <v-list-item
-                  v-for="(item, index) in items"
-                  :key="index"
-                  link
+                  v-for="item in items"
+                  :key="item.id"
+                  @click="onOptionSelected(item)"
               >
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
               </v-list-item>
@@ -60,8 +60,9 @@ export default {
   name: "NavBar",
   data: () => ({
     items: [
-      { title: 'Sign up as a user' },
-      { title: 'Sign up as agency' },
+      { id: 0, title: 'Sign in'},
+      { id: 1, title: 'Sign up as user' },
+      { id: 2, title: 'Sign up as agency' },
     ],
     search: ''
   }),
@@ -70,6 +71,11 @@ export default {
       if (!this.search == '') {
         this.$router.push({ path: `/search-service/${this.search}`})
       }
+    },
+    onOptionSelected(option) {
+      if(option.id == 0) this.$emit('sign-in');
+      if(option.id == 1) this.$emit('sign-up-user');
+      if(option.id == 2) this.$emit('sign-up-agency');
     },
     reloadPage(){
       location.reload();

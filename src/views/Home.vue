@@ -99,7 +99,6 @@
                 <v-row>
                   <v-col cols="12" class="col-md-3">
                     <v-card
-                        :loading="loading"
                         class="my-2"
                         max-width="374"
                     >
@@ -149,7 +148,6 @@
                   </v-col>
                   <v-col cols="12" class="col-md-3">
                     <v-card
-                        :loading="loading"
                         class="my-2"
                         max-width="374"
                     >
@@ -199,7 +197,6 @@
                   </v-col>
                   <v-col cols="12" class="col-md-3">
                     <v-card
-                        :loading="loading"
                         class="my-2"
                         max-width="374"
                     >
@@ -249,7 +246,6 @@
                   </v-col>
                   <v-col cols="12" class="col-md-3">
                     <v-card
-                        :loading="loading"
                         class="my-2"
                         max-width="374"
                     >
@@ -311,7 +307,6 @@
                 <v-row>
                   <v-col cols="12" class="col-md-3">
                     <v-card
-                        :loading="loading"
                         class="my-2"
                         max-width="374"
                     >
@@ -361,7 +356,6 @@
                   </v-col>
                   <v-col cols="12" class="col-md-3">
                     <v-card
-                        :loading="loading"
                         class="my-2"
                         max-width="374"
                     >
@@ -411,7 +405,6 @@
                   </v-col>
                   <v-col cols="12" class="col-md-3">
                     <v-card
-                        :loading="loading"
                         class="my-2"
                         max-width="374"
                     >
@@ -461,7 +454,6 @@
                   </v-col>
                   <v-col cols="12" class="col-md-3">
                     <v-card
-                        :loading="loading"
                         class="my-2"
                         max-width="374"
                     >
