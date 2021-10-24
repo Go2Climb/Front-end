@@ -24,6 +24,7 @@
                     class="my-2"
                     max-width="374"
                     min-height="310"
+                    v-on:click="setId(service.id)"
                 >
                   <template slot="progress">
                     <v-progress-linear
@@ -33,7 +34,7 @@
                     ></v-progress-linear>
                   </template>
 
-                  <a href="">
+                  <a >
                     <v-img
                         height=120
                         :src=service.photos
@@ -49,7 +50,7 @@
                         align="center"
                         class="mx-0"
                     >
-                      <a href="" class="text-decoration-none">
+                      <a class="text-decoration-none">
                         <v-rating
                             :value="4"
                             color="amber"
@@ -62,7 +63,7 @@
                     </v-row>
 
                     <div class="pt-3 text-subtitle-1 d-flex flex-row">
-                      <a href="" class="text-decoration-none d-flex">
+                      <a  class="text-decoration-none d-flex">
                         <div v-if="service.isOffer" class="text-decoration-line-through pr-2 black--text">${{service.price}}</div>
                         <div v-if="service.isOffer" class="black--text">${{service.newPrice}}</div>
                         <div v-else class="black--text">${{service.price}}</div>
@@ -181,6 +182,10 @@ export default {
     },
     getAgencyId(id){
       this.$router.push({ path: `/agency/add-service/${id}`})
+    },
+    setId(i){
+      this.id = i
+      this.$router.push({ path: `/agency/service/${this.id}`})
     }
   },
   mounted() {

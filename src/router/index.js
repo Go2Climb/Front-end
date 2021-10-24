@@ -21,9 +21,10 @@ const routes = [
     component: () => import('../agency/pages/AgencyClients')
   },
   {
-    path: '/agency/service',
+    path: '/agency/service/:id',
     name: 'ServiceDetails',
-    component: () => import('../agency/pages/ServiceDetail')
+    component: () => import('../agency/pages/ServiceDetail'),
+    props: true
   },
   {
     path: '/agency/add-service/:id',
