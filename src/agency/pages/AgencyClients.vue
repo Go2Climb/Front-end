@@ -17,7 +17,7 @@
 
 <script>
 import AgencyDescription from "./AgencyDescription";
-import HiredServices from "./HideServices";
+import HiredServices from "./HiredServices";
 export default {
   name: "AgencyClients",
   components: {HiredServices, AgencyDescription}

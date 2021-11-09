@@ -1,7 +1,7 @@
 import http from '../../core/http-common'
 
 class AgenciesService {
-    endPoint = '/agencies';
+    endPoint = 'https://go2climbapi.azurewebsites.net/api/v1/agencies';
 
     getAll() {
         return http.get(this.endPoint);
@@ -16,7 +16,7 @@ class AgenciesService {
         return http.get(`${this.endPoint}/${id}/services?isOffer=1`);
     }
     getReviews(id) {
-        return http.get(`${this.endPoint}/${id}/reviews`);
+        return http.get(`${this.endPoint}/${id}/agencyreviews`);
     }
     create(createAgencyDto) {
         return http.post(this.endPoint, createAgencyDto);

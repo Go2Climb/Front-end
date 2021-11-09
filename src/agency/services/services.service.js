@@ -1,7 +1,7 @@
 import http from '../../core/http-common'
 
 class ServicesService {
-    endPoint = '/services';
+    endPoint = 'https://go2climbapi.azurewebsites.net/api/v1/services';
 
     getAll() {
         return http.get(this.endPoint);
@@ -13,7 +13,7 @@ class ServicesService {
         return http.get(`${this.endPoint}/${idService}/activities`);
     }
     getReviews(idService) {
-        return http.get(`${this.endPoint}/${idService}/reviews`);
+        return http.get(`${this.endPoint}/${idService}/servicereviews`);
     }
     create(createServiceDto) {
         return http.post(this.endPoint, createServiceDto);
