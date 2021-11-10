@@ -135,7 +135,7 @@ export default {
       location: " ",
       RUC: " ",
       phoneNumber: " ",
-      photo: "https://www.paquetesdeviajesperu.com/wp-content/uploads/2021/10/logo-peru-grand-travel-1.png"
+      photo: " "
     }
   }),
 
@@ -144,22 +144,24 @@ export default {
         retrieveAgency(){
           AgenciesService.getById(this.id).then((response) =>{
             this.agency = response.data;
-            console.log(response.data);
+            //console.log(response.data);
           }).catch(e => {
             console.log(e);
           })
 
         },
 
+
+
         edit(){
           this.editinfo = true
         },
 
-        save(){
+        async save(){
           console.log(this.newinfo)
-          AgenciesService.update(this.id, this.newinfo)
-
+          await AgenciesService.update(this.id, this.newinfo)
           this.editinfo = false
+          this.retrieveAgency()
 
         }
 
@@ -167,7 +169,8 @@ export default {
 
   mounted() {
     this.retrieveAgency()
-  }
+  },
+
 
 }
 </script>

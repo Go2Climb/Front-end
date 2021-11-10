@@ -1,7 +1,7 @@
 import http from '../../core/http-common'
 
 class HiredService {
-    endPoint = '/hiredServices';
+    endPoint = 'https://go2climbapi.azurewebsites.net/api/v1/hiredservice';
 
     getAll() {
         return http.get(this.endPoint);
