@@ -24,6 +24,7 @@
                 :rules="passwordRules"
                 required
             ></v-text-field>
+            <span v-show="incorrectData" class="red--text text-caption">The data entered is not correct</span>
             <h4 class="mt-3">Do you forgot your password?</h4>
             <v-btn color="primary" class="mt-6" block rounded  @click="handleSubmit()">Sign in</v-btn>
           </v-form>
@@ -49,19 +50,21 @@ export default {
     dialog: Boolean
   },
   data: () => ({
-    email: null,
-    password: null,
+    email: '',
+    password: '',
     emailRules: [
       v => !!v || 'Email is required',
     ],
     passwordRules: [
       v => !!v || 'Password is required',
-    ]
+    ],
+    incorrectData: false
   }),
   methods: {
     closeForm(){
       this.$refs.form.reset();
       this.dialog = false;
+      this.incorrectData = false;
       this.$emit('dialog-false');
     },
     handleSubmit(){
@@ -74,6 +77,7 @@ export default {
         }
       })
       .catch(e => {
+        this.incorrectData = true;
         console.log(e);
       });
     }
@@ -84,15 +88,3 @@ export default {
 <style scoped>
 
 </style>
-
-//emailRules: [
-//   v => !!v || 'Email is required',
-//  v => /.+@.+/.test(v) || 'E-mail must be valid'
-//],
-//passwordRules: [
-// v => !!v || 'Password is required',
-//v => (v && v.length >= 6) || 'Password must have at least 6 characters',
-//v => /(?=.*[A-Z])/.test(v) || 'Must have one uppercase character',
-//v => /(?=.*\d)/.test(v) || 'Must have one number',
-//v => /([!@$%])/.test(v) || 'Must have one special character [!@$%]'
-//]
