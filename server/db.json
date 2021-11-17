@@ -6,7 +6,8 @@
       "lastname": "Bernat Priego",
       "email": "elias@gmail.com",
       "password": "123456789",
-      "phoneNumber": "945621300"
+      "phoneNumber": "945621300",
+      "photo": "https://1.bp.blogspot.com/-4jeSKiA08W0/YPEBKleA5fI/AAAAAAAARuQ/7eeLpZOLOxkp5Uz1xIlepJDXGa9nQcQfQCLcBGAsYHQ/s0/sing-a-bit-of-harmony.jpg"
     },
     {
       "id": "c2",
@@ -14,7 +15,8 @@
       "lastname": "Gálvez Gascón",
       "email": "candelaria@gmail.com",
       "password": "987654321",
-      "phoneNumber": "945621301"
+      "phoneNumber": "945621301",
+      "photo": "https://64.media.tumblr.com/da0f572d2a8c2d081185b443c5552c7b/9d6ea44a3722ffa2-bd/s1280x1920/0f0486280de0e7979f5482f176c2daa1edfd4a41.jpg"
     },
     {
       "id": "c3",
@@ -22,21 +24,21 @@
       "lastname": "Miralles Berenguer",
       "email": "amaya@gmail.com",
       "password": "12345678",
-      "phoneNumber": "987521400"
+      "phoneNumber": "987521400",
+      "photo": "https://1.bp.blogspot.com/-Li2tEwqfg9U/YG22qTrGInI/AAAAAAAATRc/Nr1ccr3dRXgvi2h9hGhpUYSSs8Ydh5XBwCLcBGAsYHQ/s700/sing-a-bit-of-harmony-anime-film.jpg"
     }
   ],
   "agencies": [
     {
       "id": 1,
-      "name": "Peru",
-      "email": "peru@gmail.com",
-      "password": "1234",
-      "description": "expensive prices",
+      "name": " ",
+      "email": " ",
+      "description": " ",
       "score": "5",
-      "location": "No location",
-      "RUC": "12313",
-      "phoneNumber": "123123123",
-      "photo": "https://www.paquetesdeviajesperu.com/wp-content/uploads/2021/10/logo-peru-grand-travel-1.png"
+      "location": " ",
+      "RUC": " ",
+      "phoneNumber": " ",
+      "photo": ""
     },
     {
       "id": 2,
@@ -178,7 +180,7 @@
     {
       "id": "hs2",
       "customerId": "c2",
-      "serviceId": "s1",
+      "serviceId": "s2",
       "amount": 2,
       "price": 320,
       "scheduledDate": "20-09-2021",
@@ -186,7 +188,7 @@
     },
     {
       "id": "hs3",
-      "customerId": "c3",
+      "customerId": "c2",
       "serviceId": "s1",
       "amount": 1,
       "price": 320,

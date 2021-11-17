@@ -24,7 +24,6 @@
                     label="Edit"
                 ></v-select>
               </template>
-
             </v-edit-dialog>
           </template>
         </v-data-table>

@@ -9,6 +9,9 @@ class CustomersService {
     getById(id) {
         return http.get(`${this.endPoint}/${id}`);
     }
+    getHiredServicesByCustomerId(id) {
+        return http.get(`${this.endPoint}/${id}/hiredServices?_expand=service`);
+    }
     create(createCustomerDto) {
         return http.post(this.endPoint, createCustomerDto);
     }

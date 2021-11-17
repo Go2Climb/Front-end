@@ -3,7 +3,6 @@
   <v-container>
   <v-card v-if="editinfo == false">
     <v-img
-
         class="logo"
         :src= "agency.photo">
     </v-img>
@@ -135,7 +134,7 @@ export default {
       location: " ",
       RUC: " ",
       phoneNumber: " ",
-      photo: " "
+      photo: ""
     }
   }),
 
@@ -173,6 +172,5 @@ export default {
     border-radius: 50%;
     height: 150px;
     width: 150px;
-
   }
 </style>

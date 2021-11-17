@@ -16,6 +16,11 @@ const routes = [
     component: () => import('../agency/pages/AgencyProfile')
   },
   {
+    path: '/customer/profile',
+    name: 'CustomerProfile',
+    component: () => import('../customer/pages/CustomerProfile')
+  },
+  {
     path: '/agency/clients',
     name: 'AgencyClients',
     component: () => import('../agency/pages/AgencyClients')
