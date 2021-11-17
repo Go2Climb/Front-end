@@ -28,14 +28,14 @@
   "agencies": [
     {
       "id": 1,
-      "name": "NewTravel",
-      "email": "newtravel@gmail.com",
-      "password": "123456",
-      "description": "The best agency from Peru",
+      "name": "Peru",
+      "email": "peru@gmail.com",
+      "password": "1234",
+      "description": "expensive prices",
       "score": "5",
-      "location": "Italia, Two - Peru",
-      "RUC": "745123685",
-      "phoneNumber": "985479265",
+      "location": "No location",
+      "RUC": "12313",
+      "phoneNumber": "123123123",
       "photo": "https://www.paquetesdeviajesperu.com/wp-content/uploads/2021/10/logo-peru-grand-travel-1.png"
     },
     {

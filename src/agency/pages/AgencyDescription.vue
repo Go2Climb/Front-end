@@ -151,8 +151,6 @@ export default {
 
         },
 
-
-
         edit(){
           this.editinfo = true
         },
@@ -162,16 +160,11 @@ export default {
           await AgenciesService.update(this.id, this.newinfo)
           this.editinfo = false
           this.retrieveAgency()
-
         }
-
       },
-
   mounted() {
     this.retrieveAgency()
-  },
-
-
+  }
 }
 </script>
 

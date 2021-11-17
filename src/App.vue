@@ -1,28 +1,36 @@
 <template>
   <v-app>
-    <NavBar v-on:sign-in="setDialogLogin"
-            v-on:sign-up-user="setDialogRegistration"
-    ></NavBar>
+    <navbar v-on:sign-in="setDialogLogin"
+            v-on:sign-up-user="setDialogRegistrationCustomer"
+            v-on:sign-up-agency="setDialogRegistrationAgency"
+    ></navbar>
     <router-view></router-view>
     <LogIn :dialog="dialogLogin" v-on:dialog-false="setDialogLogin" v-on:set-id-sign-in="setIdSignIn"></LogIn>
-    <Registration :dialog="dialogRegistration" v-on:dialog-false="setDialogRegistration"></Registration>
+    <registration-customer :dialog="dialogRegistrationCustomer" v-on:dialog-false="setDialogRegistrationCustomer"></registration-customer>
+    <registration-agency :dialog="dialogRegistrationAgency" v-on:dialog-false="setDialogRegistrationAgency"></registration-agency>
+
     <Footer></Footer>
   </v-app>
 </template>
 
 <script>
-import NavBar from "./views/NavBar";
 import Footer from "./views/Footer";
 import LogIn from "./authentication/pages/Login";
-import Registration from "./authentication/pages/Registration";
+import RegistrationCustomer from "./authentication/pages/RegistrationCustomer";
+import Navbar from "./views/Navbar";
+import RegistrationAgency from "./authentication/pages/RegistrationAgency";
 export default {
   name: 'App',
-  components: {Registration, LogIn, Footer, NavBar},
+  components: {RegistrationAgency, Navbar, RegistrationCustomer, LogIn, Footer},
   data: () => ({
     idSignIn: '',
     dialogLogin: false,
-    dialogRegistration: false
+    dialogRegistrationCustomer: false,
+    dialogRegistrationAgency: false,
   }),
+  computed: {
+
+  },
   methods: {
     setIdSignIn(id){
       this.idSignIn = id;
@@ -30,9 +38,12 @@ export default {
     setDialogLogin(){
       this.dialogLogin = !this.dialogLogin;
     },
-    setDialogRegistration(){
-      this.dialogRegistration = !this.dialogRegistration;
+    setDialogRegistrationCustomer(){
+      this.dialogRegistrationCustomer = !this.dialogRegistrationCustomer;
+    },
+    setDialogRegistrationAgency(){
+      this.dialogRegistrationAgency = !this.dialogRegistrationAgency;
     }
-  }
+  },
 };
 </script>

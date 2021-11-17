@@ -40,8 +40,7 @@ const routes = [
     path: '/search-service/:name',
     name: 'SearchService',
     component: () => import('../search-service/pages/SearchServices'),
-  }
-
+  },
 ]
 
 const router = new VueRouter({
