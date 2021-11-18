@@ -57,7 +57,7 @@
 
 <script>
 export default {
-  name: "NavBar",
+  name: "Navbar",
   data: () => ({
     items: [
       { id: 0, title: 'Sign in'},
