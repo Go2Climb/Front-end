@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <NavBar v-on:sign-in="setDialogLogin"
+    <NavBar app v-on:sign-in="setDialogLogin"
             v-on:sign-up-user="setDialogRegistration"
     ></NavBar>
     <router-view></router-view>

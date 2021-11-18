@@ -1,8 +1,8 @@
-<template>
+<template id="search">
   <v-toolbar max-height="64px" color="primary">
     <v-toolbar-items class="container pa-0">
       <v-col cols="3" class="pa-0 d-none d-sm-flex d-md-flex d-lg-flex">
-        <router-link to="/" v-on:click="reloadPage">
+        <router-link to="/" v-on:click="reloadPage()">
           <img class="mx-3"  width="150px" v-bind:src="require('../assets/logo.png') " alt="Image of a snowy mountain, Go2Climb logo">
         </router-link>
       </v-col>
@@ -68,8 +68,9 @@ export default {
   }),
   methods: {
     searchCommand() {
-      if (!this.search == '') {
-        this.$router.push({ path: `/search-service/${this.search}`})
+      if (!(this.search.length == 0)) {
+        this.$router.push({ path: `/search-service/`});
+        this.$router.push({ path: `/search-service/${this.search}`});
       }
     },
     onOptionSelected(option) {
@@ -77,10 +78,10 @@ export default {
       if(option.id == 1) this.$emit('sign-up-user');
       if(option.id == 2) this.$emit('sign-up-agency');
     },
-    reloadPage(){
+    reloadPage() {
       location.reload();
     }
-  }
+  },
 }
 </script>
 

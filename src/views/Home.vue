@@ -2,26 +2,16 @@
   <v-main app class="secondary">
     <v-container>
       <v-row class="d-flex flex-md-row flex-xl-column">
-        <v-col cols="12" class="col-md-3">
-          <!--Filters-->
-          <v-card class="rounded-lg pa-1">
-            <v-list>
-              <v-subheader class="font-weight-bold title">Categories</v-subheader>
-              <v-list-item-group>
-                <v-list-item>
-                  <v-list-item-title>Offers of the day</v-list-item-title>
-                </v-list-item>
-                <v-list-item>
-                  <v-list-item-title>The most popular</v-list-item-title>
-                </v-list-item>
-                <v-list-item>
-                  <v-list-item-title>For you</v-list-item-title>
-                </v-list-item>
-              </v-list-item-group>
-            </v-list>
-          </v-card>
-        </v-col>
-
+        <!--Filters-->
+        <v-col cols="12" class="col-md-3"><v-card class="rounded-lg pa-1">
+          <v-subheader class="font-weight-bold title">Categories</v-subheader>
+          <v-list>
+            <v-list-item link v-for="(category, index) in categories" v-bind:key="index">
+              <v-list-item-title>{{category}}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-card></v-col>
+        <!--Sections-->
         <v-col cols="12" class="col-md-9">
           <!-- SECTION: OFFERS -->
           <v-card class="py-4 px-8 mb-4 rounded-lg">
@@ -525,10 +515,9 @@ export default {
   },
   data: () => ({
     services: [],
+    categories: ["Offers of the day", "The most popular", "For you"],
     id: ""
-
   }),
-
 
   methods: {
     retrieveServices(){
@@ -541,15 +530,10 @@ export default {
             console.log(e);
           })
     },
-
     setId(i){
       this.id = i
       this.$router.push({ path: `/agency/service/${this.id}`})
-
-
     }
-
-
   },
 
   mounted() {

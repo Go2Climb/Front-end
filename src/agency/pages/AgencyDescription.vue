@@ -100,7 +100,6 @@
               class="ma-0"
               v-model="newinfo.phoneNumber"
           >
-
           </v-text-field>
          </div>
       </div>

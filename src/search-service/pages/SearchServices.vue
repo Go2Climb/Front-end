@@ -3,53 +3,31 @@
     <v-container>
       <v-row class="d-flex flex-md-row flex-xl-column">
         <v-col cols="12" class="col-md-3">
-          <v-card class="pa-4">
-            <v-card-titlen class="px-0">Filters</v-card-titlen>
+          <v-card class="px-6 py-4 mb-8 rounded-lg">
+            <v-subheader class="font-weight-bold title pa-0">Filters</v-subheader>
             <div>
               <v-card-subtitle class="px-0">Price</v-card-subtitle>
-              <div class="d-flex justify-center align-center">
-                <v-text-field type="number" placeholder="MIN" solo class="mr-2" :rules="rules"></v-text-field>
-                <p class="mb-6"> - </p>
-                <v-text-field type="number" placeholder="MAX" solo class="ml-2" :rules="rules"></v-text-field>
-              </div>
+              <v-content>
+                <v-text-field v-model="minMoney" dense type="number" placeholder="MIN" solo class=""></v-text-field>
+                <v-text-field v-model="maxMoney" dense type="number" placeholder="MAX" solo class=""></v-text-field>
+                <v-btn v-on:click="byFilterAll(scoreFilter)" class="primary">Ok</v-btn>
+              </v-content>
             </div>
-            <div>
-              <v-card-subtitle class="pa-0">Agency score</v-card-subtitle>
-              <div class="pb-1" v-for="(score, index) in agencyScore" v-bind:key="index">
-                <a href="" class="text-decoration-none">
-                  <div class="d-flex align-center">
-                    <v-rating
-                        empty-icon="mdi-star-outline"
-                        full-icon="mdi-star"
-                        half-icon="mdi-star-half"
-                        length="5"
-                        :value="score"
-                        readonly
-                        class="mr-2"
-                        small
-                        color="yellow"
-                        background-color="black"
-                    ></v-rating>
-                    <p class="ma-0 text-decoration-none black--text">o más</p>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="pt-4">
-              <v-card-subtitle class="pa-0">Service score</v-card-subtitle>
+            <div class="pt-2">
+              <v-card-subtitle class="px-0">Service score</v-card-subtitle>
               <div class="pb-1" v-for="(score, index) in serviceScore" v-bind:key="index">
-                <a href="" class="text-decoration-none">
+                <a v-on:click="byFilterAll(score)" v-bind:class="scoreSelected(score)" class="text-decoration-none">
                   <div class="d-flex align-center">
                     <v-rating
                         empty-icon="mdi-star-outline"
                         full-icon="mdi-star"
                         half-icon="mdi-star-half"
-                        length="5"
+                        size="14"
                         :value="score"
                         readonly
                         class="mr-2"
-                        small
-                        color="yellow"
+                        dense
+                        color="amber"
                         background-color="black"
                     ></v-rating>
                     <p class="ma-0 black--text">o más</p>
@@ -60,52 +38,50 @@
           </v-card>
         </v-col>
         <v-col cols="12" class="col-md-9">
-          <v-card min-height="568.7" class="pa-4">
-            <v-card-subtitle class="px-0">More than {{services.length}} matches for <span class="font-weight-bold">{{word}}</span></v-card-subtitle>
+          <v-card min-height="250" class="pa-4 mb-8 rounded-lg">
+            <div v-if="this.services.length >= 10">
+              <v-card-subtitle class="px-0">More than {{this.services.length}} matches for <span class="font-weight-bold">{{this.word}}</span></v-card-subtitle>
+            </div>
+            <div v-else>
+              <v-card-subtitle class="px-0">Found {{this.services.length}} matches for <span class="font-weight-bold">{{this.word}}</span></v-card-subtitle>
+            </div>
             <v-divider></v-divider>
-            <div class="d-flex flex-column">
-              <div>
-                <v-card class="d-flex mt-3 mb-1 rounded-xl" v-for="(service, index) in services" v-bind:key="index">
-                  <v-row>
-                    <v-col cols="4" class="col-4">
-                      <a href="">
-                        <v-img max-width="300px" max-height="150px" class="rounded-l-xl" :src="service.photos"></v-img>
-                      </a>
-                    </v-col>
-                    <v-col cols="8" class="pa-3 d-flex flex-column justify-center">
-                      <a href="" class="text-decoration-none black--text">
-                        <v-card-title class="pa-0">{{service.name}}</v-card-title>
-                      </a>
-                      <v-rating
-                          empty-icon="mdi-star-outline"
-                          full-icon="mdi-star"
-                          half-icon="mdi-star-half"
-                          length="5"
-                          :value="service.score"
-                          readonly
-                          class="ma-0"
-                          small
-                      ></v-rating>
-                      <div class="d-flex align-center ma-0">
-                        <p class="mb-0">by
-                          <a href="" class="text-decoration-none"><span class="font-weight-bold black--text">TravelNew</span></a>
-                        </p>
-                        <v-rating
-                            empty-icon="mdi-star-outline"
-                            full-icon="mdi-star"
-                            half-icon="mdi-star-half"
-                            length="5"
-                            :value="service.score"
-                            readonly
-                            class="ml-2 my-0"
-                            small
-                        ></v-rating>
-                      </div>
-                      <p class="font-weight-bold headline ma-0">${{service.price}}</p>
-                    </v-col>
-                  </v-row>
-                </v-card>
+            <div v-if="this.services.length != 0">
+              <div class="d-flex flex-column">
+                <div>
+                  <v-card max-height="180" min-height="180" class="d-flex mt-4 mb-1 rounded-xl" v-for="(service, index) in this.services" v-bind:key="index">
+                    <v-row>
+                      <v-col cols="4" class="col-4">
+                        <a href="">
+                          <v-img min-width="250px" max-width="250px" min-height="180px" max-height="180px" class="rounded-l-xl banner" :src="service.photos"></v-img>
+                        </a>
+                      </v-col>
+                      <v-col cols="8" class="pa-3 d-flex flex-column justify-center">
+                        <a href="" class="text-decoration-none black--text">
+                          <v-card-title class="pa-0">{{service.name}}</v-card-title>
+                          <v-rating
+                              v-bind:value=service.score
+                              color="amber"
+                              dense
+                              half-increments
+                              readonly
+                              size="14"
+                          ></v-rating>
+                        </a>
+                        <div class="d-flex flex-column ma-0">
+                          <p class="my-1"><span class="font-weight-bold black--text">Location: </span>{{service.location}}</p>
+                          <p class="mb-1">{{service.description}}</p>
+                        </div>
+                        <p class="font-weight-bold headline ma-0">${{service.price}}</p>
+                      </v-col>
+                    </v-row>
+                  </v-card>
+                </div>
               </div>
+            </div>
+            <div v-else class="d-flex flex-column justify-center align-center pa-4">
+              <img width="150px" src="https://cdn-icons-png.flaticon.com/512/65/65842.png">
+              <p>We are sorry, we have not found results for the applied filters</p>
             </div>
           </v-card>
         </v-col>
@@ -115,64 +91,86 @@
 </template>
 
 <script>
-import ServiceService from '../services/services.service'
-import AgenciesService from '../services/agencies.service'
+import ServiceSearchService from '../services/services-search.service'
 export default {
   name: "SearchServices",
   data: () => ({
-    services: [],
-    agency: [],
-    word: ' ',
-    agencyScore: [5, 4, 3, 2, 1],
-    serviceScore: [5, 4, 3, 2, 1],
+    service: [],
+    moreServices: [],
+    serviceScore: [4, 3, 2, 1],
+    maxMoney: null,
+    minMoney: null,
+    start: 0,
+    limit: 100,
+    NUM_MIN: 0,
+    NUM_MAX: 99999,
+    scoreFilter: 1
   }),
+  computed: {
+    word: function () {
+      this.getServicesByName(this.$route.params.name, this.start, this.limit);
+      return this.$route.params.name;
+    },
+    services: function () {
+      return this.service;
+    }
+  },
   methods: {
-    getServicesByName() {
-      ServiceService.getByName(this.word)
+    getServicesByName(word, start, limit) {
+      ServiceSearchService.getByName(word, start, limit)
           .then((response) => {
-            this.services = response.data;
-            for(let i = 0; i < response.data.length; i++)
-            {
-              AgenciesService.getById(this.services.at(i).idAgency)
-                  .then((res) => {
-                    this.services.nameAgency = res.data.name;
-                  })
-                  .catch(e => {
-                    console.log(e);
-                  })
-            }
+            this.service = response.data;
           })
           .catch(e => {
             console.log(e);
           })
     },
-    getAgencyInfo() {
-      for(let i = 0; i < this.services.length; i++)
-      {
-        AgenciesService.getById(this.services.at(i).idAgency)
-            .then((response) => {
-              this.agency.push(response.data);
-            })
-            .catch(e => {
-              console.log(e);
-            })
+    byFilterAll(score) {
+
+      // Others Validations
+      let min, max;
+      if (this.minMoney === undefined || !this.minMoney) min = this.NUM_MIN;
+      else min = this.minMoney;
+      if (this.maxMoney === undefined || !this.maxMoney) max = this.NUM_MAX;
+      else max = this.maxMoney
+
+      this.scoreFilter = score;
+
+      ServiceSearchService.getByAllFilter(this.word, this.scoreFilter, min, max, this.start, this.limit)
+          .then((response) => {
+            this.service = response.data;
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e);
+          })
+    },
+    filterBy(score) {
+      this.scoreFilter = score;
+      this.byFilterAll();
+    },
+    scoreSelected: function (score) {
+      if (score == this.scoreFilter) {
+        return 'font-weight-bold';
       }
+      return 'font-weight-regular';
     },
-    searchByInput() {
-      this.getServicesByName();
-      this.getAgencyInfo();
-      console.log(this.services);
-    },
-  },
-  mounted() {
-    this.searchByInput();
-  },
-  beforeMount() {
-    this.word = this.$route.params.name
-  },
+  }
 }
 </script>
 
 <style scoped>
-
+  .banner {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+  }
+  .banner-before {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+  .score {
+    font-size: 16px;
+  }
 </style>
