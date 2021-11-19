@@ -9,6 +9,7 @@ class HiredService {
     getExtendInformation(category) {
         return http.get(`${this.endPoint}?_expand=${category}`);
     }
+
     getById(id) {
         return http.get(`${this.endPoint}/${id}`);
     }
