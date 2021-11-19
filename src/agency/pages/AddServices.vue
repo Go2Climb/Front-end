@@ -108,7 +108,10 @@
                     </v-date-picker>
                   </v-menu>
                 </v-col>
-                <v-btn class="mx-6 mb-8 black--text" color="primary" rounded>Add Offer</v-btn>
+                <v-btn class="mx-6 mb-8 black--text" color="primary" rounded @click="item.isOffer=1">
+                  <v-col v-if="item.isOffer=1"></v-col>
+                  <v-row class="my-4">Add Offer</v-row>
+                </v-btn>
               </v-row>
               <v-divider></v-divider>
               <v-row>
@@ -137,10 +140,16 @@
                 </v-col>
               </v-row>
               <v-card-actions>
-                <v-btn class="ma-6 black--text float-right" color="primary" rounded @click="save" v-on:click="getServiceId(item.id)">Continue</v-btn>
+                <v-btn class="ma-6 black--text float-right" color="primary" rounded @click="save">Continue</v-btn>
               </v-card-actions>
             </v-form>
           </v-card>
+          <v-overlay v-if="serviceCreated === true">
+            <v-card>
+              <v-card-text>Service created successfully</v-card-text>
+              <v-btn v-on:click="getServiceId(item.id)">Continue</v-btn>
+            </v-card>
+          </v-overlay>
         </v-col>
       </v-row>
     </v-container>
@@ -161,6 +170,7 @@ export default {
     menu1: false,
     menu2: false,
     menu3: false,
+    serviceCreated: false,
     rules: [
       value => !value || value.size < 2000000 || 'Avatar size should be less than 2 MB!',
     ],
@@ -168,7 +178,7 @@ export default {
     files: [],
     search: null,
     item: {
-      id: 's11',
+      id: '',
       agencyId: '',
       name: '',
       price: '',
@@ -181,7 +191,7 @@ export default {
     activity: {
       id: '',
       serviceId: '',
-      name: 'activity1',
+      name: '',
       description: '',
     },
   }),
@@ -194,6 +204,7 @@ export default {
         .catch(e => {
           console.log(e);
         })
+      this.serviceCreated = true
     },
     saveActivity(){
       ServiceService.createActivity(this.item.id, this.activity)
@@ -204,8 +215,8 @@ export default {
             console.log(e);
           })
     },
-    getServiceId(id){
-      this.$router.push({ path: `/agency/add-service/promotion/${id}`})
+    getServiceId(){
+      this.$router.push({ path: `/agency/profile`})
     },
   },
 

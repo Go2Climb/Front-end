@@ -63,6 +63,7 @@ export default {
       { id: 0, title: 'Sign in'},
       { id: 1, title: 'Sign up as user' },
       { id: 2, title: 'Sign up as agency' },
+      { id: 3, title: 'Subscription'}
     ],
     search: ''
   }),
@@ -76,6 +77,7 @@ export default {
       if(option.id == 0) this.$emit('sign-in');
       if(option.id == 1) this.$emit('sign-up-user');
       if(option.id == 2) this.$emit('sign-up-agency');
+      if(option.id == 3) this.$emit('subscription');
     },
     reloadPage(){
       location.reload();
