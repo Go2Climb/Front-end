@@ -6,7 +6,7 @@
         <v-btn color="primary" class="mb-3">Download</v-btn>
       </div>
       <v-card class="mx-auto">
-        <v-data-table :headers="headers" :items="clients" sort-by="name" class="elevation-1" show-group-by>
+        <v-data-table :headers="headers" :items="hiredServices" sort-by="name" class="elevation-1" show-group-by>
           <template v-slot:item.status="props">
             <v-edit-dialog
                 large
@@ -40,16 +40,16 @@ export default {
   name: "hired-services",
   data: () => ({
     headers: [
-      {text: 'Nombre y apellidos', align: 'start', value: 'name', groupable: false},
-      {text: 'Correo', align: 'left', value: 'email', sortable: false, groupable: false},
-      {text: 'Teléfono', align: 'left', value: 'phoneNumber', sortable: false, groupable: false},
-      {text: 'Cantidad (personas)', align: 'left', value: 'amount', groupable: false},
-      {text: 'Servicio', align: 'left', value: 'service'},
-      {text: 'Fecha de salida', align: 'left', value: 'scheduledDate', groupable: false},
-      {text: 'Monto', align: 'left', value: 'price', groupable: false},
-      {text: 'Estado', align: 'left', value: 'status', groupable: false},
+      {text: 'Name and lastname', align: 'start', value: 'customer.name', groupable: false},
+      {text: 'Email', align: 'left', value: 'customer.email', sortable: false, groupable: false},
+      {text: 'Phone', align: 'left', value: 'customer.phoneNumber', sortable: false, groupable: false},
+      {text: 'Quantity (people)', align: 'left', value: 'amount', groupable: false},
+      {text: 'Service', align: 'left', value: 'service.name'},
+      {text: 'Departure date', align: 'left', value: 'scheduledDate', groupable: false},
+      {text: 'Mount', align: 'left', value: 'price', groupable: false},
+      {text: 'Status', align: 'left', value: 'status', groupable: false},
     ],
-    clients: [],
+    hiredServices: [],
     dialogChangeStatus: false,
     dialogDelete: false,
     editIndex: -1,
@@ -77,39 +77,18 @@ export default {
   },
 
   methods: {
-    getDisplayHiredService(hiredService) {
-      return {
-        name: `${hiredService.customer.name} ${hiredService.customer.lastname}`,
-        email: hiredService.customer.email,
-        phoneNumber: hiredService.customer.phoneNumber,
-        amount: hiredService.amount,
-        service: '',
-        scheduledDate: hiredService.scheduledDate,
-        price: hiredService.price,
-        status: hiredService.status,
-      }
-    },
-
     retrieveHiredServices() {
-      HiredService.getExtendInformation("customer")
-          .then((response) => {
-            this.clients = response.data.map(this.getDisplayHiredService);
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          }),
-
-          HiredService.getExtendInformation("service")
-              .then((response) => {
-                for (let position = 0; position < response.data.length; position++) {
-                  this.clients[position].service = response.data[position].service.name;
-                }
-                console.log(response.data);
-              })
-              .catch(e => {
-                console.log(e);
-              })
+      HiredService.getExtendInformation(1, "true")
+      .then(response => {
+        this.hiredServices = response.data;
+        for (let i = 0; i < response.data.length; i++){
+          let name = `${response.data[i].customer.name} ${response.data[i].customer.lastName}`;
+          this.hiredServices[i].customer.name = name;
+        }
+      })
+      .catch(e => {
+        console.log(e);
+      })
     },
 
     refreshList() {
