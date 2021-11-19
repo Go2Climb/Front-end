@@ -52,13 +52,13 @@
                   <v-card max-height="180" min-height="180" class="d-flex mt-4 mb-1 rounded-xl" v-for="(service, index) in this.services" v-bind:key="index">
                     <v-row>
                       <v-col cols="4" class="col-4">
-                        <a href="">
+                        <a v-on:click="showService(service.id)">
                           <v-img min-width="250px" max-width="250px" min-height="180px" max-height="180px" class="rounded-l-xl banner" :src="service.photos"></v-img>
                         </a>
                       </v-col>
                       <v-col cols="8" class="pa-3 d-flex flex-column justify-center">
-                        <a href="" class="text-decoration-none black--text">
-                          <v-card-title class="pa-0">{{service.name}}</v-card-title>
+                        <a  class="text-decoration-none black--text">
+                          <v-card-title v-on:click="showService(service.id)" class="pa-0">{{service.name}}</v-card-title>
                           <v-rating
                               v-bind:value=service.score
                               color="amber"
@@ -155,6 +155,9 @@ export default {
       }
       return 'font-weight-regular';
     },
+    showService(serviceId) {
+      this.$router.push({ path: `/agency/service/${serviceId}`});
+    }
   }
 }
 </script>
