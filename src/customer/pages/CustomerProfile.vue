@@ -7,7 +7,8 @@
           <customer-info></customer-info>
         </v-col>
         <v-col cols="12" class="col-md-9">
-          <v-card class="pt-md-4">
+          <v-card class="pt-md-4 pa-4" >
+            <h2 class="mb-6 title font-weight-bold">Hired services</h2>
             <!--servicios-->
             <customer-services></customer-services>
           </v-card>

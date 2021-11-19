@@ -1,11 +1,28 @@
 <template>
-  <v-data-table :headers="headers" :items="hiredServices" sort-by="name" class="elevation-1">
-    <template v-slot:item.actions="{ item }">
-      <v-btn color="primary" rounded small @click="addReview(item)">
-        Rate service
-      </v-btn>
-    </template>
-  </v-data-table>
+  <v-row>
+    <v-col v-if="hiredServices.length > 0">
+      <v-data-table :headers="headers" :items="hiredServices" sort-by="name" class="elevation-1">
+        <template v-slot:item.actions="{ item }">
+          <v-btn color="primary" rounded small @click="addReview(item)">
+            Rate service
+          </v-btn>
+        </template>
+      </v-data-table>
+    </v-col>
+
+    <div v-if="hiredServices.length <= 0" class="mx-auto mb-10">
+      <div class="d-flex justify-center align-center">
+        <v-img
+            max-height="100px"
+            max-width="100px"
+            src="https://i.ibb.co/82q8FhX/65842.png">
+        </v-img>
+      </div>
+      <div class="d-flex justify-center">
+        <p>You still do not have contracted services, discover Go2climb and start the trip of your life</p>
+      </div>
+    </div>
+  </v-row>
 </template>
 
 <script>
@@ -31,20 +48,13 @@ export default {
   }),
   methods: {
     retrieveHiredServices(){
-      CustomersService.getHiredServicesByCustomerId("c2")
+      CustomersService.getHiredServicesByCustomerIdWithServiceInformation(1)
           .then(response => {
             this.hiredServices = response.data;
             console.log(this.hiredServices);
           }).catch(e => {
         console.log(e);
       })
-    },
-
-    getDisplayInfoHiredServices(){
-      for (let position = 0; position < this.hiredServices.length; position++){
-        this.resource.info = `${this.hiredServices.service.name}`;
-        this.displayHiredServices[position] = this.resource;
-      }
     },
 
     addReview(item) {

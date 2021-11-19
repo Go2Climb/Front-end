@@ -1,7 +1,7 @@
 import http from '../../core/http-common'
 
 class CustomersService {
-    endPoint = '/customers';
+    endPoint = 'https://localhost:5001/api/v1/customers';
 
     getAll() {
         return http.get(this.endPoint);
@@ -9,8 +9,8 @@ class CustomersService {
     getById(id) {
         return http.get(`${this.endPoint}/${id}`);
     }
-    getHiredServicesByCustomerId(id) {
-        return http.get(`${this.endPoint}/${id}/hiredServices?_expand=service`);
+    getHiredServicesByCustomerIdWithServiceInformation(id) {
+        return http.get(`${this.endPoint}/${id}/hiredservices/information?expand=service`);
     }
     create(createCustomerDto) {
         return http.post(this.endPoint, createCustomerDto);
