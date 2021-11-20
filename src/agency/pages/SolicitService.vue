@@ -51,21 +51,21 @@
       <v-container>
         <v-row justify="center" class="mb-n16">
           <v-col cols="10" >
-        <v-text-field shaped placeholder="Card Number" outlined></v-text-field>
+        <v-text-field shaped placeholder="Card Number" outlined :rules="rules"></v-text-field>
           </v-col>
         </v-row>
         <v-row justify="center" class="mb-n16">
           <v-col cols="10" >
-            <v-text-field  placeholder="Holder Name" outlined></v-text-field>
+            <v-text-field  placeholder="Holder Name" outlined :rules="rules"></v-text-field>
           </v-col>
         </v-row>
         <v-row align-content="center" justify="center" >
           <v-col cols="4" class="align-center" >
-            <v-text-field  placeholder="Month/Year" class="text2 justify-end" outlined></v-text-field>
+            <v-text-field  placeholder="Month/Year" class="text2 justify-end" outlined :rules="rules"></v-text-field>
           </v-col>
 
           <v-col cols="4" class="align-center">
-              <v-text-field placeholder="ccv" outlined class="text1"></v-text-field>
+              <v-text-field placeholder="ccv" outlined class="text1" :rules="rules"></v-text-field>
           </v-col>
 
         </v-row>
@@ -75,7 +75,9 @@
     <v-row justify="center">
       <v-btn rounded
              width="200px"
-            color="#9CD4E7">Pay</v-btn>
+            color="#9CD4E7"
+            @click="createService"
+      >Pay</v-btn>
     </v-row>
 
   </v-card>
@@ -83,6 +85,8 @@
 </template>
 
 <script>
+import HiredService from '../../agency/services/hiredServices.service'
+
 export default {
   name: "SolicitService",
   props: ['pDetail', 'ppl', 'dte'],
@@ -90,11 +94,34 @@ export default {
   data: () => ({
     date: '',
     people: 0,
-    service: []
+    service: [],
+    item: {
+      customerId: "c1",
+      serviceId: 0,
+      amount: 0,
+      price: 0,
+      scheduledDate: '',
+      status: ''
+    },
+    rules: [
+      value => !!value || 'Required.',
+      value => (value && value.length >= 3) || 'Min 3 characters',
+    ],
 
   }),
   methods:{
+    createService(){
+      this.item.serviceId = this.service.id
+      this.item.amount = this.people
+      this.item.scheduledDate = this.date
+      this.item.price = this.service.price
+      this.item.status = 'active'
 
+      console.log(this.item)
+      HiredService.create(this.item).catch(e => {
+        console.log(e);
+      })
+    }
   },
   mounted(){
     this.date = this.dte,

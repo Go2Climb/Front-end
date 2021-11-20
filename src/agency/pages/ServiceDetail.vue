@@ -11,10 +11,10 @@
                 <v-subheader class="font-weight-medium subtitle-1">Output</v-subheader>
                 <v-text-field type="date" full-width solo hide-details single-line flat class="rounded-pill" placeholder="Enter the date"  outlined color="blue" v-model="date"></v-text-field>
                 <v-subheader class="font-weight-medium subtitle-1">Persons</v-subheader>
-                <v-text-field type="text" full-width solo hide-details single-line flat class="rounded-pill adjust" placeholder="Enter the number of people" outlined color="blue" v-model="people"></v-text-field>
+                <v-text-field type="text" full-width solo hide-details single-line flat class="rounded-pill adjust" placeholder="Enter the number of people" outlined color="blue" v-model="people" :rules="rules"></v-text-field>
                 <v-btn @click="payService" class="rounded-pill my-5 ml-15" color="primary">Solicit</v-btn>
                 <v-overlay :value="overlay"
-                            dark="false">
+                            :dark= "false">
                   <v-btn @click="overlay=false" icon > <v-icon>mdi-close</v-icon></v-btn>
                   <solicit-service :pDetail = pay :ppl = people :dte = date></solicit-service>
 
@@ -98,7 +98,10 @@ export default {
     Aid : '',
     pay: [],
     date: '',
-    people: ''
+    people: '',
+    rules: [
+      value => !!value || 'Required.',
+    ],
 
   }),
 

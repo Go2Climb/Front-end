@@ -194,6 +194,15 @@
       "price": 320,
       "scheduledDate": "20-11-2020",
       "status": "finished"
+    },
+    {
+      "customerId": "c1",
+      "serviceId": "s2",
+      "amount": "5",
+      "price": 520,
+      "scheduledDate": "",
+      "status": "active",
+      "id": "7yZw618"
     }
   ],
   "reviews": [
@@ -229,7 +238,6 @@
       "photo": "https://cdn.vuetifyjs.com/images/john.jpg",
       "comment": "It is not my first time with TravelNew, they never disappoint me, it is true that for some sections the costs are quite high compared to the others, but I would not change it for anything, Thank you!!!!!!!!!"
     },
-
     {
       "id": 5,
       "serviceId": "s2",
