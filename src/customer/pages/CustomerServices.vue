@@ -3,8 +3,8 @@
     <v-col v-if="hiredServices.length > 0">
       <v-data-table :headers="headers" :items="hiredServices" sort-by="name" class="elevation-1">
     <template v-slot:top>
-      <ServiceReview :dialogService="dialogService" v-on:dialog-service-false="setCustomerReview" v-on:dialog-continue="setAgencyReview"></ServiceReview>
-      <AgencyReview :dialogAgency="dialogAgency" v-on:dialog-agency-false="closeForm"></AgencyReview>
+      <ServiceReview v-bind:service="service" v-bind:dialogService="dialogService" v-on:dialog-service-false="setCustomerReview" v-on:dialog-continue="setAgencyReview"></ServiceReview>
+      <AgencyReview v-bind:service="service" v-bind:dialogAgency="dialogAgency" v-on:dialog-agency-false="closeForm"></AgencyReview>
     </template>
     <template v-slot:item.actions="{ item }">
       <v-btn color="primary" rounded small @click="setCustomerReview(item)">
@@ -37,16 +37,11 @@ export default {
   name: "CustomerServices",
   components: {ServiceReview, AgencyReview},
   data: () => ({
+    errors: [],
     hiredServices: [],
     dialogService: false,
     dialogAgency: false,
-    /*
-    displayHiredServices: [],
-    resource: {
-      info: '',
-      cost: '',
-      status: ''
-    }, */
+    service: [],
     headers: [
       {text: 'N° transaction', align: 'start', value: 'id'},
       { text: 'Contracted service', align: 'start', value: 'service.name'},
@@ -60,10 +55,10 @@ export default {
       CustomersService.getHiredServicesByCustomerIdWithServiceInformation(1)
           .then(response => {
             this.hiredServices = response.data;
-            console.log(this.hiredServices);
-          }).catch(e => {
-        console.log(e);
-      })
+          })
+          .catch(e => {
+            this.errors.push(e);
+          })
     },
     getDisplayInfoHiredServices(){
       for (let position = 0; position < this.hiredServices.length; position++){
@@ -73,7 +68,7 @@ export default {
     },
     setCustomerReview(item) {
       this.dialogService = !this.dialogService;
-      console.log(item);
+      this.service = item;
     },
     setAgencyReview() {
       this.dialogService = !this.dialogService;
@@ -81,6 +76,10 @@ export default {
     },
     closeForm() {
       this.dialogAgency = !this.dialogAgency;
+    },
+    sendAllData(item) {
+      item.dialogService = this.dialogService;
+      return item;
     }
   },
   mounted(){
