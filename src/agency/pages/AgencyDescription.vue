@@ -2,10 +2,12 @@
 
   <v-container>
   <v-card v-if="editinfo == false">
+    <v-col class="justify-center align-center ml-8">
     <v-img
-        class="logo"
+        class="logo align-center justify-center"
         :src= "agency.photo">
     </v-img>
+    </v-col>
     <v-card-text>
       <v-card-title>{{agency.name}}</v-card-title>
       <v-card-subtitle>{{ agency.email }}</v-card-subtitle>
@@ -47,63 +49,74 @@
   </v-card>
 
   <v-card v-if="editinfo == true">
+    <v-col class="justify-center align-center ml-8">
     <v-img
-        height=150
+        class="logo align-center justify-center"
         :src= "agency.photo">
     </v-img>
+    </v-col>
+    <v-form>
     <v-card-text>
-      <v-text-field
-          :label="agency.name"
-          class="subtitle-2 ma-0 "
-          dense
-          v-model="newinfo.name"
-      ></v-text-field>
-
-      <v-text-field
-          :label="agency.email"
-          class="subtitle-1 ma-0"
-          dense
-          v-model="newinfo.email"
-      ></v-text-field>
+      <v-row>
+        <v-text-field
+            :hint="agency.name"
+            label="Agency name"
+            v-model="newinfo.name"
+            :rules="required"
 
 
+        ></v-text-field>
+      </v-row>
+      <v-row>
+        <v-text-field
+            :hint="agency.email"
+            label="Email"
+
+            v-model="newinfo.email"
+        ></v-text-field>
+      </v-row>
+      <v-row>
       <v-text-field
-          :label="agency.description"
-          class="ma-0 text-sm-subtitle-1"
+          :hint="agency.description"
+          label="Description"
           v-model="newinfo.description"
 
       >
       </v-text-field>
+      </v-row>
+      <v-row>
 
-      <div class="d-flex flex-column">
-        <p class="font-weight-bold ma-0">Location</p>
+
         <v-text-field
-            :label="agency.location"
-            class="ma-0"
+            label= "Location"
+            :hint="agency.location"
+
             v-model="newinfo.location"
         ></v-text-field>
-        </div>
 
-      <div class="d-flex flex-column">
-        <p class="font-weight-bold">RUC</p>
+      </v-row>
+
+      <v-row>
+
         <v-text-field
-            :label="agency.RUC"
-            class="ma-0"
+            label="RUC"
+            :hint="agency.RUC"
             v-model="newinfo.RUC"
         ></v-text-field>
+      </v-row>
+      <v-row>
 
-        <div class="d-flex flex-column">
-          <p class="font-weight-bold ma-0">Telephone</p>
           <v-text-field
-              :label="agency.phoneNumber"
-              class="ma-0"
+              :hint="agency.phoneNumber"
+              label="Phone"
               v-model="newinfo.phoneNumber"
           >
           </v-text-field>
-         </div>
-      </div>
+
+      </v-row>
 
     </v-card-text>
+    </v-form>
       <v-card-actions class="justify-center">
       <v-btn  v-on:click="save" color="primary" >
         save
@@ -134,7 +147,9 @@ export default {
       RUC: " ",
       phoneNumber: " ",
       photo: ""
-    }
+    },
+    required: [v => !!v || 'Required.']
+
   }),
 
   methods:

@@ -2,7 +2,7 @@
   <v-card class="py-4 px-8 mb-4 rounded-lg">
     <v-list>
 
-      <!--<p>{{this.AgId}}</p>-->
+      <p>{{this.AgId}}</p>
 
       <v-subheader class="title font-weight-bold pl-0">{{services.name}} </v-subheader>
       <v-row>
@@ -107,7 +107,6 @@ export default {
   data: () => ({
     services: [],
     agency: [],
-    id: " ",
     aId: " "
 
   }),
@@ -126,7 +125,7 @@ export default {
           })
 
     },
-    retrieveAgency(){
+    async retrieveAgency(){
 
       AgenciesService.getById(this.AgId).then((response) =>{
         this.agency = response.data;
@@ -141,15 +140,11 @@ export default {
   mounted() {
 
     this.retrieveServices();
+    console.log(this.AgId)
     this.retrieveAgency();
     //console.log(this.Sid)
   },
-  beforeMount() {
-    //console.log(this.Sid)
-    //this.id = this.Sid
-    this.aId =  this.AgId
 
-  },
 
 
 }
