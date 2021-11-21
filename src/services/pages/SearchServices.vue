@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import ServiceSearchService from '../services/services-search.service'
+import ServiceSearchService from '../services/services.service'
 export default {
   name: "SearchServices",
   data: () => ({
@@ -156,7 +156,7 @@ export default {
       return 'font-weight-regular';
     },
     showService(serviceId) {
-      this.$router.push({ path: `/agency/service/${serviceId}`});
+      this.$router.push({ path: `/services/${serviceId}`});
     }
   }
 }

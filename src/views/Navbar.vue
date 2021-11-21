@@ -69,8 +69,8 @@ export default {
   methods: {
     searchCommand() {
       if (!(this.search.length == 0)) {
-        this.$router.push({ path: `/search-service/`});
-        this.$router.push({ path: `/search-service/${this.search}`});
+        this.$router.push({ path: `/services/search/`});
+        this.$router.push({ path: `/services/search/${this.search}`});
       }
     },
     onOptionSelected(option) {

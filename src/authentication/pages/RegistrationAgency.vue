@@ -1,76 +1,72 @@
 <template>
-  <v-row justify="center">
-    <!--Data dialog-->
-    <v-dialog v-model="dialog" persistent max-width="600px">
-      <v-card class="rounded-xl">
-        <v-card-text class="pa-2">
-          <div cols="12">
-            <v-btn icon color="black" @click="closeForm">
-              <v-icon>mdi-close</v-icon>
-            </v-btn>
-          </div>
-          <hr>
-          <v-form ref="form" class="mx-8" lazy-validation>
-            <h3 class="mt-4">Welcome to Go2Climb</h3>
-            <v-text-field
-                label = "Email"
-                v-model="agency.email"
-                :rules="emailRules"
-                error-count="2"
-                required
-            ></v-text-field>
-            <v-text-field
-                label = "Password"
-                v-model="agency.password"
-                type="password"
-                :rules="passwordRules"
-                error-count="2"
-                required
-            ></v-text-field>
-            <h3 class="mt-3">Agency information</h3>
-            <v-text-field label = "Agency name"
-                          v-model="agency.name"
-                          :rules="nameRules"
-                          required
-            ></v-text-field>
-            <v-row>
-              <v-col cols="6">
-                <v-text-field cols="6"
-                              label = "RUC"
-                              type = 'tel'
-                              v-model="agency.RUC"
-                              :rules="RucRules"
-                              required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="6">
-                <v-text-field cols="6"
-                              label = "Phone number"
-                              type = 'tel'
-                              v-model="agency.phoneNumber"
-                              :rules="phoneNumberRules"
-                              required
-                ></v-text-field>
-              </v-col>
-            </v-row>
-            <v-text-field label = "Physical location"
-                          v-model = "agency.location"
-                          :rules="locationRules"
-                          required
-            ></v-text-field>
-            <v-checkbox
-                class="my-0"
-                label="I accept the terms and conditions of Go2Climb"
-                type="checkbox"
-                :rules="checkboxRules"
-                required
-            ></v-checkbox>
-            <v-btn color="primary" class="mb-6" block rounded  @click="handleNext">Next</v-btn>
-          </v-form>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
-
+  <v-dialog v-model="dialog" persistent max-width="600px">
+    <v-card class="rounded-xl">
+      <v-card-text class="pa-2">
+        <div cols="12">
+          <v-btn icon color="black" @click="closeForm">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </div>
+        <hr>
+        <v-form ref="form" class="mx-8" lazy-validation>
+          <h3 class="mt-4">Welcome to Go2Climb</h3>
+          <v-text-field
+              label = "Email"
+              v-model="agency.email"
+              :rules="emailRules"
+              error-count="2"
+              required
+          ></v-text-field>
+          <v-text-field
+              label = "Password"
+              v-model="agency.password"
+              type="password"
+              :rules="passwordRules"
+              error-count="2"
+              required
+          ></v-text-field>
+          <h3 class="mt-3">Agency information</h3>
+          <v-text-field label = "Agency name"
+                        v-model="agency.name"
+                        :rules="nameRules"
+                        required
+          ></v-text-field>
+          <v-row>
+            <v-col cols="6">
+              <v-text-field cols="6"
+                            label = "RUC"
+                            type = 'tel'
+                            v-model="agency.RUC"
+                            :rules="RucRules"
+                            required
+              ></v-text-field>
+            </v-col>
+            <v-col cols="6">
+              <v-text-field cols="6"
+                            label = "Phone number"
+                            type = 'tel'
+                            v-model="agency.phoneNumber"
+                            :rules="phoneNumberRules"
+                            required
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-text-field label = "Physical location"
+                        v-model = "agency.location"
+                        :rules="locationRules"
+                        required
+          ></v-text-field>
+          <v-checkbox
+              class="my-0"
+              label="I accept the terms and conditions of Go2Climb"
+              type="checkbox"
+              :rules="checkboxRules"
+              required
+          ></v-checkbox>
+          <v-btn color="primary" class="mb-6" block rounded  @click="handleNext">Next</v-btn>
+        </v-form>
+      </v-card-text>
+    </v-card>
     <!--Pay dialog-->
     <v-dialog v-model="payDialog" persistent max-width="600px">
       <v-card class="rounded-xl">
@@ -85,26 +81,26 @@
             <h3 class="mt-4">Select a subscription plan</h3>
 
             <div class="personalization">
-                <v-btn-toggle v-model="togglePlan" class="pt-4" color="primary" rounded mandatory>
-                  <v-btn color="white" block>
-                    <div class="btn-diff">
-                      <div>Basic plan</div>
-                      <v-icon color="#CD7F32"> mdi-key </v-icon>
-                    </div>
-                  </v-btn>
-                  <v-btn color="white" block>
-                    <div class="btn-diff">
-                      <div>Standard plan</div>
-                      <v-icon color="#C0C0C0"> mdi-key </v-icon>
-                    </div>
-                  </v-btn>
-                  <v-btn color="white" block>
-                    <div class="btn-diff">
-                      <div>Premium plan</div>
-                      <v-icon color="#FFBF00"> mdi-key </v-icon>
-                    </div>
-                  </v-btn>
-                </v-btn-toggle>
+              <v-btn-toggle v-model="togglePlan" class="pt-4" color="primary" rounded mandatory>
+                <v-btn color="white" block>
+                  <div class="btn-diff">
+                    <div>Basic plan</div>
+                    <v-icon color="#CD7F32"> mdi-key </v-icon>
+                  </div>
+                </v-btn>
+                <v-btn color="white" block>
+                  <div class="btn-diff">
+                    <div>Standard plan</div>
+                    <v-icon color="#C0C0C0"> mdi-key </v-icon>
+                  </div>
+                </v-btn>
+                <v-btn color="white" block>
+                  <div class="btn-diff">
+                    <div>Premium plan</div>
+                    <v-icon color="#FFBF00"> mdi-key </v-icon>
+                  </div>
+                </v-btn>
+              </v-btn-toggle>
             </div>
 
             <h3 class="mt-4">Payment details</h3>
@@ -137,7 +133,7 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-  </v-row>
+  </v-dialog>
 </template>
 
 <script>

@@ -157,8 +157,8 @@ export default {
 
 
 <style scoped>
-.logo{
-  margin-top: 25px;
-  border-radius: 50%;
-}
+  .logo{
+    margin-top: 25px;
+    border-radius: 50%;
+  }
 </style>
