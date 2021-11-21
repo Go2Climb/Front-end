@@ -2,12 +2,14 @@
   <v-dialog v-model="dialog" persistent max-width="600px">
     <v-card class="rounded-xl">
       <v-card-text class="pa-2">
-        <div cols="12">
+        <div cols="12" class="d-flex align-center justify-space-around">
           <v-btn icon color="black" @click="closeForm">
             <v-icon>mdi-close</v-icon>
           </v-btn>
+          <div class="mx-auto"><h3>Log In</h3></div>
+          <v-btn icon disabled></v-btn>
         </div>
-        <hr>
+        <hr class="hr">
         <v-form ref="form" class="mx-8" lazy-validation>
           <h3 class="mt-4">Welcome to Go2Climb</h3>
           <v-text-field
