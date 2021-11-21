@@ -9,13 +9,15 @@
               <v-subheader class="font-weight-bold title"> ${{ services.price }}</v-subheader>
               <v-list-item-group>
                 <v-subheader class="font-weight-medium subtitle-1">Output</v-subheader>
-                <v-text-field type="date" full-width solo hide-details single-line flat class="rounded-pill" placeholder="Enter the date"  outlined color="blue"></v-text-field>
+                <v-text-field type="date" full-width solo hide-details single-line flat class="rounded-pill" placeholder="Enter the date"  outlined color="blue" v-model="date"></v-text-field>
                 <v-subheader class="font-weight-medium subtitle-1">Persons</v-subheader>
-                <v-text-field type="text" full-width solo hide-details single-line flat class="rounded-pill adjust" placeholder="Enter the number of people" outlined color="blue"></v-text-field>
-                <v-btn @click="overlay = !overlay" class="rounded-pill my-5 ml-15" color="primary">Solicit</v-btn>
-                <v-overlay :value="overlay" >
-                  <solicit-service></solicit-service>
-                  <v-btn @click="overlay=false"> close </v-btn>
+                <v-text-field type="text" full-width solo hide-details single-line flat class="rounded-pill adjust" placeholder="Enter the number of people" outlined color="blue" v-model="people" :rules="rules"></v-text-field>
+                <v-btn @click="payService" class="rounded-pill my-5 ml-15" color="primary">Solicit</v-btn>
+                <v-overlay :value="overlay"
+                            :dark= "false">
+                  <v-btn @click="overlay=false" icon > <v-icon>mdi-close</v-icon></v-btn>
+                  <solicit-service :pDetail = pay :ppl = people :dte = date></solicit-service>
+
                 </v-overlay>
 
               </v-list-item-group>
@@ -29,7 +31,7 @@
 
         <v-col cols="12" class="col-md-9">
           <!-- SECTION: OFFERS -->
-          <agency-info :Sid = "id" :AgId ="services.agencyId"></agency-info>
+          <agency-info v-bind:Sid = "id" v-bind:AgId ="Aid" ></agency-info>
 
           <v-row>
             <v-col>
@@ -92,7 +94,14 @@ export default {
     activities:[],
     id : ' ',
     overlay: false,
-    acctype: 2
+    acctype: 1,
+    Aid : '',
+    pay: [],
+    date: '',
+    people: '',
+    rules: [
+      value => !!value || 'Required.',
+    ],
 
   }),
 
@@ -117,20 +126,28 @@ export default {
           .catch(e => {
             console.log(e);
           })
+    },
+
+    payService(){
+      this.overlay = !this.overlay
+      this.pay = this.services
     }
 
 
   },
 
   mounted() {
-    this.retrieveServices();
+
     this.retrieveActivities();
+
 
   },
 
   beforeMount() {
     //console.log("XD")
     this.id = this.$route.params.id
+    this.retrieveServices();
+    this.Aid = this.services.AgencyId
     //console.log(this.serviceId)
   },
 

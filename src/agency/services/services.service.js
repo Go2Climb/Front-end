@@ -13,7 +13,7 @@ class ServicesService {
         return http.get(`${this.endPoint}/${idService}/activities`);
     }
     getReviews(idService) {
-        return http.get(`${this.endPoint}/${idService}/servicereviews`);
+        return http.get(`${this.endPoint}/${idService}/reviews`);
     }
     create(createServiceDto) {
         return http.post(this.endPoint, createServiceDto);

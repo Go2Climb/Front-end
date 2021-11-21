@@ -1,88 +1,146 @@
 <template>
-  <v-card
-      :loading="loading"
-      class="mx-auto my-12"
-      max-width="374"
-  >
-    <template slot="progress">
-      <v-progress-linear
-          color="deep-purple"
-          height="10"
-          indeterminate
-      ></v-progress-linear>
-    </template>
+  <v-card class="pa-5">
+    <v-card-title> Payment </v-card-title>
+    <v-divider></v-divider>
+    <v-row>
+      <v-container>
+      <v-card
+          outlined
+          class="ma-5 card1"
+         >
+        <v-row class="mb-n8">
+          <v-col class="align-center">
+            <v-img
+                :src="service.photos"
+                width="250px"
+                class="rounded"
+            ></v-img>
 
-    <v-img
-        height="250"
-        src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-    ></v-img>
 
-    <v-card-title>Cafe Badilico</v-card-title>
+          </v-col>
+          <v-col>
+            <v-card-text class="font-weight-bold mb-n8">{{service.name}}</v-card-text>
+            <v-card-text class="mb-n8">{{service.location}}</v-card-text>
+            <v-card-text>Offered by {{service.agencyId}}</v-card-text>
 
-    <v-card-text>
-      <v-row
-          align="center"
-          class="mx-0"
-      >
-        <v-rating
-            :value="4.5"
-            color="amber"
-            dense
-            half-increments
-            readonly
-            size="14"
-        ></v-rating>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-card-text class="mb-n8">
+              Departure Date: {{date}}
+            </v-card-text>
+            <v-card-text>
+              Number of Passengers: {{people}}
+            </v-card-text>
+          </v-col>
+          <v-col class="align-content-end">
+            <v-card-text class="font-weight-bold">Total amount ${{service.price}}</v-card-text>
+          </v-col>
 
-        <div class="grey--text ms-4">
-          4.5 (413)
-        </div>
-      </v-row>
+        </v-row>
 
-      <div class="my-4 text-subtitle-1">
-        $ • Italian, Cafe
-      </div>
 
-      <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
-    </v-card-text>
 
-    <v-divider class="mx-4"></v-divider>
+      </v-card>
 
-    <v-card-title>Tonight's availability</v-card-title>
+      </v-container>
+    </v-row>
+    <v-row class="mb-n8">
+      <v-card-text>Payment method</v-card-text>
+      <v-container>
+        <v-row justify="center" class="mb-n16">
+          <v-col cols="10" >
+        <v-text-field shaped placeholder="Card Number" outlined :rules="rules"></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row justify="center" class="mb-n16">
+          <v-col cols="10" >
+            <v-text-field  placeholder="Holder Name" outlined :rules="rules"></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row align-content="center" justify="center" >
+          <v-col cols="4" class="align-center" >
+            <v-text-field  placeholder="Month/Year" class="text2 justify-end" outlined :rules="rules"></v-text-field>
+          </v-col>
 
-    <v-card-text>
-      <v-chip-group
-          v-model="selection"
-          active-class="deep-purple accent-4 white--text"
-          column
-      >
-        <v-chip>5:30PM</v-chip>
+          <v-col cols="4" class="align-center">
+              <v-text-field placeholder="ccv" outlined class="text1" :rules="rules"></v-text-field>
+          </v-col>
 
-        <v-chip>7:30PM</v-chip>
+        </v-row>
+      </v-container>
 
-        <v-chip>8:00PM</v-chip>
+    </v-row>
+    <v-row justify="center">
+      <v-btn rounded
+             width="200px"
+            color="#9CD4E7"
+            @click="createService"
+      >Pay</v-btn>
+    </v-row>
 
-        <v-chip>9:00PM</v-chip>
-      </v-chip-group>
-    </v-card-text>
-
-    <v-card-actions>
-      <v-btn
-          color="deep-purple lighten-2"
-          text
-          @click="reserve"
-      >
-        Reserve
-      </v-btn>
-    </v-card-actions>
   </v-card>
+
 </template>
 
 <script>
+import HiredService from '../../agency/services/hiredServices.service'
+
 export default {
-  name: "SolicitService"
+  name: "SolicitService",
+  props: ['pDetail', 'ppl', 'dte'],
+
+  data: () => ({
+    date: '',
+    people: 0,
+    service: [],
+    item: {
+      customerId: "c1",
+      serviceId: 0,
+      amount: 0,
+      price: 0,
+      scheduledDate: '',
+      status: ''
+    },
+    rules: [
+      value => !!value || 'Required.',
+      value => (value && value.length >= 3) || 'Min 3 characters',
+    ],
+
+  }),
+  methods:{
+    createService(){
+      this.item.serviceId = this.service.id
+      this.item.amount = this.people
+      this.item.scheduledDate = this.date
+      this.item.price = this.service.price
+      this.item.status = 'active'
+
+      console.log(this.item)
+      HiredService.create(this.item).catch(e => {
+        console.log(e);
+      })
+    }
+  },
+  mounted(){
+    this.date = this.dte,
+    this.people= this.ppl,
+    this.service = this.pDetail
+  }
+
 }
 </script>
 
 <style scoped>
-
+.text1{
+  border-bottom-right-radius: 25px ;
+}
+.text2{
+  border-bottom-left-radius: 25px ;
+}
+.card1{
+  border-radius: 25px;
+  outline-color: #9CD4E7;
+}
 </style>

@@ -16,7 +16,7 @@ class AgenciesService {
         return http.get(`${this.endPoint}/${id}/services?isOffer=1`);
     }
     getReviews(id) {
-        return http.get(`${this.endPoint}/${id}/agencyreviews`);
+        return http.get(`${this.endPoint}/${id}/reviews`); //agencyreviews en el backend
     }
     create(createAgencyDto) {
         return http.post(this.endPoint, createAgencyDto);
