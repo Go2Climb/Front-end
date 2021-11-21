@@ -1,5 +1,5 @@
 <template>
- <v-card class="py-4 px-8 mb-4 rounded-lg">
+ <v-card class="py-4 px-8 rounded-lg">
    <header class="title font-weight-bold pl-0">Reviews</header>
    <div class="py-3">
      <div v-if="Object.keys(reviews).length === 0">
@@ -17,10 +17,15 @@
      </div>
      <v-card v-for="(review, index) in reviews" v-bind:key="index" class="pa-4 mb-4">
        <div class="d-flex align-center">
-         <v-avatar><img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John"></v-avatar>
+         <v-avatar><img v-bind:src="review.customer.photo"></v-avatar>
          <div>
-           <v-card-title>{{review.author}}</v-card-title>
+           <v-card-title>{{review.customer.name}} {{review.customer.lastName}}</v-card-title>
            <v-card-subtitle>{{review.date}}</v-card-subtitle>
+         </div>
+         <v-spacer></v-spacer>
+         <div>
+           <v-icon color ="amber"> mdi-star </v-icon>
+           <p>{{review.score}}.0</p>
          </div>
        </div>
        <v-card-text>
@@ -32,39 +37,14 @@
 </template>
 
 <script>
-import ServicesService from "../../agency/services/services.service";
-
 export default {
   name: "Reviews",
-  props:['AId'],
-  data: () => ({
-    reviews: [],
-    //idService: 's1'
-
-  }),
-
-  methods: {
-    retrieveServices(){
-      ServicesService.getReviews(this.AId)
-          .then((response) => {
-            this.reviews = response.data;
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          })
-    },
-  },
-
-  mounted() {
-    this.retrieveServices();
-  }
-
+  props:['reviews'],
 }
 </script>
 
 <style scoped>
-.logo{
-  border-radius: 50%;
-}
+  .logo{
+    border-radius: 50%;
+  }
 </style>

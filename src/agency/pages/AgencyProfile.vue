@@ -100,7 +100,7 @@
                   <v-img
                       min-height="100px"
                       max-width="100px"
-                      src="https://cdn-icons-png.flaticon.com/512/65/65842.png">
+                      src="https://i.ibb.co/82q8FhX/65842.png">
                   </v-img>
                 </div>
                 <div class="d-flex justify-center">

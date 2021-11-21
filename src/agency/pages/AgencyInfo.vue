@@ -156,4 +156,5 @@ export default {
   margin-top: 25px;
   border-radius: 50%;
 }
+
 </style>

@@ -7,7 +7,7 @@
     ></v-img>
   </div>
   <v-card-text class="mx-3">
-    <h3 class="black--text"> {{customer.name + " " + customer.lastname}} </h3>
+    <h3 class="black--text"> {{customer.name + " " + customer.lastName}} </h3>
     <p class="grey--text"> {{ customer.email }}</p>
     <div>
       <h4 class="black--text"> Phone number: </h4>
@@ -37,7 +37,7 @@ export default {
   methods:
       {
         retrieveCustomer(){
-          CustomersService.getById("c2")
+          CustomersService.getById(5)
           .then(response => {
             this.customer = response.data;
             console.log(this.customer);
@@ -45,8 +45,8 @@ export default {
             console.log(e);
           })
         }
-
       },
+
   mounted(){
     this.retrieveCustomer();
   }
