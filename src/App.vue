@@ -1,11 +1,11 @@
 <template>
   <v-app>
-    <navbar app v-on:sign-in="setDialogLogin"
+    <navbar v-on:closeSession="closeSession" v-bind:typeUser="typeUser" v-bind:idUser="idSignIn" app v-on:sign-in="setDialogLogin"
             v-on:sign-up-user="setDialogRegistrationCustomer"
             v-on:sign-up-agency="setDialogRegistrationAgency"
     ></navbar>
     <template>
-      <router-view app></router-view>
+      <router-view v-bind:idUser="idSignIn" v-bind:typeUser="typeUser" app></router-view>
       <LogIn :dialog="dialogLogin" v-on:dialog-false="setDialogLogin" v-on:set-id-sign-in="setIdSignIn"></LogIn>
       <registration-customer :dialog="dialogRegistrationCustomer" v-on:dialog-false="setDialogRegistrationCustomer"></registration-customer>
       <registration-agency :dialog="dialogRegistrationAgency" v-on:dialog-false="setDialogRegistrationAgency"></registration-agency>
@@ -24,7 +24,8 @@ export default {
   name: 'App',
   components: {RegistrationAgency, Navbar, RegistrationCustomer, LogIn, Footer},
   data: () => ({
-    idSignIn: '',
+    idSignIn: 1,
+    typeUser: 'agency',
     dialogLogin: false,
     dialogRegistrationCustomer: false,
     dialogRegistrationAgency: false,
@@ -44,6 +45,10 @@ export default {
     },
     setDialogRegistrationAgency(){
       this.dialogRegistrationAgency = !this.dialogRegistrationAgency;
+    },
+    closeSession() {
+      this.idSignIn = null;
+      this.typeUser = '';
     }
   },
 };
