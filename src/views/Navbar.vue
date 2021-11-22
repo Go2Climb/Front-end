@@ -9,8 +9,8 @@
       <v-col cols="4" class="col-sm-3 col-md-3 d-flex flex-row align-center pa-0">
         <div class="d-flex justify-center align-center my-auto ml-3 rounded-pill white dense--btn">
           <v-btn height="40px" @click="isUserLogged()" class="rounded-l-pill white" icon>
-            <v-icon v-if="id == null">mdi-account</v-icon>
-            <v-avatar v-else size="36"><v-img src="https://cdn.vuetifyjs.com/images/john.jpg"></v-img></v-avatar>
+            <v-icon v-if="this.idUser == null">mdi-account</v-icon>
+            <v-avatar color="secondary" v-else size="36"><v-img v-bind:src="photo">Photo</v-img></v-avatar>
           </v-btn>
           <v-menu offset-y>
             <template v-slot:activator="{ on, attrs }">
@@ -21,7 +21,7 @@
               ></v-app-bar-nav-icon>
             </template>
             <!-- Type Menus -->
-            <v-list class="rounded-xl" v-if="id == null">
+            <v-list class="rounded-xl" v-if="this.idUser == null">
               <v-list-item
                   v-for="item in notRegistered"
                   :key="item.id"
@@ -30,7 +30,7 @@
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
               </v-list-item>
             </v-list>
-            <v-list class="rounded-xl" v-else-if="typeUser === 'customer'">
+            <v-list class="rounded-xl" v-else-if="this.typeUser === 'customer'">
               <v-list-item
                   v-for="item in registeredCustomer"
                   :key="item.id"
@@ -39,7 +39,7 @@
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
               </v-list-item>
             </v-list>
-            <v-list class="rounded-xl" v-else-if="typeUser === 'agency'">
+            <v-list class="rounded-xl" v-else-if="this.typeUser === 'agency'">
               <v-list-item
                   v-for="item in registeredAgency"
                   :key="item.id"
@@ -77,6 +77,9 @@
 <script>
 export default {
   name: "Navbar",
+  props: [
+    'idUser', 'typeUser'
+  ],
   data: () => ({
     notRegistered: [
       { id: 0, title: 'Sign in'},
@@ -94,8 +97,7 @@ export default {
       { id: 3, title: 'Log Out'}
     ],
     search: '',
-    typeUser: 'agency',
-    id: 1
+    photo: 'Include',
   }),
   methods: {
     searchCommand() {
@@ -111,21 +113,27 @@ export default {
     },
     onOptionSelectedRegisteredCustomer(option) {
       if(option.id == 0) this.$router.push({ path: `/${this.typeUser}/profile` });
-      if(option.id == 1) { this.id = null; this.typeUser = ''; }
+      if(option.id == 1) this.closeSession();
     },
     onOptionSelectedRegisteredAgency(option) {
       if(option.id == 0) this.$router.push({ path: `/${this.typeUser}/profile` });
       if(option.id == 1) this.$router.push({ path: `/${this.typeUser}/clients` });
       if(option.id == 2) this.$router.push({ path: `/${this.typeUser}/none` });
-      if(option.id == 3) { this.id = null; this.typeUser = ''; }
+      if(option.id == 3) this.closeSession();
     },
     reloadPage() {
       location.reload();
     },
+    closeSession() {
+      this.$emit('closeSession');
+    },
     isUserLogged() {
-      if (this.id == null) this.$emit('sign-in');
-      else this.$router.push({ path: `/agency/profile` });
+      if (this.idUser == null) this.$emit('sign-in');
+      else if (this.typeUser === 'agency') this.$router.push({ path: `/agency/profile` });
+      else if (this.typeUser === 'customer') this.$router.push({ path: `/customer/profile` });
     }
+  },
+  mounted(){
   },
 }
 </script>

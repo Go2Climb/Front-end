@@ -47,7 +47,15 @@
                 <v-row>
                   <v-col><v-btn @click="continueDialogSolicit" class="rounded-pill mt-7 mb-2 col-12" color="primary">Solicit</v-btn></v-col>
                 </v-row>
-                <solicit-service v-on:dialog-solicit-false="setDialogSolicit" :dialogSolicit="dialogSolicit" :service="service" :date="dateOutput" :nPeople="nPeople"></solicit-service>
+                <solicit-service
+                    v-on:dialog-solicit-false="setDialogSolicit"
+                    :dialogSolicit="dialogSolicit" :service="service"
+                    :date="dateOutput"
+                    :nPeople="nPeople"
+                    :idUser="this.idUser"
+                    :typeUser="this.typeUser"
+                    :agencyName="agency.name">
+                </solicit-service>
               </v-list-item-group>
             </v-list>
           </v-card>
@@ -152,7 +160,7 @@ export default {
   name: "ServiceDetail",
   components: { ListReviews, SolicitService },
   props: [
-    'serviceId'
+    'serviceId', 'typeUser', 'idUser'
   ],
   data: () => ({
     errors: [],
@@ -168,7 +176,7 @@ export default {
     reviews: [],
     dateOutput: '',
     nPeople: null,
-    id: 1,
+    id: null,
     dialogSolicit: false,
   }),
   methods: {
