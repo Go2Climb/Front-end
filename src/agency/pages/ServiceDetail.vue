@@ -32,7 +32,6 @@
         <v-col cols="12" class="col-md-9">
           <!-- SECTION: OFFERS -->
           <agency-info v-bind:Sid = "id" v-bind:AgId ="Aid" ></agency-info>
-
           <v-row>
             <v-col>
               <!-- SECTION: Activities -->
@@ -40,9 +39,7 @@
                 <v-list>
                   <header class="title font-weight-bold pl-0">The activities you will do</header>
                   <v-subheader v-for="act in activities" :key ="act.name"><v-icon class="pa-1">mdi-playlist-check</v-icon>{{act.description}}</v-subheader>
-
                   <v-list-item-group >
-
 
                   </v-list-item-group>
                 </v-list>
@@ -56,8 +53,6 @@
                   <v-subheader class="justify-end">This service serves visitors from Monday to Friday</v-subheader>
                   <v-subheader class="font-weight-light justify-lg-end">from 10:00 am to 20:00 pm</v-subheader>
                   <v-list-item-group >
-
-
                   </v-list-item-group>
                 </v-list>
               </v-card>
@@ -76,25 +71,20 @@
 
 <script>
 import ServicesService from "../services/services.service";
-
 import AgencyInfo from "./AgencyInfo";
 import Reviews from "./Reviews";
 import SolicitService from "./SolicitService";
-
-
 
 export default {
   name: "ServiceDetail",
   components: {SolicitService, Reviews, AgencyInfo},
   props: ['serviceId'],
-
-
   data: () => ({
     services: [],
     activities:[],
     id : ' ',
     overlay: false,
-    acctype: 1,
+    acctype: 2,
     Aid : '',
     pay: [],
     date: '',
@@ -104,10 +94,8 @@ export default {
     ],
 
   }),
-
   methods: {
     retrieveServices(){
-
       ServicesService.getById(this.id)
           .then((response) => {
             this.services = response.data;
@@ -127,22 +115,14 @@ export default {
             console.log(e);
           })
     },
-
     payService(){
       this.overlay = !this.overlay
       this.pay = this.services
     }
-
-
   },
-
   mounted() {
-
     this.retrieveActivities();
-
-
   },
-
   beforeMount() {
     //console.log("XD")
     this.id = this.$route.params.id
@@ -150,9 +130,6 @@ export default {
     this.Aid = this.services.AgencyId
     //console.log(this.serviceId)
   },
-
-
-
 }
 </script>
 

@@ -8,17 +8,46 @@
             <v-list>
               <v-subheader class="font-weight-bold title"> ${{ service.price }}</v-subheader>
               <v-list-item-group>
-                <v-subheader class="font-weight-medium subtitle-1">Output</v-subheader>
-                <v-text-field type="date" full-width solo dense hide-details single-line flat class="rounded-pill" placeholder="Enter the date"  outlined color="blue"></v-text-field>
-                <v-subheader class="font-weight-medium subtitle-1">Persons</v-subheader>
-                <v-text-field type="number" oninput="if(this.value <= 0) this.value = 1; else if (this.value > 5) this.value = 5;" full-width solo dense hide-details single-line flat class="rounded-pill adjust" placeholder="Enter the number of people" outlined color="blue"></v-text-field>
+                <v-form ref="form" class="v-border-none" lazy-validation border-none>
+                  <v-subheader class="font-weight-medium subtitle-1">Output</v-subheader>
+                  <v-text-field
+                      required
+                      type="date"
+                      v-model="dateOutput"
+                      :rules="dateRules"
+                      full-width
+                      solo
+                      dense
+                      hide-details
+                      single-line
+                      flat
+                      class="rounded-pill"
+                      placeholder="Enter the date"
+                      outlined
+                      color="blue"></v-text-field>
+                  <v-subheader class="font-weight-medium subtitle-1">Persons</v-subheader>
+                  <v-text-field
+                      required
+                      type="number"
+                      min="0"
+                      max="5"
+                      :rules="peopleRules"
+                      v-model="nPeople"
+                      oninput="if(this.value <= 0) this.value = 1; else if (this.value > 5) this.value = 5;"
+                      full-width
+                      solo
+                      dense
+                      hide-details
+                      single-line
+                      flat class="rounded-pill adjust"
+                      placeholder="Enter the number of people"
+                      outlined
+                      color="blue"></v-text-field>
+                </v-form>
                 <v-row>
-                  <v-col><v-btn @click="overlay = !overlay" class="rounded-pill mt-7 mb-2 col-12" color="primary">Solicit</v-btn></v-col>
+                  <v-col><v-btn @click="continueDialogSolicit" class="rounded-pill mt-7 mb-2 col-12" color="primary">Solicit</v-btn></v-col>
                 </v-row>
-                <v-overlay :value="overlay" >
-                  <solicit-service></solicit-service>
-                  <v-btn @click="overlay=false"> close </v-btn>
-                </v-overlay>
+                <solicit-service v-on:dialog-solicit-false="setDialogSolicit" :dialogSolicit="dialogSolicit" :service="service" :date="dateOutput" :nPeople="nPeople"></solicit-service>
               </v-list-item-group>
             </v-list>
           </v-card>
@@ -115,23 +144,32 @@
 
 <script>
 import ListReviews from '../../common/pages/ListReviews'
+import SolicitService from '../pages/SolicitService'
 import ServicesService from '../services/services.service'
 import AgenciesService from  '../services/agencies.service'
 import moment from 'moment'
 export default {
   name: "ServiceDetail",
-  components: {ListReviews},
+  components: { ListReviews, SolicitService },
   props: [
     'serviceId'
   ],
   data: () => ({
     errors: [],
+    dateRules: [
+      v => !!v || 'Date is required',
+    ],
+    peopleRules: [
+      v => !!v || '´Number people is required',
+    ],
     service: [],
     agency: [],
     activities: [],
     reviews: [],
+    dateOutput: '',
+    nPeople: null,
     id: 1,
-    overlay: false,
+    dialogSolicit: false,
   }),
   methods: {
     dateTransform(date) {
@@ -174,6 +212,16 @@ export default {
         .catch(errors => {
           this.errors.push(errors);
         });
+    },
+    validateForm() {
+      return this.$refs.form.validate();
+    },
+    setDialogSolicit() {
+      this.dialogSolicit = !this.dialogSolicit;
+    },
+    continueDialogSolicit() {
+      let isValid = this.validateForm();
+      if (isValid) this.setDialogSolicit();
     },
   },
   async mounted() {
