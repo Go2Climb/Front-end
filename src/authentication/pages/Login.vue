@@ -42,7 +42,7 @@
 </template>
 
 <script>
-
+//import AuthService from '../services/auth.service'
 export default {
   name: "LogIn",
   props: {
@@ -81,7 +81,6 @@ export default {
     },
     handleSubmit: function() {
       this.$refs.form.validate();
-
       if(this.user.email && this.user.password) {
         this.$store.dispatch('auth/login', this.user).then(
             (user) => {
@@ -90,8 +89,7 @@ export default {
               this.closeForm();
             },
             error => {
-              console.log('Error');
-              console.log(`${error}`);
+              console.log(error);
               this.incorrectData = true;
             }
         )
