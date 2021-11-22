@@ -34,16 +34,18 @@ export const auth = {
             state.status.loggedIn = true;
             state.user = user;
 
-            if(state.user.description == null) state.type = "C";
-            else state.type = "A";
+            if(state.user.description == null) state.type = "customer";
+            else state.type = "agency";
         },
         loginFailure(state) {
             state.status.loggedIn = false;
             state.user = null;
+            state.type = null;
         },
         logout(state) {
             state.status.loggedIn = false;
             state.user = null;
+            state.type = null;
         },
     }
 }

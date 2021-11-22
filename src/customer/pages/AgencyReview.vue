@@ -152,7 +152,7 @@ export default {
 
         let agencyReviewDto = {
           agencyId: agencyId,
-          customerId: this.service.customerId,
+          customerId: this.$store.state.auth.user.id,
           date: dateNow.toDateString(),
           comment: this.message,
           professionalismScore: this.scores[0].score,

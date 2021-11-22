@@ -4,7 +4,7 @@
       <v-row class="d-flex flex-md-row flex-xl-column">
         <v-col cols="12" class="col-md-3">
           <!--Filters-->
-          <v-card  v-if="acctype == 1"   class="rounded-lg pa-1">
+          <v-card  v-if="this.$store.state.auth.type == 'customer'"   class="rounded-lg pa-1">
             <v-list>
               <v-subheader class="font-weight-bold title"> ${{ services.price }}</v-subheader>
               <v-list-item-group>
@@ -24,7 +24,7 @@
             </v-list>
           </v-card>
 
-          <v-card v-if="acctype==2" class="rounded-lg pa-4">
+          <v-card v-if="this.$store.state.auth.type == 'agency'" class="rounded-lg pa-4">
             <v-btn block class="rounded-pill mb-5 text-uppercase" color="primary">Edit service</v-btn>
           </v-card>
         </v-col>

@@ -52,19 +52,14 @@ export default {
   }),
   methods: {
     retrieveHiredServices(){
-      CustomersService.getHiredServicesByCustomerIdWithServiceInformation(1)
+      CustomersService.getHiredServicesByCustomerIdWithServiceInformation
+      (this.$store.state.auth.user.id)
           .then(response => {
             this.hiredServices = response.data;
           })
           .catch(e => {
             this.errors.push(e);
           })
-    },
-    getDisplayInfoHiredServices(){
-      for (let position = 0; position < this.hiredServices.length; position++){
-        this.resource.info = `${this.hiredServices.service.name}`;
-        this.displayHiredServices[position] = this.resource;
-      }
     },
     setCustomerReview(item) {
       this.dialogService = !this.dialogService;

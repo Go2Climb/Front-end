@@ -136,7 +136,7 @@ export default {
   name: "CustomerProfile",
   components: {AgencyDescription},
   data: () => ({
-    idAgency: 1,
+    idAgency: this.$store.state.auth.user.id,
     onlyOffer: 0,
     active: "primary",
     noActive: "secondary",

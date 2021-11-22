@@ -86,6 +86,7 @@ export default {
             (user) => {
               console.log('Logged In');
               console.log(user);
+              this.$emit('set-id-sign-in');
               this.closeForm();
             },
             error => {

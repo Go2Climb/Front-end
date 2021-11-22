@@ -68,7 +68,7 @@ import HiredService from '../services/hiredServices.service'
 import moment from 'moment'
 export default {
   name: "SolicitService",
-  props: ['service', 'date', 'nPeople', 'dialogSolicit', 'idUser', 'typeUser', 'agencyName'],
+  props: ['service', 'date', 'nPeople', 'dialogSolicit', 'agencyName'],
   data: () => ({
     errors: [],
     service: [],
@@ -104,7 +104,7 @@ export default {
     saveServiceReview() {
       if (this.validateForm()) {
         let hiredServiceDto = {
-          customerId: this.id,
+          customerId: this.$store.state.auth.user.id,
           serviceId: this.service.id,
           amount: this.nPeople,
           price: this.service.price,

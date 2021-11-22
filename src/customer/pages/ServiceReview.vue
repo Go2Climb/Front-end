@@ -74,8 +74,7 @@ export default {
     errors: [],
     service: [],
     dialogService: Boolean,
-    idService: Number,
-    idCustomer: Number
+    idService: Number
   },
   data: () => ({
     score: null,
@@ -114,7 +113,7 @@ export default {
         let dateNow = new Date(time);
         let saveServiceReview = {
           serviceId: this.service.serviceId,
-          customerId: this.service.customerId,
+          customerId: this.$store.state.auth.user.id,
           date: dateNow.toDateString(),
           comment: this.message,
           score: this.score

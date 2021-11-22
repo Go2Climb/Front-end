@@ -78,7 +78,7 @@ export default {
 
   methods: {
     retrieveHiredServices() {
-      HiredService.getExtendInformation(1, "true")
+      HiredService.getExtendInformation(this.$store.state.auth.user.id, "true")
       .then(response => {
         this.hiredServices = response.data;
         for (let i = 0; i < response.data.length; i++){

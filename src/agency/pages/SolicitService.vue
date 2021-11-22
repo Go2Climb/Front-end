@@ -96,7 +96,7 @@ export default {
     people: 0,
     service: [],
     item: {
-      customerId: "c1",
+      customerId: this.$store.state.auth.user.id,
       serviceId: 0,
       amount: 0,
       price: 0,

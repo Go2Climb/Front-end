@@ -106,6 +106,7 @@ export default {
         this.$router.push({ path: `/services/search/${this.search}`});
       }
     },
+
     onOptionSelectedNotRegistered(option) {
       if(option.id == 0) this.$emit('sign-in');
       if(option.id == 1) this.$emit('sign-up-user');
@@ -121,12 +122,15 @@ export default {
       if(option.id == 2) this.$router.push({ path: `/${this.typeUser}/none` });
       if(option.id == 3) this.closeSession();
     },
+
     reloadPage() {
       location.reload();
     },
     closeSession() {
       this.$emit('closeSession');
     },
+
+    //Button of profile in navbar
     isUserLogged() {
       if (this.idUser == null) this.$emit('sign-in');
       else if (this.typeUser === 'agency') this.$router.push({ path: `/agency/profile` });

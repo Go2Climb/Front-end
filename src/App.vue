@@ -1,12 +1,12 @@
 <template>
   <v-app>
-    <navbar v-on:closeSession="closeSession" v-bind:typeUser="typeUser" v-bind:idUser="idSignIn" app v-on:sign-in="setDialogLogin"
+    <navbar v-on:closeSession="logout" v-bind:typeUser="typeUser" v-bind:idUser="idSignIn" app v-on:sign-in="setDialogLogin"
             v-on:sign-up-user="setDialogRegistrationCustomer"
             v-on:sign-up-agency="setDialogRegistrationAgency"
     ></navbar>
     <template>
       <router-view v-bind:idUser="idSignIn" v-bind:typeUser="typeUser" app></router-view>
-      <LogIn :dialog="dialogLogin" v-on:dialog-false="setDialogLogin" v-on:set-id-sign-in="setIdSignIn"></LogIn>
+      <LogIn :dialog="dialogLogin" v-on:dialog-false="setDialogLogin" v-on:set-id-sign-in="login"></LogIn>
       <registration-customer :dialog="dialogRegistrationCustomer" v-on:dialog-false="setDialogRegistrationCustomer"></registration-customer>
       <registration-agency :dialog="dialogRegistrationAgency" v-on:dialog-false="setDialogRegistrationAgency"></registration-agency>
     </template>
@@ -24,19 +24,18 @@ export default {
   name: 'App',
   components: {RegistrationAgency, Navbar, RegistrationCustomer, LogIn, Footer},
   data: () => ({
-    idSignIn: 1,
-    typeUser: 'agency',
+    idSignIn: null,
+    typeUser: '',
     dialogLogin: false,
     dialogRegistrationCustomer: false,
     dialogRegistrationAgency: false,
   }),
   computed: {
-
+    currentUser() {
+      return this.$store.state.auth.user;
+    }
   },
   methods: {
-    setIdSignIn(id){
-      this.idSignIn = id;
-    },
     setDialogLogin(){
       this.dialogLogin = !this.dialogLogin;
     },
@@ -46,9 +45,17 @@ export default {
     setDialogRegistrationAgency(){
       this.dialogRegistrationAgency = !this.dialogRegistrationAgency;
     },
-    closeSession() {
+
+
+    login(){
+      this.idSignIn = this.$store.state.auth.user.id;
+      this.typeUser = this.$store.state.auth.type;
+    },
+    logout() {
+      this.$store.dispatch('auth/logout');
       this.idSignIn = null;
       this.typeUser = '';
+      this.$router.push('/');
     }
   },
 };

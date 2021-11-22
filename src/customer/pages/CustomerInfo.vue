@@ -37,7 +37,7 @@ export default {
   methods:
       {
         retrieveCustomer(){
-          CustomersService.getById(5)
+          CustomersService.getById(this.$store.state.auth.user.id)
           .then(response => {
             this.customer = response.data;
             console.log(this.customer);
