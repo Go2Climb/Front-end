@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import CustomersService from "../../customer/services/customers.service";
+import AuthService from '../services/auth.service'
 
 export default {
   name: "RegistrationCustomer",
@@ -82,12 +82,11 @@ export default {
   },
   data: () => ({
     customer: {
-      id: 'c10',
       name: '',
       lastname: '',
       email: '',
       password: '',
-      phoneNumber: '',
+      phoneNumber: 0,
     },
     emailRules: [
       v => !!v || 'Email is required',
@@ -124,8 +123,7 @@ export default {
     async handleRegister(){
       if(this.$refs.form.validate())
       {
-        console.log(this.customer);
-        await CustomersService.create(this.customer);
+        await AuthService.registerCustomer(this.customer);
       }
       this.closeForm();
     }

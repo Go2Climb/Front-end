@@ -14,13 +14,13 @@
           <h3 class="mt-4">Welcome to Go2Climb</h3>
           <v-text-field
               label = "Email"
-              v-model="email"
+              v-model="user.email"
               :rules="emailRules"
               required
           ></v-text-field>
           <v-text-field
               label = "Password"
-              v-model="password"
+              v-model="user.password"
               type="password"
               :rules="passwordRules"
               required
@@ -42,7 +42,6 @@
 </template>
 
 <script>
-import AgenciesService from '../../agency/services/agencies.service'
 
 export default {
   name: "LogIn",
@@ -50,8 +49,11 @@ export default {
     dialog: Boolean
   },
   data: () => ({
-    email: '',
-    password: '',
+    user: {
+      email: '',
+      password: '',
+    },
+    response: [],
     emailRules: [
       v => !!v || 'Email is required',
     ],
@@ -60,6 +62,16 @@ export default {
     ],
     incorrectData: false
   }),
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    }
+  },
+  created() {
+    if (this.loggedIn) {
+      this.closeForm();
+    }
+  },
   methods: {
     closeForm(){
       this.$refs.form.reset();
@@ -67,19 +79,23 @@ export default {
       this.incorrectData = false;
       this.$emit('dialog-false');
     },
-    handleSubmit(){
+    handleSubmit: function() {
       this.$refs.form.validate();
-      AgenciesService.findByEmail(this.email)
-      .then( (response) => {
-        if (this.password === response.data[0].password){
-            this.$emit('set-id-sign-in', response.data[0].id);
-            this.closeForm();
-        }
-      })
-      .catch(e => {
-        this.incorrectData = true;
-        console.log(e);
-      });
+
+      if(this.user.email && this.user.password) {
+        this.$store.dispatch('auth/login', this.user).then(
+            (user) => {
+              console.log('Logged In');
+              console.log(user);
+              this.closeForm();
+            },
+            error => {
+              console.log('Error');
+              console.log(`${error}`);
+              this.incorrectData = true;
+            }
+        )
+      }
     }
   }
 }

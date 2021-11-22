@@ -58,6 +58,11 @@
                         :rules="locationRules"
                         required
           ></v-text-field>
+          <v-text-field label = "Description of my agency"
+                        v-model = "agency.description"
+                        :rules="descriptionRules"
+                        required
+          ></v-text-field>
           <v-checkbox
               class="my-0"
               label="I accept the terms and conditions of Go2Climb"
@@ -139,7 +144,7 @@
 </template>
 
 <script>
-import AgenciesService from "../../agency/services/agencies.service";
+import AuthService from '../services/auth.service'
 
 export default {
   name: "RegistrationAgency",
@@ -148,16 +153,13 @@ export default {
   },
   data: () => ({
     agency: {
-      id: 10,
       name: '',
       email: '',
       password: '',
       description: '',
-      score: '',
       location: '',
       RUC: '',
       phoneNumber: '',
-      photo: ''
     },
     payDialog: false,
     togglePlan: undefined,
@@ -175,6 +177,9 @@ export default {
     ],
     nameRules: [
       v => !!v || 'Agency name is required',
+    ],
+    descriptionRules: [
+      v => !!v || 'Description is required',
     ],
     RucRules: [
       v => !!v || 'RUC is required',
@@ -222,9 +227,10 @@ export default {
       }
     },
     async handleRegister(){
+      console.log(this.agency.RUC);
       if(this.$refs.payForm.validate())
       {
-        await AgenciesService.create(this.agency);
+        await AuthService.registerAgency(this.agency);
       }
       this.closePayDialog();
     }
