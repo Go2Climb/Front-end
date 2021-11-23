@@ -1,9 +1,7 @@
 <template>
   <v-card class="py-4 px-8 mb-4 rounded-lg">
     <v-list>
-
       <p>{{this.AgId}}</p>
-
       <v-subheader class="title font-weight-bold pl-0">{{services.name}} </v-subheader>
       <v-row>
         <v-col>
@@ -13,7 +11,6 @@
           <v-subheader class="title font-weight-bold justify-end"> <v-icon color ="amber"> mdi-star </v-icon>  {{services.score}}</v-subheader>
         </v-col>
       </v-row>
-
       <v-row class="justify-center">
         <v-col class="d-flex child-flex ">
           <v-img
@@ -37,9 +34,7 @@
             </template>
           </v-img>
         </v-col>
-        <v-col class="d-flex child-flex justify-center"
-
-        >
+        <v-col class="d-flex child-flex justify-center">
           <v-row>
             <v-col
                 v-for="n in 4"
@@ -73,7 +68,6 @@
       </v-row>
       <v-list-item-group>
         <v-row>
-
           <v-col cols = "1">
             <v-img :src="`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxU5N0gjC5KeKFAVkh-sN7ogtf4lSQ_WsMJQ&usqp=CAU`"
                    max-height="75px"
@@ -81,7 +75,6 @@
                    class="logo"
             ></v-img>
           </v-col>
-
           <v-col>
             <v-subheader>Offered by {{agency.name}}</v-subheader>
             <v-subheader class="align-lg-start">Registered agency since October 2020</v-subheader>
@@ -102,51 +95,35 @@ import AgenciesService from "../services/agencies.service";
 export default {
   name: "AgencyInfo",
   props: ['Sid','AgId'],
-
-
   data: () => ({
+    errors: [],
     services: [],
     agency: [],
     aId: " "
-
   }),
-
   methods: {
-    retrieveServices(){
-      //console.log(this.id)
-      ServicesService.getById(this.Sid)
-          .then((response) => {
-            this.services = response.data;
-            //console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-
-          })
-
+    async retrieveServices(){
+      await ServicesService.getById(this.Sid)
+        .then((response) => {
+          this.services = response.data;
+        })
+        .catch(error => {
+          this.errors.push(error);
+        })
     },
     async retrieveAgency(){
-
-      AgenciesService.getById(this.AgId).then((response) =>{
-        this.agency = response.data;
-        console.log(response.data);
-      }).catch(e => {
-        console.log(e);
-      })
+      await AgenciesService.getById(this.AgId)
+        .then((response) =>{
+          this.agency = response.data;})
+        .catch(error => {
+          this.errors.push(error);
+        })
     }
-
   },
-
   mounted() {
-
     this.retrieveServices();
-    console.log(this.AgId)
     this.retrieveAgency();
-    //console.log(this.Sid)
   },
-
-
-
 }
 </script>
 

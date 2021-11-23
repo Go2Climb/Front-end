@@ -5,8 +5,8 @@
         <v-col cols="12" class="col-md-3">
           <AgencyDescription></AgencyDescription>
         </v-col>
-        <v-col cols="12" class="col-md-9">
-          <v-card class="mb-6">
+        <v-col cols="12" class="col-md-9" v-if="!createService">
+          <v-card class="mb-6 px-4 rounded-lg">
             <v-card-title>Services</v-card-title>
             <div class="px-4 d-flex justify-space-between">
               <v-btn
@@ -14,17 +14,16 @@
                   v-on:click="setOnlyOffer()"
                   v-bind:class="[onlyOffer? active: noActive]">Offers
               </v-btn>
-              <v-btn v-on:click="getAgencyId(idAgency)" dark fab small color="primary">
+              <v-btn v-on:click="setAddService" dark fab small color="primary">
                 <v-icon dark>mdi-plus</v-icon>
               </v-btn>
             </div>
             <v-row class="px-4 py-2 wrap">
-              <v-col cols="12" class="col-md-3" v-for="(service, index) in services" :key="index">
+              <v-col cols="12" class="col-md-3 pb-0 pt-1" v-for="(service, index) in services" :key="index">
                 <v-card
                     class="my-2"
-                    max-width="374"
-                    min-height="310"
-                    v-on:click="setId(service.id)"
+                    min-height="255"
+                    max-height="255"
                 >
                   <template slot="progress">
                     <v-progress-linear
@@ -33,50 +32,71 @@
                         indeterminate
                     ></v-progress-linear>
                   </template>
-
-                  <a >
+                  <v-hover v-slot="{ hover }">
                     <v-img
+                        class="rounded-t-lg"
                         height=120
                         :src=service.photos
-                    ></v-img>
-                  </a>
-
-                  <a href="" class="text-decoration-none">
-                    <v-card-title class="d-flex flex-column align-center pb-0 black--text">{{service.name}}</v-card-title>
-                  </a>
-
-                  <v-card-text class="d-flex flex-column align-center">
-                    <v-row
-                        align="center"
-                        class="mx-0"
                     >
-                      <a class="text-decoration-none">
-                        <v-rating
-                            :value="4"
-                            color="amber"
-                            dense
-                            half-increments
-                            readonly
-                            size="20"
-                        ></v-rating>
-                      </a>
-                    </v-row>
-
-                    <div class="pt-3 text-subtitle-1 d-flex flex-row">
-                      <a  class="text-decoration-none d-flex">
-                        <div v-if="service.isOffer" class="text-decoration-line-through pr-2 black--text">${{service.price}}</div>
-                        <div v-if="service.isOffer" class="black--text">${{service.newPrice}}</div>
-                        <div v-else class="black--text">${{service.price}}</div>
-                      </a>
+                      <v-expand-transition>
+                        <div
+                            v-if="hover"
+                            class="d-flex transition-fast-in-fast-out bg-black-transparent darken-2 v-card--reveal text-h2 white--text"
+                            style="height: 100%;"
+                        >
+                          <v-btn dark fab icon @click="setId(service.id)"><v-icon color="blue">mdi-pencil</v-icon></v-btn>
+                          <v-btn dark fab icon @click="deleteService(service.id)"><v-icon color="red">mdi-delete</v-icon></v-btn>
+                        </div>
+                      </v-expand-transition>
+                    </v-img>
+                  </v-hover>
+                  <a v-on:click="goServiceSelected(service.id)">
+                    <div class="text-center text-truncate pa-2">
+                      <v-tooltip bottom>
+                        <template v-slot:activator="{ on, attrs }">
+                          <a class="text-decoration-none font-weight-bold">
+                            <p
+                                class="black--text h4 truncate-text"
+                                v-bind="attrs"
+                                v-on="on"
+                            >{{ service.name }}</p>
+                          </a>
+                        </template>
+                        <p>{{ service.name }}</p>
+                      </v-tooltip>
                     </div>
-                  </v-card-text>
+                    <v-card-text class="d-flex flex-column align-center">
+                      <v-row
+                          align="center"
+                          class="mx-0"
+                      >
+                        <a class="text-decoration-none">
+                          <v-rating
+                              :value="4"
+                              color="amber"
+                              dense
+                              half-increments
+                              readonly
+                              size="20"
+                          ></v-rating>
+                        </a>
+                      </v-row>
+                      <div class="pt-3 text-subtitle-1 d-flex flex-row">
+                        <a  class="text-decoration-none d-flex">
+                          <div v-if="service.isOffer" class="text-decoration-line-through pr-2 black--text">${{service.price}}</div>
+                          <div v-if="service.isOffer" class="black--text">${{service.newPrice}}</div>
+                          <div v-else class="black--text">${{service.price}}</div>
+                        </a>
+                      </div>
+                    </v-card-text>
+                  </a>
                 </v-card>
               </v-col>
             </v-row>
           </v-card>
-          <v-card class="mb-4">
-            <v-card-title>Reviews</v-card-title>
-            <v-row class="px-4">
+          <v-card class="mb-4 rounded-lg py-4 px-8">
+            <v-card-title class="pa-0">Reviews</v-card-title>
+            <v-row>
               <v-col cols="12" class="d-flex flex-row align-center col-md-6">
                 <div class="pr-4 col-5">Professionalism</div>
                 <v-progress-linear class="col-7" value="100" light background-color="grey" color="black"></v-progress-linear>
@@ -94,34 +114,13 @@
                 <v-progress-linear class="col-7" value="100" light background-color="grey" color="black"></v-progress-linear>
               </v-col>
             </v-row>
-            <div class="pa-8">
-              <div v-if="Object.keys(reviews).length === 0">
-                <div class="d-flex justify-center align-center">
-                  <v-img
-                      min-height="100px"
-                      max-width="100px"
-                      src="https://i.ibb.co/82q8FhX/65842.png">
-                  </v-img>
-                </div>
-                <div class="d-flex justify-center">
-                  <p>You still do not have user reviews, get
-                    customers by promoting your services</p>
-                </div>
-              </div>
-              <v-card v-for="(review, index) in reviews" v-bind:key="index" class="pa-4 mb-4">
-                <div class="d-flex align-center">
-                  <v-avatar><img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John"></v-avatar>
-                  <div>
-                    <v-card-title>{{review.author}}</v-card-title>
-                    <v-card-subtitle>{{review.date}}</v-card-subtitle>
-                  </div>
-                </div>
-                <v-card-text>
-                  <p>{{review.comment}}</p>
-                </v-card-text>
-              </v-card>
+            <div class="mt-4">
+              <list-reviews :reviews="reviews"></list-reviews>
             </div>
           </v-card>
+        </v-col>
+        <v-col cols="12" class="col-md-9" v-else>
+          <add-service v-on:cancelAddService="setAddService"></add-service>
         </v-col>
       </v-row>
     </v-container>
@@ -130,49 +129,59 @@
 
 <script>
 import AgencyDescription from "./AgencyDescription";
-import AgencyService from '../services/agencies.service'
-
+import AgencyService from '../services/agencies.service';
+import ServicesService from '../services/services.service';
+import AddService from '../pages/AddServices';
+import ListReviews from '../../common/pages/ListReviews';
 export default {
   name: "CustomerProfile",
-  components: {AgencyDescription},
+  components: { AgencyDescription, ListReviews, AddService },
   data: () => ({
+    errors: [],
     idAgency: 1,
     onlyOffer: 0,
     active: "primary",
     noActive: "secondary",
     services: [],
-    reviews: []
+    reviews: [],
+    createService: false
   }),
   methods: {
-    getServiceOfAgency(id) {
-      AgencyService.getServices(id)
+    async getServiceOfAgency(id) {
+      await AgencyService.getServices(id)
           .then((response) => {
             this.services = response.data;
-            console.log(response.data);
           })
-          .catch(e => {
-            console.log(e);
+          .catch(error => {
+            this.errors.push(error);
           })
     },
-    getReviewsOfAgency(id) {
-      AgencyService.getReviews(id)
+    async getReviewsOfAgency(id) {
+      await AgencyService.getReviews(id)
           .then((response) => {
             this.reviews = response.data;
             console.log(response.data);
           })
-          .catch(e => {
-            console.log(e);
+          .catch(error => {
+            this.errors.push(error);
           })
     },
-    getServiceOfferOfAgency(id) {
-      AgencyService.getServiceOffer(id)
+    async deleteService(id) {
+      await ServicesService.delete(id)
+        .then(response => {
+          if (response.status === 200) location.reload();
+        })
+        .catch(error => {
+          this.errors.push(error);
+        })
+    },
+    async getServiceOfferOfAgency(id) {
+      await AgencyService.getServiceOffer(id)
           .then((response) => {
             this.services = response.data;
-            console.log(response.data);
-            console.log("hello");
           })
-          .catch(e => {
-            console.log(e);
+          .catch(error => {
+            this.errors.push(error);
           })
     },
     setOnlyOffer(){
@@ -180,8 +189,14 @@ export default {
       if (this.onlyOffer) this.getServiceOfferOfAgency(this.idAgency);
       else this.getServiceOfAgency(this.idAgency);
     },
+    setAddService(){
+      this.createService = !this.createService;
+    },
     getAgencyId(id){
       this.$router.push({ path: `/agency/add-service/${id}`})
+    },
+    goServiceSelected(id) {
+      this.$router.push({ path: `/services/${id}`})
     },
     setId(i){
       this.id = i
@@ -192,10 +207,22 @@ export default {
     this.getServiceOfAgency(this.idAgency);
     this.getReviewsOfAgency(this.idAgency);
   }
-
 }
 </script>
 
 <style scoped>
-
+  .truncate-text {
+    margin: 10px 0 0 0;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .bg-black-transparent {
+    background-color: rgba(0, 0, 0, .5);
+  }
+  .v-card--reveal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 </style>
