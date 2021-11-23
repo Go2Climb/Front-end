@@ -65,7 +65,6 @@
 
 <script>
 import ServiceReviewService from '../services/service-review.service'
-
 export default {
   name: "CustomerReviews",
   computed: {

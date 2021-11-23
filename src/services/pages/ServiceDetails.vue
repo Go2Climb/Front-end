@@ -4,7 +4,7 @@
       <v-row class="d-flex flex-md-row flex-xl-column">
         <v-col cols="12" class="col-md-3">
           <!--Solicit Service-->
-          <v-card class="rounded-lg px-4 py-2">
+          <v-card v-if="typeUser === 'customer' || typeUser === 'unregistered'" class="rounded-lg px-4 py-2">
             <v-list>
               <v-subheader class="font-weight-bold title"> ${{ service.price }}</v-subheader>
               <v-list-item-group>
@@ -58,6 +58,14 @@
                 </solicit-service>
               </v-list-item-group>
             </v-list>
+          </v-card>
+          <v-card class="rounded-lg px-4 py-4">
+            <div class="d-flex align-center pb-2">
+              <p class="title ma-0">Preview</p>
+              <v-spacer></v-spacer>
+              <v-icon>mdi-eye-outline</v-icon>
+            </div>
+            <p>This is an agency account, only review mode is allowed.</p>
           </v-card>
         </v-col>
         <!--Section 1: ServiceInformation -->
@@ -143,7 +151,11 @@
             </v-col>
           </v-row>
           <!-- Section 5: Service Reviews -->
-          <list-reviews v-bind:reviews="reviews"></list-reviews>
+          <v-card class="py-4 px-8 rounded-lg">
+            <header class="title pb-4 font-weight-bold pl-0">Reviews</header>
+            <list-reviews v-bind:reviews="reviews"></list-reviews>
+          </v-card>
+
         </v-col>
       </v-row>
     </v-container>

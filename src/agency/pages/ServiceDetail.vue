@@ -72,12 +72,10 @@
 <script>
 import ServicesService from "../services/services.service";
 import AgencyInfo from "./AgencyInfo";
-import Reviews from "./Reviews";
-import SolicitService from "./SolicitService";
 
 export default {
   name: "ServiceDetail",
-  components: {SolicitService, Reviews, AgencyInfo},
+  components: { AgencyInfo },
   props: ['serviceId'],
   data: () => ({
     services: [],

@@ -113,11 +113,11 @@ export default {
       if(option.id == 2) this.$emit('sign-up-agency');
     },
     onOptionSelectedRegisteredCustomer(option) {
-      if(option.id == 0) this.$router.push({ path: `/${this.typeUser}/profile` });
+      if(option.id == 0) this.$router.push({ path: `/${this.typeUser}/${this.idUser}/profile` });
       if(option.id == 1) this.closeSession();
     },
     onOptionSelectedRegisteredAgency(option) {
-      if(option.id == 0) this.$router.push({ path: `/${this.typeUser}/profile` });
+      if(option.id == 0) this.$router.push({ path: `/${this.typeUser}/${this.idUser}/profile` });
       if(option.id == 1) this.$router.push({ path: `/${this.typeUser}/clients` });
       if(option.id == 2) this.$router.push({ path: `/${this.typeUser}/none` });
       if(option.id == 3) this.closeSession();
