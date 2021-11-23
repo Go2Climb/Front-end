@@ -1,223 +1,311 @@
 <template>
-  <v-main class="secondary">
-    <v-container>
-      <v-row>
-        <v-col cols="12" class="col-md-3">
-          <AgencyDescription></AgencyDescription>
-        </v-col>
-        <v-col cols="12" class="col-md-9">
-          <v-card class="mb-6">
-            <v-card-title class="mb-2 font-weight-bold">Add new service</v-card-title>
-            <v-card-subtitle class="font-weight-black mb-4">Service Details</v-card-subtitle>
-            <v-divider></v-divider>
-            <v-form>
+  <v-main>
+    <v-row>
+      <v-col cols="12" class="col-sm-12">
+        <v-card class="mb-6 px-6 py-2 rounded-lg">
+          <v-card-title class="font-weight-bold pa-0 pt-4 ma-0">Add new service</v-card-title>
+          <v-card-subtitle class="font-weight-bold ma-0 pb-4 pa-0">General information</v-card-subtitle>
+          <v-form ref="formAddService" lazy-validation border-none class="v-border-none">
+            <v-row>
+              <v-col cols="4" class="px-0">
+                <v-card class="rounded-l-xl rounded-r-0 pr-0 img mr-0">
+                  <img height="100% ma-0" class="rounded-r-0 rounded-l-xl" :src="newService.photos" alt="">
+                </v-card>
+              </v-col>
+              <v-col cols="8" class="pl-0">
+                <v-text-field
+                    v-model="newService.name"
+                    :rules="rules"
+                    color="primary"
+                    placeholder="Service name"
+                    dense
+                    solo
+                    hide-details
+                    required
+                    outlined
+                    class="rounded-tr-xl rounded-b-0 rounded-l-0">
+                </v-text-field>
+                <v-textarea
+                    v-model="newService.description"
+                    :rules="rules"
+                    placeholder="Service description"
+                    counter="300"
+                    solo
+                    height="60"
+                    hide-details
+                    dense
+                    auto-grow
+                    required
+                    outlined
+                    class="rounded-0">
+                </v-textarea>
+                <v-text-field
+                    v-model="newService.location"
+                    :rules="rules"
+                    placeholder="Location"
+                    solo dense
+                    hide-details
+                    required
+                    outlined
+                    class="rounded-0">
+                </v-text-field>
+                <v-text-field
+                    v-model="newService.photos"
+                    :rules="rules"
+                    placeholder="Url photo"
+                    solo dense
+                    hide-details
+                    required
+                    outlined
+                    class="rounded-br-xl rounded-t-0 rounded-l-0">
+                </v-text-field>
+              </v-col>
+            </v-row>
+            <v-row class="px-4">
+              <v-col cols="12">
+                <v-card-subtitle class="font-weight-black mx-0 mt-5 pa-0">Price information</v-card-subtitle>
+              </v-col>
+              <v-col cols="12" class="col-lg-6 d-flex flex-column">
+                <p class="py-0">Price</p>
+                <v-text-field :rules="rulesPrice" required outlined solo v-model="newService.price" color="primary" type="number" placeholder="Enter the price" min="0" dense class="rounded-xl"></v-text-field>
+              </v-col>
+              <v-col cols="12" class="col-lg-6 d-flex">
+                <div class="mr-2">
+                  <p>From: </p>
+                  <v-text-field :rules="rulesDate" type="date" solo dense required outlined></v-text-field>
+                </div>
+                <div class="ml-2">
+                  <p>To: </p>
+                  <v-text-field :rules="rulesDate" type="date" solo dense required outlined></v-text-field>
+                </div>
+              </v-col>
+            </v-row>
+          </v-form>
+          <v-form>
+            <v-row class="px-4">
+              <v-col cols="12">
+                <v-card-subtitle class="font-weight-black mx-0 mt-5 pa-0">Price offer (Optional)</v-card-subtitle>
+              </v-col>
+              <v-col cols="12" class="col-lg-6 d-flex flex-column">
+                <p class="py-0">Price</p>
+                <v-text-field required outlined solo v-model="newService.newPrice" color="primary" type="number" placeholder="Enter the price" min="0" dense class="rounded-xl"></v-text-field>
+              </v-col>
+              <v-col cols="12" class="col-lg-6 d-flex">
+                <div class="mr-2">
+                  <p>From: </p>
+                  <v-text-field type="date" solo dense required outlined></v-text-field>
+                </div>
+                <div class="ml-2">
+                  <p>To: </p>
+                  <v-text-field :rules="rulesDate" type="date" solo dense required outlined></v-text-field>
+                </div>
+              </v-col>
+            </v-row>
+          </v-form>
+          <v-form ref="formAddActivity">
+            <v-col class="px-6">
+              <v-row><v-card-subtitle class="font-weight-black ma-0 py-4 px-0">Activities information (Optional)</v-card-subtitle></v-row>
               <v-row>
-                <v-col cols="12">
-                  <v-text-field v-model="item.name" color="primary" label="Service Name" outlined dense class="rounded-xl mx-4 pt-6"></v-text-field>
-                </v-col>
-              </v-row>
-              <v-divider></v-divider>
-              <v-row>
-                <v-col cols="12">
-                  <v-text-field v-model="item.description" label="Description" counter="300" outlined auto-grow class="rounded-xl mx-4 pt-6"></v-text-field>
-                </v-col>
-              </v-row>
-              <v-divider></v-divider>
-              <v-row>
-                <v-col cols="12">
-                  <v-text-field v-model="item.location" label="Location" outlined dense class="rounded-xl mx-4 pt-6"></v-text-field>
-                </v-col>
-              </v-row>
-              <v-divider></v-divider>
-              <v-row class="pb-6">
-                <v-col cols="12">
-                  <v-text-field v-model="activity.description" color="primary" label="Activities" outlined dense class="rounded-xl mx-4 pt-6"></v-text-field>
-                  <v-btn class="mx-4 black--text" color="primary" rounded @click="saveActivity">Add Activity</v-btn>
-                </v-col>
-              </v-row>
-              <v-divider></v-divider>
-              <v-row>
-                <v-col cols="3">
-                  <template>
-                    <v-container fluid>
-                      <v-combobox color="primary" :items="items" label="Currency" :search-input.sync="search" class="rounded-xl pt-3" outlined dense hide-selected></v-combobox>
-                    </v-container>
-                  </template>
-                </v-col>
-                <v-col cols="3" >
-                  <v-text-field v-model="item.price" color="primary" type="number" label="Price" min="0" outlined dense class="rounded-xl pt-6"></v-text-field>
-                </v-col>
-                <v-col cols="3">
-                  <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :return-value.sync="start_date" transition="scale-transition" offset-y min-width="auto">
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field v-model="start_date" label="Start Date" outlined dense prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" class="rounded-xl mx-4 pt-6"></v-text-field>
-                    </template>
-                    <v-date-picker v-model="start_date" no-title scrollable>
-                      <v-spacer></v-spacer>
-                      <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-                      <v-btn text color="primary" @click="$refs.menu.save(start_date)">OK</v-btn>
-                    </v-date-picker>
-                  </v-menu>
-                </v-col>
-                <v-col cols="3">
-                  <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" :return-value.sync="end_date" transition="scale-transition" offset-y min-width="auto">
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field v-model="end_date" label="End Date" outlined dense prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" class="rounded-xl mx-4 pt-6"></v-text-field>
-                    </template>
-                    <v-date-picker v-model="end_date" no-title scrollable>
-                      <v-spacer></v-spacer>
-                      <v-btn text color="primary" @click="menu1 = false">Cancel</v-btn>
-                      <v-btn text color="primary" @click="$refs.menu1.save(end_date)">OK</v-btn>
-                    </v-date-picker>
-                  </v-menu>
-                </v-col>
-              </v-row>
-              <v-divider></v-divider>
-              <v-row>
-                <v-col cols="3">
-                  <template>
-                    <v-container fluid>
-                      <v-combobox color="primary" :items="items" label="Currency" :search-input.sync="search" class="rounded-xl pt-3" outlined dense hide-selected></v-combobox>
-                    </v-container>
-                  </template>
-                </v-col>
-                <v-col cols="3" >
-                  <v-text-field v-model="item.newPrice" color="primary" label="Offer Price" type="number" min="0" outlined dense class="rounded-xl pt-6"></v-text-field>
-                </v-col>
-                <v-col cols="3">
-                  <v-menu ref="menu2" v-model="menu2" :close-on-content-click="false" :return-value.sync="start_date" transition="scale-transition" offset-y min-width="auto">
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field v-model="start_date" label="Start Date" outlined dense prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" class="rounded-xl mx-4 pt-6"></v-text-field>
-                    </template>
-                    <v-date-picker v-model="start_date" no-title scrollable>
-                      <v-spacer></v-spacer>
-                      <v-btn text color="primary" @click="menu2 = false">Cancel</v-btn>
-                      <v-btn text color="primary" @click="$refs.menu2.save(start_date)">OK</v-btn>
-                    </v-date-picker>
-                  </v-menu>
-                </v-col>
-                <v-col cols="3">
-                  <v-menu ref="menu3" v-model="menu3" :close-on-content-click="false" :return-value.sync="end_date" transition="scale-transition" offset-y min-width="auto">
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field v-model="end_date" label="End Date" outlined dense prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" class="rounded-xl mx-4 pt-6"></v-text-field>
-                    </template>
-                    <v-date-picker v-model="end_date" no-title scrollable>
-                      <v-spacer></v-spacer>
-                      <v-btn text color="primary" @click="menu3 = false">Cancel</v-btn>
-                      <v-btn text color="primary" @click="$refs.menu3.save(end_date)">OK</v-btn>
-                    </v-date-picker>
-                  </v-menu>
-                </v-col>
-                <v-btn class="mx-6 mb-8 black--text" color="primary" rounded>Add Offer</v-btn>
-              </v-row>
-              <v-divider></v-divider>
-              <v-row>
-                <v-col cols="12" class="mx-4 pt-6">
-                  Add Images
-                  <template>
-                    <v-file-input
-                        v-model="files"
+                <v-col cols="8" class="pa-0 col-lg-10">
+                  <v-form ref="formActivities">
+                    <v-text-field
+                        v-model="activity.name"
+                        :rules="rulesActivityName"
                         color="primary"
-                        counter
-                        multiple
-                        placeholder="Select your files"
-                        prepend-icon="mdi-paperclip"
+                        placeholder="Name"
+                        solo dense
+                        hide-details
                         outlined
-                        dense
-                        class="rounded-xl pt-2 mr-8"
-                        :show-size="1000"
-                    >
-                      <template v-slot:selection="{ text }">
-                        <v-chip
-                            color="primary" dark label small>{{ text }}
-                        </v-chip>
-                      </template>
-                    </v-file-input>
-                  </template>
+                        class="rounded-bl-0 rounded-l-xl pa-0 ma-0">
+                    </v-text-field>
+                    <v-text-field
+                        v-model="activity.description"
+                        :rules="rulesActivityDescription"
+                        color="primary"
+                        placeholder="Description"
+                        solo dense
+                        hide-details
+                        outlined
+                        class="rounded-tl-0 rounded-l-xl rounded-r-0 pa-0 ma-0">
+                    </v-text-field>
+                  </v-form>
+                </v-col>
+                <v-col cols="4" class="pa-0 col-lg-2">
+                  <v-btn color="primary" block class="white-text rounded-l-0 rounded-r-xl full-size" @click="saveActivity">Add Activity</v-btn>
                 </v-col>
               </v-row>
-              <v-card-actions>
-                <v-btn class="ma-6 black--text float-right" color="primary" rounded @click="save" v-on:click="getServiceId(item.id)">Continue</v-btn>
-              </v-card-actions>
-            </v-form>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
+              <div v-if="activities != null" class="mt-8">
+                <v-card v-for="(act, index) in activities" v-bind:key="index" class="py-1 px-2 mb-2 d-flex align-center secondary rounded-xl">
+                  <p class="black-text rounded-xl ma-0 px-2">{{index+1}}: {{act.name}}</p>
+                  <v-spacer></v-spacer>
+                  <v-btn icon disabled color="blue"><v-icon small>mdi-pencil</v-icon></v-btn>
+                  <v-btn icon color="red" @click="deleteActivity(index)"><v-icon small>mdi-delete</v-icon></v-btn>
+                </v-card>
+              </div>
+            </v-col>
+          </v-form>
+          <v-card-actions class="mt-8 mb-4">
+            <v-spacer></v-spacer>
+            <v-btn min-width="150" class="mr-2" color="secondary" rounded @click="cancelAddService">Cancel</v-btn>
+            <v-btn min-width="150" color="primary" rounded @click="continueForm">Finalize</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-main>
 </template>
 
 <script>
-import AgencyDescription from "./AgencyDescription";
-import ServiceService from '../services/services.service';
-
+import ServicesService from '../services/services.service'
 export default {
   name: "AddServices",
-  components: {AgencyDescription},
+  components: {},
   data: () => ({
-    start_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-    end_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-    menu: false,
-    menu1: false,
-    menu2: false,
-    menu3: false,
-    rules: [
-      value => !value || value.size < 2000000 || 'Avatar size should be less than 2 MB!',
+    errors: [],
+    rulesActivityName: [
+      v => !!v || 'Activity name is required!',
     ],
-    items: ['USD', 'PEN'],
-    files: [],
+    rulesActivityDescription: [
+      v => !!v || 'Activity description is required!',
+    ],
+    rulesDate: [
+      v => !!v || 'Date is required',
+    ],
+    rulesPrice: [
+      v => !!v || 'Price is required',
+    ],
+    rules: [
+      v => !!v || 'Comment is required',
+    ],
+    activities: [],
     search: null,
-    item: {
-      id: 's11',
-      agencyId: '',
+    newService: {
+      agencyId: null,
       name: '',
       price: '',
       newPrice: '',
       location: '',
       isOffer: 0,
-      photos: "https://www.boletomachupicchu.com/gutblt/wp-content/uploads/2018/06/montana-siete-colores-informacion.jpg",
+      photos: '',
       description: '',
     },
     activity: {
-      id: '',
-      serviceId: '',
-      name: 'activity1',
+      name: '',
       description: '',
     },
   }),
-
   methods: {
-    save() {
-      ServiceService.create(this.item)
-        .then(() => {
-        })
-        .catch(e => {
-          console.log(e);
-        })
+    validateFormActivities() {
+      return this.$refs.formAddActivity.validate();
+    },
+    validateFormAddService() {
+      return this.$refs.formAddService.validate();
+    },
+    async continueForm() {
+      if (this.validateFormAddService()) {
+
+        let date = Date.now();
+        let dateNow = new Date(date);
+        let isOffer = false, newPrice = 0;
+        if (this.newService.newPrice !== '') { isOffer = true; newPrice = this.newService.newPrice }
+
+        let newServiceDto = {
+          name: this.newService.name,
+          score: 1,
+          price: this.newService.price,
+          newPrice: newPrice,
+          location: this.newService.location,
+          creationDate: `${dateNow.getFullYear()}/${dateNow.getMonth()}/${dateNow.getDay()}`,
+          photos: this.newService.photos,
+          description: this.newService.description,
+          isOffer: isOffer,
+          agencyId: this.newService.agencyId
+        };
+
+        await ServicesService.create(newServiceDto)
+          .then(response => {
+            if (response.status === 200) {
+              this.clearInputs();
+              this.cancelAddService();
+              location.reload();
+            }
+          })
+          .catch(error => {
+            this.errors.push(error);
+          })
+      }
+    },
+    clearInputs() {
+      this.newService.agencyId =  null;
+      this.newService.name =  '';
+      this.newService.price =  '';
+      this.newService.newPrice = '';
+      this.newService.location = '';
+      this.newService.isOffer =  0;
+      this.newService.photos =  '';
+      this.newService.description = '';
     },
     saveActivity(){
-      ServiceService.createActivity(this.item.id, this.activity)
-          .then(() => {
-
-          })
-          .catch(e => {
-            console.log(e);
-          })
+      if (this.validateFormActivities()) {
+        let activityDto = {
+          name: this.activity.name,
+          description: this.activity.description
+        }
+        this.activities.push(activityDto);
+        this.activity.name = null;
+        this.activity.description = null;
+      }
     },
     getServiceId(id){
       this.$router.push({ path: `/agency/add-service/promotion/${id}`})
     },
+    cancelAddService(){
+      this.$emit('cancelAddService');
+    },
+    deleteActivity(index){
+      this.activities.splice(index, 1);
+    }
   },
-
   beforeMount() {
-    this.item.agencyId = this.$route.params.id;
+    this.newService.agencyId = this.$store.state.auth.user.id;
   },
-
   onMounted() {
-    this.activity.serviceId = this.item.id;
+
   }
 }
 </script>
 
 <style scoped>
+  .full-size {
+    min-width: 100%;
+    min-height: 100%;
+  }
+  .img{
+    margin:0px auto;
+    width:90%;
+    height:100%;
+    border: 0px solid black;
+    background-size: 100% 100%;
+    background-repeat:no-repeat;
+    background-size: cover;
+  }
+  .img img{
+    width: 100%;
+  }
+  @media all and (min-width: 500px) and (max-width: 1000px)
+  {
+    .img{
+      margin:0px auto;
+      width:90%;
+      height:100%;
+      border: 0 solid black;
+      background-size: 100% 100%;
+      background-repeat:no-repeat;
+      background-size: cover;
+
+    }
+  }
+  .img img{
+    width:100%;
+  }
 </style>

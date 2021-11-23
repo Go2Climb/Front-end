@@ -13,7 +13,12 @@ const routes = [
   {
     path: '/agency/profile',
     name: 'AgencyProfile',
-    component: () => import('../agency/pages/AgencyProfile')
+    component: () => import('../agency/pages/AgencyProfile'),
+  },
+  {
+    path: '/customer/profile',
+    name: 'CustomerProfile',
+    component: () => import('../customer/pages/CustomerProfile')
   },
   {
     path: '/agency/clients',
@@ -37,11 +42,17 @@ const routes = [
     component: () => import('../agency/pages/PromoteService')
   },
   {
-    path: '/search-service/:name',
-    name: 'SearchService',
-    component: () => import('../search-service/pages/SearchServices'),
+    path: '/services/:id',
+    name: 'ServiceDetails',
+    component: () => import('../services/pages/ServiceDetails'),
+    props: true
+  },
+  {
+    path: '/services/search/:name',
+    name: 'ServiceDetails',
+    component: () => import('../services/pages/SearchServices'),
+    props: true
   }
-
 ]
 
 const router = new VueRouter({
