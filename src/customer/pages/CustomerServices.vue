@@ -52,8 +52,7 @@ export default {
   }),
   methods: {
     retrieveHiredServices(){
-      CustomersService.getHiredServicesByCustomerIdWithServiceInformation
-      (this.$store.state.auth.user.id)
+      CustomersService.getHiredServicesByCustomerIdWithServiceInformation(this.$store.state.auth.user.id)
           .then(response => {
             this.hiredServices = response.data;
           })

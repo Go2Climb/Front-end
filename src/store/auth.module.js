@@ -4,9 +4,12 @@ import AuthService from '../authentication/services/auth.service';
 
 const user = JSON.parse(localStorage.getItem('user'));
 
-const initialState = user
-    ? { status: { loggedIn: true }, user, type: null }
-    : { status: { loggedIn: false }, user: null, type: null };
+let initialState = { status: { loggedIn: false }, user: null, type: null };
+if (user != null) {
+    initialState.user = user;
+    if (user.description == null) initialState.type = "customer";
+    else initialState.type = "agency";
+}
 
 export const auth = {
     namespaced: true,
@@ -15,7 +18,6 @@ export const auth = {
         login({ commit }, user) {
             return AuthService.login(user).then(
                 user => {
-                    console.log(user);
                     commit('loginSuccess', user);
                     return Promise.resolve(user);
                 },
@@ -33,7 +35,10 @@ export const auth = {
         loginSuccess(state, user) {
             state.status.loggedIn = true;
             state.user = user;
-
+            if(state.user.description == null) state.type = "customer";
+            else state.type = "agency";
+        },
+        checkType(state){
             if(state.user.description == null) state.type = "customer";
             else state.type = "agency";
         },

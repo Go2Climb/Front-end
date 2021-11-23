@@ -30,6 +30,9 @@ export default {
     dialogRegistrationCustomer: false,
     dialogRegistrationAgency: false,
   }),
+  mounted() {
+    this.login();
+  },
   computed: {
     currentUser() {
       return this.$store.state.auth.user;
@@ -45,11 +48,12 @@ export default {
     setDialogRegistrationAgency(){
       this.dialogRegistrationAgency = !this.dialogRegistrationAgency;
     },
-
-
     login(){
       this.idSignIn = this.$store.state.auth.user.id;
       this.typeUser = this.$store.state.auth.type;
+      console.log(this.idSignIn);
+      console.log(this.typeUser);
+      console.log(this.$store.state.auth.status.loggedIn);
     },
     logout() {
       this.$store.dispatch('auth/logout');
