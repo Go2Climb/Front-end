@@ -74,8 +74,8 @@ export default {
   },
   methods: {
     closeForm(){
-      this.$refs.form.reset();
       this.dialog = false;
+      this.$refs.form.reset();
       this.incorrectData = false;
       this.$emit('dialog-false');
     },

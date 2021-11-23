@@ -11,10 +11,9 @@ const routes = [
     component: Home
   },
   {
-    path: '/agency/:id/profile',
+    path: '/agency/profile',
     name: 'AgencyProfile',
     component: () => import('../agency/pages/AgencyProfile'),
-    props: true
   },
   {
     path: '/customer/profile',

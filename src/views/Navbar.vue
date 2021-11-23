@@ -10,7 +10,7 @@
         <div class="d-flex justify-center align-center my-auto ml-3 rounded-pill white dense--btn">
           <v-btn height="40px" @click="isUserLogged()" class="rounded-l-pill white" icon>
             <v-icon v-if="this.idUser == null">mdi-account</v-icon>
-            <v-avatar color="secondary" v-else size="36"><v-img v-bind:src="photo">Photo</v-img></v-avatar>
+            <v-avatar class="" color="secondary" v-else size="36"><v-img v-bind:src="photo"></v-img></v-avatar>
           </v-btn>
           <v-menu offset-y>
             <template v-slot:activator="{ on, attrs }">
@@ -97,7 +97,7 @@ export default {
       { id: 3, title: 'Log Out'}
     ],
     search: '',
-    photo: 'Include',
+    photo: null,
   }),
   methods: {
     searchCommand() {
@@ -106,20 +106,19 @@ export default {
         this.$router.push({ path: `/services/search/${this.search}`});
       }
     },
-
     onOptionSelectedNotRegistered(option) {
       if(option.id == 0) this.$emit('sign-in');
       if(option.id == 1) this.$emit('sign-up-user');
       if(option.id == 2) this.$emit('sign-up-agency');
     },
     onOptionSelectedRegisteredCustomer(option) {
-      if(option.id == 0) this.$router.push({ path: `/${this.typeUser}/${this.idUser}/profile` });
+      if(option.id == 0) this.$router.push({ path: `/${this.typeUser}/profile` });
       if(option.id == 1) this.closeSession();
     },
     onOptionSelectedRegisteredAgency(option) {
-      if(option.id == 0) this.$router.push({ path: `/${this.typeUser}/${this.idUser}/profile` });
+      if(option.id == 0) this.$router.push({ path: `/${this.typeUser}/profile` });
       if(option.id == 1) this.$router.push({ path: `/${this.typeUser}/clients` });
-      if(option.id == 2) this.$router.push({ path: `/${this.typeUser}/none` });
+      if(option.id == 2) this.$emit('subscription');
       if(option.id == 3) this.closeSession();
     },
 
@@ -138,22 +137,24 @@ export default {
     }
   },
   mounted(){
+    this.photo = this.$store.state.auth.user.photo;
+    console.log(this.photo);
   },
 }
 </script>
 
 <style scoped>
-@media (min-width: 750px) {
-  .adjust {
-    width: 350px;
+  @media (min-width: 750px) {
+    .adjust {
+      width: 350px;
+    }
   }
-}
-@media (min-width: 900px) {
-  .adjust {
-    width: 500px;
+  @media (min-width: 900px) {
+    .adjust {
+      width: 500px;
+    }
   }
-}
-.dense--btn {
-  max-height: 40px;
-}
+  .dense--btn {
+    max-height: 40px;
+  }
 </style>

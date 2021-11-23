@@ -23,7 +23,7 @@
         <v-spacer></v-spacer>
         <div>
           <v-icon color ="amber"> mdi-star </v-icon>
-          <p>{{extractScore(review)}}.0</p>
+          <p>{{extractScore(review)}}</p>
         </div>
       </div>
       <v-card-text>
@@ -36,7 +36,7 @@
 <script>
 export default {
   name: "Reviews",
-  props:['reviews'],
+  props:['reviews', 'typeReview'],
   data: () => ({
     score: 0,
     typeUser: 'agency'
@@ -46,10 +46,12 @@ export default {
       return (review.professionalismScore + review.securityScore + review.qualityScore +  review.costScore) / 4;
     },
     extractScore(review) {
-      if (this.typeUser === 'agency') return this.calcScore(review);
-      else if (this.typeUser === 'customer') return review.score;
-      else return 0;
+      if (this.typeReview === 'agency') return this.calcScore(review);
+      else if (this.typeReview === 'service') return review.score;
     }
+  },
+  mounted() {
+    this.typeUser = this.$store.state.auth.typeUser;
   }
 }
 </script>

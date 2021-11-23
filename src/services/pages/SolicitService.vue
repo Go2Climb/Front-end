@@ -25,11 +25,11 @@
                 </div>
               </v-col>
               <v-col cols="6">
-                <p><span class="font-weight-bold">Fecha de salida:</span> {{dateFormatted}}</p>
-                <p><span class="font-weight-bold">Número de personas:</span> {{nPeople}}</p>
+                <p><span class="font-weight-bold">Output date:</span> {{dateFormatted}}</p>
+                <p><span class="font-weight-bold">People number:</span> {{nPeople}}</p>
               </v-col>
               <v-col cols="6" class="d-flex flex-column align-end">
-                <p class="font-weight-bold ma-0">Total importe:</p>
+                <p class="font-weight-bold ma-0">Total amount:</p>
                 <p class="font-weight-bold ma-0 title">${{service.price}}.00</p>
               </v-col>
             </v-row>
@@ -99,7 +99,7 @@ export default {
       this.dialogConfirmed = !this.dialogConfirmed;
     },
     gotToProfile() {
-      this.$router.push({ path: `/${this.typeUser}/profile` });
+      this.$router.push({ path: `/customer/profile` });
     },
     saveServiceReview() {
       if (this.validateForm()) {
@@ -112,14 +112,14 @@ export default {
           status: 'pending'
         }
         HiredService.create(hiredServiceDto)
-            .then(response => {
-              if (response.status === 200) {
-                this.setDialogConfirmed();
-              }
-            })
-            .catch(errors => {
-              this.errors.push(errors);
-            })
+          .then(response => {
+            if (response.status === 200) {
+              this.setDialogConfirmed();
+            }
+          })
+          .catch(errors => {
+            this.errors.push(errors);
+          })
       }
     }
   },

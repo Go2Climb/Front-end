@@ -211,7 +211,7 @@ export default {
 
         let newServiceDto = {
           name: this.newService.name,
-          score: 0,
+          score: 1,
           price: this.newService.price,
           newPrice: newPrice,
           location: this.newService.location,
@@ -267,10 +267,10 @@ export default {
     }
   },
   beforeMount() {
-    this.newService.agencyId = this.$route.params.id;
+    this.newService.agencyId = this.$store.state.auth.user.id;
   },
   onMounted() {
-    this.activity.serviceId = this.item.id;
+
   }
 }
 </script>

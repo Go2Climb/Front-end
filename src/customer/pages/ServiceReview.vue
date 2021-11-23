@@ -115,8 +115,9 @@ export default {
           customerId: this.$store.state.auth.user.id,
           date: dateNow.toDateString(),
           comment: this.message,
-          score: this.score
-        }
+          score: Number(this.score)
+        };
+        console.log(saveServiceReview);
         await ServiceReviewService.create(saveServiceReview)
             .then(response => {
               if (response.status === 200) this.setDialogContinue();
