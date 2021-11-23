@@ -3,12 +3,14 @@
     <navbar v-on:closeSession="logout" v-bind:typeUser="typeUser" v-bind:idUser="idSignIn" app v-on:sign-in="setDialogLogin"
             v-on:sign-up-user="setDialogRegistrationCustomer"
             v-on:sign-up-agency="setDialogRegistrationAgency"
+            v-on:subscription="setDialogSubscription"
     ></navbar>
     <template>
-      <router-view v-bind:idUser="idSignIn" v-bind:typeUser="typeUser" app></router-view>
+      <router-view v-on:sign-in="setDialogLogin" v-bind:idUser="idSignIn" v-bind:typeUser="typeUser" app></router-view>
       <LogIn :dialog="dialogLogin" v-on:dialog-false="setDialogLogin" v-on:set-id-sign-in="login"></LogIn>
       <registration-customer :dialog="dialogRegistrationCustomer" v-on:dialog-false="setDialogRegistrationCustomer"></registration-customer>
       <registration-agency :dialog="dialogRegistrationAgency" v-on:dialog-false="setDialogRegistrationAgency"></registration-agency>
+      <subscription :dialog="dialogSubscription" v-on:dialog-false="setDialogSubscription"></subscription>
     </template>
     <Footer app></Footer>
   </v-app>
@@ -20,15 +22,17 @@ import Footer from "./views/Footer";
 import LogIn from "./authentication/pages/Login";
 import RegistrationCustomer from "./authentication/pages/RegistrationCustomer";
 import RegistrationAgency from "./authentication/pages/RegistrationAgency";
+import Subscription from '../src/agency/pages/Subscription'
 export default {
   name: 'App',
-  components: {RegistrationAgency, Navbar, RegistrationCustomer, LogIn, Footer},
+  components: { RegistrationAgency, Navbar, RegistrationCustomer, LogIn, Footer, Subscription },
   data: () => ({
     idSignIn: null,
     typeUser: '',
     dialogLogin: false,
     dialogRegistrationCustomer: false,
     dialogRegistrationAgency: false,
+    dialogSubscription: false,
   }),
   mounted() {
     this.login();
@@ -47,6 +51,9 @@ export default {
     },
     setDialogRegistrationAgency(){
       this.dialogRegistrationAgency = !this.dialogRegistrationAgency;
+    },
+    setDialogSubscription() {
+      this.dialogSubscription = !this.dialogSubscription;
     },
     login(){
       this.idSignIn = this.$store.state.auth.user.id;

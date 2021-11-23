@@ -9,7 +9,7 @@
       </v-col>
       <div v-if="editInformation == false">
         <v-card-text class="pb-0">
-          <v-card-title>{{agency.name}}</v-card-title>
+          <v-card-title class="pt-0">{{agency.name}}</v-card-title>
           <v-card-subtitle>{{ agency.email }}</v-card-subtitle>
           <v-row align="center" class="mx-3">
             <v-rating
@@ -199,8 +199,10 @@ export default {
 <style scoped>
   .logo{
     border-radius: 50%;
-    height: 150px;
-    width: 150px;
+    min-height: 150px;
+    max-height: 150px;
+    min-width: 150px;
+    max-width: 150px;
   }
   .text-help {
     font-size: 14px;

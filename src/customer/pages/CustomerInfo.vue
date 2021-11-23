@@ -13,14 +13,6 @@
       <h4 class="black--text"> Phone number: </h4>
       <p class="grey--text font-italic"> {{customer.phoneNumber}} </p>
     </div>
-    <!--TODO: Country in a customer-->
-    <!--
-    <div>
-      <h4 class="black--text"> Country: </h4>
-      <p class="grey--text font-italic"> {{customer.country}} </p>
-    </div>
-    -->
-
   </v-card-text>
 </v-card>
 </template>
@@ -31,22 +23,21 @@ import CustomersService from '../services/customers.service'
 export default {
   name: "CustomerInfo",
   data: () => ({
+    errors: [],
     editInfo: false,
     customer: [],
   }),
-  methods:
-      {
-        retrieveCustomer(){
-          CustomersService.getById(this.$store.state.auth.user.id)
-          .then(response => {
-            this.customer = response.data;
-            console.log(this.customer);
-          }).catch(e => {
-            console.log(e);
-          })
-        }
-      },
-
+  methods: {
+    retrieveCustomer(){
+      CustomersService.getById(this.$store.state.auth.user.id)
+        .then(response => {
+          this.customer = response.data;
+        })
+        .catch(error => {
+          this.errors.push(error);
+        })
+    }
+  },
   mounted(){
     this.retrieveCustomer();
   }

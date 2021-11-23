@@ -115,7 +115,7 @@
               </v-col>
             </v-row>
             <div class="mt-4">
-              <list-reviews :reviews="reviews"></list-reviews>
+              <list-reviews v-bind:typeReview="'agency'" :reviews="reviews"></list-reviews>
             </div>
           </v-card>
         </v-col>
@@ -138,7 +138,7 @@ export default {
   components: { AgencyDescription, ListReviews, AddService },
   data: () => ({
     errors: [],
-    idAgency: this.$store.state.auth.user.id,
+    idAgency: null,
     onlyOffer: 0,
     active: "primary",
     noActive: "secondary",
@@ -149,22 +149,21 @@ export default {
   methods: {
     async getServiceOfAgency(id) {
       await AgencyService.getServices(id)
-          .then((response) => {
-            this.services = response.data;
-          })
-          .catch(error => {
-            this.errors.push(error);
-          })
+        .then((response) => {
+          this.services = response.data;
+        })
+        .catch(error => {
+          this.errors.push(error);
+        })
     },
     async getReviewsOfAgency(id) {
       await AgencyService.getReviews(id)
-          .then((response) => {
-            this.reviews = response.data;
-            console.log(response.data);
-          })
-          .catch(error => {
-            this.errors.push(error);
-          })
+        .then((response) => {
+          this.reviews = response.data;
+        })
+        .catch(error => {
+          this.errors.push(error);
+        })
     },
     async deleteService(id) {
       await ServicesService.delete(id)
@@ -177,12 +176,12 @@ export default {
     },
     async getServiceOfferOfAgency(id) {
       await AgencyService.getServiceOffer(id)
-          .then((response) => {
-            this.services = response.data;
-          })
-          .catch(error => {
-            this.errors.push(error);
-          })
+        .then((response) => {
+          this.services = response.data;
+        })
+        .catch(error => {
+          this.errors.push(error);
+        })
     },
     setOnlyOffer(){
       this.onlyOffer = !this.onlyOffer;
@@ -204,6 +203,7 @@ export default {
     }
   },
   mounted() {
+    this.idAgency = this.$store.state.auth.user.id;
     this.getServiceOfAgency(this.idAgency);
     this.getReviewsOfAgency(this.idAgency);
   }

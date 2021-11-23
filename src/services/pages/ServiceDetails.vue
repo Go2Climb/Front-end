@@ -4,7 +4,15 @@
       <v-row class="d-flex flex-md-row flex-xl-column">
         <v-col cols="12" class="col-md-3">
           <!--Solicit Service-->
-          <v-card v-if="typeUser === 'customer' || typeUser === 'unregistered'" class="rounded-lg px-4 py-2">
+          <v-card v-if="typeUser === 'agency'" class="rounded-lg px-4 py-4">
+            <div class="d-flex align-center pb-2">
+              <p class="title ma-0">Preview</p>
+              <v-spacer></v-spacer>
+              <v-icon>mdi-eye-outline</v-icon>
+            </div>
+            <p>This is an agency account, only review mode is allowed.</p>
+          </v-card>
+          <v-card v-else class="rounded-lg px-4 py-2">
             <v-list>
               <v-subheader class="font-weight-bold title"> ${{ service.price }}</v-subheader>
               <v-list-item-group>
@@ -58,14 +66,6 @@
                 </solicit-service>
               </v-list-item-group>
             </v-list>
-          </v-card>
-          <v-card class="rounded-lg px-4 py-4">
-            <div class="d-flex align-center pb-2">
-              <p class="title ma-0">Preview</p>
-              <v-spacer></v-spacer>
-              <v-icon>mdi-eye-outline</v-icon>
-            </div>
-            <p>This is an agency account, only review mode is allowed.</p>
           </v-card>
         </v-col>
         <!--Section 1: ServiceInformation -->
@@ -153,7 +153,7 @@
           <!-- Section 5: Service Reviews -->
           <v-card class="py-4 px-8 rounded-lg">
             <header class="title pb-4 font-weight-bold pl-0">Reviews</header>
-            <list-reviews v-bind:reviews="reviews"></list-reviews>
+            <list-reviews v-bind:typeReview="'service'" v-bind:reviews="reviews"></list-reviews>
           </v-card>
 
         </v-col>
@@ -189,6 +189,7 @@ export default {
     dateOutput: '',
     nPeople: null,
     id: null,
+    agencyId: null,
     dialogSolicit: false,
   }),
   methods: {
@@ -225,7 +226,7 @@ export default {
         });
     },
     async retrieveAgency() {
-      await AgenciesService.getById(this.id)
+      await AgenciesService.getById(this.service.agencyId)
         .then(response => {
           this.agency = response.data;
         })
@@ -241,7 +242,10 @@ export default {
     },
     continueDialogSolicit() {
       let isValid = this.validateForm();
-      if (isValid) this.setDialogSolicit();
+      if (isValid) {
+        if (this.typeUser == null || this.typeUser === '') this.$emit('sign-in');
+        else if (this.typeUser === 'customer') this.setDialogSolicit();
+      }
     },
   },
   async mounted() {
@@ -250,8 +254,9 @@ export default {
     await this.retrieveReviews();
     await this.retrieveAgency();
   },
-  async beforeMount() {
-    this.id = this.$route.params.id
+  beforeMount() {
+    this.id = this.$route.params.id;
+    this.typeUser = this.$store.state.user.typeUser;
   }
 }
 </script>

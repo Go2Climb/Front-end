@@ -7,7 +7,8 @@
       <AgencyReview v-bind:service="service" v-bind:dialogAgency="dialogAgency" v-on:dialog-agency-false="closeForm"></AgencyReview>
     </template>
     <template v-slot:item.actions="{ item }">
-      <v-btn color="primary" rounded small @click="setCustomerReview(item)">
+      <v-btn v-if="item.status === 'pending'" color="primary" rounded small disabled>Rate service</v-btn>
+      <v-btn v-else color="primary" rounded small @click="setCustomerReview(item)">
         Rate service
       </v-btn>
     </template>
@@ -53,12 +54,12 @@ export default {
   methods: {
     retrieveHiredServices(){
       CustomersService.getHiredServicesByCustomerIdWithServiceInformation(this.$store.state.auth.user.id)
-          .then(response => {
-            this.hiredServices = response.data;
-          })
-          .catch(e => {
-            this.errors.push(e);
-          })
+        .then(response => {
+          this.hiredServices = response.data;
+        })
+        .catch(e => {
+          this.errors.push(e);
+        })
     },
     setCustomerReview(item) {
       this.dialogService = !this.dialogService;

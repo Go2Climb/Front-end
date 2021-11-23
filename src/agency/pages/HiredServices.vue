@@ -8,20 +8,16 @@
       <v-card class="mx-auto">
         <v-data-table :headers="headers" :items="hiredServices" sort-by="name" class="elevation-1" show-group-by>
           <template v-slot:item.status="props">
-            <v-edit-dialog
-                large
-                persistent
-            >
+            <v-edit-dialog large persistent v-on:save="saveEditDialog(props)">
               <div>{{ props.item.status }}</div>
-
               <template v-slot:input>
                 <div class="mt-4 text-h6">
                   Update status
                 </div>
                 <v-select
-                    :items = "serviceStatus"
-                    v-model="props.item.status"
-                    label="Edit"
+                  :items = "serviceStatus"
+                  v-model="props.item.status"
+                  label="Edit"
                 ></v-select>
               </template>
             </v-edit-dialog>
@@ -39,6 +35,7 @@ import HiredService from '../services/hiredServices.service'
 export default {
   name: "hired-services",
   data: () => ({
+    errors: [],
     headers: [
       {text: 'Name and lastname', align: 'start', value: 'customer.name', groupable: false},
       {text: 'Email', align: 'left', value: 'customer.email', sortable: false, groupable: false},
@@ -65,17 +62,14 @@ export default {
     },
     serviceStatus: ['pending', 'active', 'finished'],
   }),
-
-  //calculated properties
   watch: {
     dialogChangeStatus(val) {
-      val || this.closed();
+      val || this.closed(); console.log("here");
     },
     dialogDelete(val) {
       val || this.dialogDelete();
     }
   },
-
   methods: {
     retrieveHiredServices() {
       HiredService.getExtendInformation(this.$store.state.auth.user.id, "true")
@@ -86,50 +80,56 @@ export default {
           this.hiredServices[i].customer.name = name;
         }
       })
-      .catch(e => {
-        console.log(e);
+      .catch(error => {
+        this.errors.push(error);
       })
+      console.log(this.hiredServices)
     },
-
     refreshList() {
       this.retrieveHiredServices();
     },
-
-    editStatusService(id) {
-      //TODO: Implement external edit
-      console.log(id);
+    async editStatusService(id, item) {
+      let hiredServiceDto = {
+        customerId: item.customerId,
+        serviceId: item.serviceId,
+        amount: item.amount,
+        price: item.price,
+        scheduledDate: item.scheduledDate,
+        status: item.status
+      };
+      console.log(hiredServiceDto);
+      await HiredService.update(id, hiredServiceDto)
+        .then(response => {
+          if(response.status === 200) console.log("Ready!");
+        })
+        .catch(error => {
+          this.errors.push(error);
+          console.log("error");
+        })
     },
-
-    deleteHiredService(id) {
-      HiredService.delete(id)
-          .then(() => {
-            this.refreshList();
-          })
-          .catch(e => {
-            console.log(e);
-          });
+    saveEditDialog(props) {
+      this.editStatusService(props.item.id, props.item);
     },
-
+    cancelEditDialog(item, props) {
+      props.item.status = item.status;
+    },
     changeStatusItem(item) {
       this.editedIndex = this.clients.indexOf(item);
       this.editedItem = Object.assign({}, item);
+      this.editStatusService(item);
       this.dialogChangeStatus = true;
     },
-
     deleteItem(item) {
       this.editedIndex = this.clients.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialogDelete = true;
     },
-
     closeChangeStatus() {
       this.dialogChangeStatus = false;
     },
-
     closeDelete() {
       this.dialogDelete = false;
     }
-
   },
   mounted() {
     this.retrieveHiredServices();
